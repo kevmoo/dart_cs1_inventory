@@ -4,11 +4,11 @@ Patches and new items are welcome via GitHub pull requests.
 
 ## Keep it clean-room
 
-Every item in this repository is original. **Do not contribute material
-derived from FCS1, SCS1, or any other access-restricted or secure
-assessment** — not item text, not options, not orderings. If you have seen
-those instruments, write your items from the concept list alone, as the
-existing ones were. See the provenance statement in the [README](README.md).
+Every item in this repository is original. **Do not contribute material derived
+from FCS1, SCS1, or any other access-restricted or secure assessment** — not
+item text, not options, not orderings. If you have seen those instruments, write
+your items from the concept list alone, as the existing ones were. See the
+provenance statement in the [README](README.md).
 
 ## Code of conduct
 
@@ -32,5 +32,5 @@ This project follows the [Code of Conduct](docs/code-of-conduct.md).
   ```
 
   If `report.dart --check` fails, regenerate with `dart run tool/report.dart`
-  and commit `coverage.md` / `dag.md`. If `balance_keys.dart --dry-run` wants
-  to swap, run it without `--dry-run` and commit the result.
+  and commit `coverage.md` / `dag.md`. If `balance_keys.dart --dry-run` wants to
+  swap, run it without `--dry-run` and commit the result.

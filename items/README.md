@@ -1,7 +1,7 @@
 # Item format
 
-One directory per concept. Every item has a YAML file; tracing and
-completion items also have a Dart file next to it.
+One directory per concept. Every item has a YAML file; tracing and completion
+items also have a Dart file next to it.
 
 ```
 items/<concept>/<concept>_<def|trace|complete>_<n>.yaml
@@ -39,14 +39,13 @@ dart_notes: >-                      # optional: pseudocode -> Dart hazards
   Exactly what the student sees. Tests import it and capture `print`.
 - **Completion**: one `void optionA()` … `void optionD()` per option, each a
   complete program with that option substituted into the blank. The key is
-  marked `// KEY`. Distractors that would not compile are omitted from the
-  Dart file and flagged `compile_error: true` in YAML, with the analyzer
-  diagnostic named in `rationale`.
-- Student-shaped code: explicit types are fine, `var` is fine, no clever
-  idioms unless the item is *about* that idiom. Keep programs under ~15 lines.
+  marked `// KEY`. Distractors that would not compile are omitted from the Dart
+  file and flagged `compile_error: true` in YAML, with the analyzer diagnostic
+  named in `rationale`.
+- Student-shaped code: explicit types are fine, `var` is fine, no clever idioms
+  unless the item is _about_ that idiom. Keep programs under ~15 lines.
 - Every tracing/completion item id appears as a `group('<id>', ...)` in
   `test/items/<concept>_test.dart`; `test/inventory_test.dart` enforces this.
-- Answer-key positions must stay balanced (no letter > 40%). Write the item
-  with whatever order reads naturally, then run
-  `dart run tool/balance_keys.dart` — it swaps YAML blocks, `optionX`
-  functions and test references consistently.
+- Answer-key positions must stay balanced (no letter > 40%). Write the item with
+  whatever order reads naturally, then run `dart run tool/balance_keys.dart` —
+  it swaps YAML blocks, `optionX` functions and test references consistently.

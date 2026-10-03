@@ -14,3 +14,8 @@ linter:
     use_primary_constructors: false
     unnecessary_this: false
     unnecessary_statements: false
+    # Students write `var`, repeat the receiver, and build strings with `+`.
+    prefer_final_locals: false
+    cascade_invocations: false
+    use_string_buffers: false
+    prefer_expression_function_bodies: false

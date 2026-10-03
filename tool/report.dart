@@ -12,8 +12,8 @@ void main(List<String> args) {
   final check = args.contains('--check');
   final inv = Inventory.load();
   final outputs = {
-    'coverage.md': renderCoverage(inv),
-    'dag.md': renderDag(inv),
+    'coverage.md': _generated(renderCoverage(inv)),
+    'dag.md': _generated(renderDag(inv)),
   };
   var stale = false;
   for (final MapEntry(key: name, value: content) in outputs.entries) {
@@ -31,6 +31,11 @@ void main(List<String> args) {
   }
   if (stale) exitCode = 1;
 }
+
+/// Generated tables and wrapped prose are not stable under prettier, so the
+/// whole body is range-ignored; `.prettierrc.json` stays canonical.
+String _generated(String body) =>
+    '<!-- prettier-ignore-start -->\n$body<!-- prettier-ignore-end -->\n';
 
 // ---------------------------------------------------------------- coverage
 
@@ -111,9 +116,10 @@ for the Dart-teaching DAG once the CS1 core is secure.
     groups.putIfAbsent(a.group, () => []).add(a);
   }
   for (final MapEntry(key: group, value: areas) in groups.entries) {
-    b.writeln('### $group\n');
-    b.writeln('| Area | Spec reference | Note |');
-    b.writeln('| --- | --- | --- |');
+    b
+      ..writeln('### $group\n')
+      ..writeln('| Area | Spec reference | Note |')
+      ..writeln('| --- | --- | --- |');
     for (final a in areas) {
       b.writeln(
         '| `${a.id}` — ${_md(a.title)} | ${_md(a.reference)} | '
@@ -127,10 +133,11 @@ for the Dart-teaching DAG once the CS1 core is secure.
 ## Concepts that do not translate cleanly from pseudocode
 ''');
   for (final t in inv.translationIssues) {
-    b.writeln('### ${t.title}\n');
-    b.writeln('Concepts: ${t.concepts.map((c) => '`$c`').join(', ')}\n');
-    b.writeln('${t.problem.trim()}\n');
-    b.writeln('**Decision:** ${t.decision.trim()}\n');
+    b
+      ..writeln('### ${t.title}\n')
+      ..writeln('Concepts: ${t.concepts.map((c) => '`$c`').join(', ')}\n')
+      ..writeln('${t.problem.trim()}\n')
+      ..writeln('**Decision:** ${t.decision.trim()}\n');
   }
 
   b.writeln('''
@@ -163,9 +170,9 @@ special-character typing, trace tables), from `data/concepts.yaml`.
 }
 
 String _matrix(Inventory inv) {
-  final b = StringBuffer();
-  b.writeln('| Concept | FCS1 name | definitional | tracing | completion |');
-  b.writeln('| --- | --- | ---: | ---: | ---: |');
+  final b = StringBuffer()
+    ..writeln('| Concept | FCS1 name | definitional | tracing | completion |')
+    ..writeln('| --- | --- | ---: | ---: | ---: |');
   var total = 0;
   for (final c in inv.concepts) {
     final counts = [
@@ -216,9 +223,9 @@ flowchart TD
       b.writeln('  $pre --> ${n.id}');
     }
   }
-  b.writeln('```\n');
-
-  b.writeln('## Levels (longest prerequisite chain)\n');
+  b
+    ..writeln('```\n')
+    ..writeln('## Levels (longest prerequisite chain)\n');
   for (var d = 0; d <= maxDepth; d++) {
     final ids = inv.dag.where((n) => depth[n.id] == d).map((n) => n.id);
     b.writeln('- **Level $d**: ${ids.map((i) => '`$i`').join(', ')}');
@@ -264,6 +271,6 @@ flowchart TD
   return b.toString();
 }
 
-String _md(String s) => s.replaceAll('|', '\\|').replaceAll('\n', ' ');
+String _md(String s) => s.replaceAll('|', r'\|').replaceAll('\n', ' ');
 
 String _mermaid(String s) => s.replaceAll('"', '#quot;').replaceAll('`', '');
