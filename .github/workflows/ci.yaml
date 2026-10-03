@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: dart analyze --fatal-infos
+
+      - name: Test
+        run: dart test
+
+      - name: Generated reports are current
+        run: dart run tool/report.dart --check
+
+      # Answer keys must stay spread across a/b/c/d; a non-zero swap count
+      # means someone added items without rerunning the balancer.
+      - name: Answer keys are balanced
+        run: dart run tool/balance_keys.dart --dry-run | tee /dev/stderr | grep -q '0 swaps'
