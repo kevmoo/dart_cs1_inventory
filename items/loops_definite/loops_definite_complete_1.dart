@@ -1,4 +1,4 @@
-void optionA() {
+void optionB() {
   var line = '';
   for (var i = 1; i < 5; i++) {
     line += '$i ';
@@ -7,7 +7,7 @@ void optionA() {
 }
 
 // KEY
-void optionB() {
+void optionA() {
   var line = '';
   for (var i = 1; i <= 5; i++) {
     line += '$i ';

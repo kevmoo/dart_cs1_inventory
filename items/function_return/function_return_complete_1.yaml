@@ -1,6 +1,7 @@
 id: function_return_complete_1
 concept: function_return
 type: completion
+dag_node: return_values
 prompt: |
   Fill in the blank with a function so the program prints `9`.
 code_file: function_return_complete_1.dart
@@ -16,16 +17,17 @@ options:
     text: "void square(int n) { print(n * n); }"
     rationale: Prints the answer instead of returning it, so `square(3)` has no value to store; the analyzer reports `use_of_void_result`.
     compile_error: true
+    diagnostic: use_of_void_result
   - id: b
-    text: "int square(int n) { return n * n; }"
-    rationale: Returns the computed value, which the call expression then hands to `result`.
+    text: "int square(int n) { n * n; return n; }"
+    rationale: Computes `n * n` but never stores or returns it; `return n` gives back the unchanged 3.
   - id: c
     text: "int square(int n) { print(n * n); return n; }"
     rationale: Believes printing is what sends the answer back; it prints `9` inside the function but returns 3, so the output is `9` then `3`.
   - id: d
-    text: "int square(int n) { n * n; return n; }"
-    rationale: Computes `n * n` but never stores or returns it; `return n` gives back the unchanged 3.
-answer: b
+    text: "int square(int n) { return n * n; }"
+    rationale: Returns the computed value, which the call expression then hands to `result`.
+answer: d
 spec_areas: [statements.return, functions.declarations, expressions.function_invocation, expressions.multiplicative, statements.print]
 dart_notes: >-
   In pseudocode a "function that prints" can often be used as a value with a

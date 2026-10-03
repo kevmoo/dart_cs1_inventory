@@ -1,6 +1,7 @@
 id: arrays_trace_1
 concept: arrays
 type: tracing
+dag_node: lists_indexing
 prompt: |
   What does this program print?
 code_file: arrays_trace_1.dart

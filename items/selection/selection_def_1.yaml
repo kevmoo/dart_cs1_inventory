@@ -1,6 +1,7 @@
 id: selection_def_1
 concept: selection
 type: definitional
+dag_node: selection
 prompt: |
   A program contains the chain
   `if (x > 10) { A } else if (x > 5) { B } else { C }`

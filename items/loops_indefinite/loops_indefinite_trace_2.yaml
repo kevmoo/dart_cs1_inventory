@@ -1,6 +1,7 @@
 id: loops_indefinite_trace_2
 concept: loops_indefinite
 type: tracing
+dag_node: indefinite_loops
 prompt: |
   What does this program print?
 code_file: loops_indefinite_trace_2.dart

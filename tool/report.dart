@@ -228,17 +228,17 @@ flowchart TD
 
 ## Nodes
 
-| Node | FCS1 concept | Prerequisites | Items available | Rationale |
+| Node | FCS1 concept | Prerequisites | Items | Rationale |
 | --- | --- | --- | ---: | --- |''');
   for (final n in inv.dag) {
-    final items = n.concept == null ? 0 : inv.itemsFor(n.concept!).length;
+    final items = inv.items.where((i) => i.dagNode == n.id).length;
     final concept = n.concept == null ? '—' : '`${n.concept}`';
     final pres = n.prerequisites.isEmpty
         ? '—'
         : n.prerequisites.map((x) => '`$x`').join(', ');
     b.writeln(
       '| `${n.id}` — ${_md(n.title)} | $concept | $pres | '
-      '$items | ${_md(n.rationale.trim())} |',
+      '${items == 0 ? '⚠️ 0' : '$items'} | ${_md(n.rationale.trim())} |',
     );
   }
 
@@ -246,9 +246,8 @@ flowchart TD
 
 ## Open questions
 
-- Items are tagged per FCS1 concept, not per DAG node, so "items available"
-  is the concept total. Tagging items with `dag_node:` would let a drill
-  select exactly the items that unlock the next node.
+- Every item carries a `dag_node:`; ⚠️ marks nodes with no evidence items
+  yet (they can only be "passed" by their successors' items).
 - `definite_loops` and `indefinite_loops` are siblings here. Curricula
   disagree; if `for-in` is taught first the `while` node could depend on it.
 - `recursion` depends on `return_values` and scope but *not* on loops. That

@@ -49,6 +49,23 @@ void main() {
     }
   });
 
+  test('answer keys are spread across positions (no letter > 40%)', () {
+    final counts = <String, int>{};
+    for (final item in inv.items) {
+      counts.update(item.answer, (n) => n + 1, ifAbsent: () => 1);
+    }
+    expect(counts.keys, unorderedEquals(['a', 'b', 'c', 'd']));
+    for (final MapEntry(key: letter, value: n) in counts.entries) {
+      expect(
+        n / inv.items.length,
+        lessThanOrEqualTo(0.4),
+        reason:
+            'key "$letter" used $n/${inv.items.length} times; '
+            'run `dart run tool/balance_keys.dart`',
+      );
+    }
+  });
+
   test('every (concept, type) cell has at least one item', () {
     final missing = <String>[];
     for (final c in inv.concepts) {
@@ -73,6 +90,20 @@ void main() {
           expect(o.rationale.trim(), isNotEmpty, reason: 'option ${o.id}');
         }
         expect(item.specAreas, isNotEmpty);
+        expect(
+          inv.dag.map((n) => n.id),
+          contains(item.dagNode),
+          reason: 'unknown dag_node ${item.dagNode}',
+        );
+        // Note: an item may provide evidence for a node owned by another
+        // concept (e.g. a `for-in` loop item feeding `lists_iteration`).
+        for (final o in item.options) {
+          expect(
+            o.diagnostic != null,
+            o.compileError,
+            reason: 'option ${o.id}: diagnostic iff compile_error',
+          );
+        }
         for (final a in item.specAreas) {
           expect(areaIds, contains(a), reason: 'unknown spec area $a');
         }
@@ -87,7 +118,16 @@ void main() {
           if (item.type == ItemType.tracing) {
             expect(source, contains('void main()'));
           } else {
-            expect(source, contains('// KEY'));
+            expect(item.template, isNotNull);
+            expect(item.template, contains('____'));
+            // `// KEY` must sit directly above the key's option function or
+            // a helper suffixed with the key letter (e.g. `squareB`).
+            final keyLetter = item.answer.toUpperCase();
+            expect(
+              RegExp('// KEY\\n[^\\n]*\\w$keyLetter\\b').hasMatch(source),
+              isTrue,
+              reason: '// KEY is not above option$keyLetter',
+            );
             for (final o in item.options) {
               final fn = 'void option${o.id.toUpperCase()}()';
               expect(

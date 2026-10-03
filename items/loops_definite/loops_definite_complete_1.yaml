@@ -1,6 +1,7 @@
 id: loops_definite_complete_1
 concept: loops_definite
 type: completion
+dag_node: definite_loops
 prompt: |
   Fill in the blank so the program prints `1 2 3 4 5`.
 code_file: loops_definite_complete_1.dart
@@ -14,18 +15,18 @@ template: |
   }
 options:
   - id: a
-    text: "i < 5"
-    rationale: Exclusive bound starting at 1 stops at 4; prints `1 2 3 4`.
-  - id: b
     text: "i <= 5"
     rationale: Inclusive bound with a 1-based start visits 1..5.
+  - id: b
+    text: "i < 5"
+    rationale: Exclusive bound starting at 1 stops at 4; prints `1 2 3 4`.
   - id: c
     text: "i <= 6"
     rationale: Inclusive bound one too far; prints `1 2 3 4 5 6`.
   - id: d
     text: "i == 5"
     rationale: The condition is false on the first check (`1 == 5`), so the body never runs; prints an empty line.
-answer: b
+answer: a
 spec_areas: [statements.for, expressions.relational, expressions.equality, expressions.strings]
 dart_notes: >-
   `i < 6` was rejected as a distractor because it is behaviourally correct;

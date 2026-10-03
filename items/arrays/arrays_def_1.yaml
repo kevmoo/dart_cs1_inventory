@@ -1,13 +1,14 @@
 id: arrays_def_1
 concept: arrays
 type: definitional
+dag_node: lists_indexing
 prompt: |
   A list `a` has `a.length == 4`. Which values of `i` make `a[i]` a valid
   element access?
 options:
   - id: a
-    text: 0, 1, 2, 3
-    rationale: Dart lists are zero-based, so a list of length 4 has indexes 0 through `length - 1`.
+    text: Any integer, because a Dart list grows automatically when you index past the end.
+    rationale: A growable list only grows through `add`/`insert`; indexing past the end is always an error.
   - id: b
     text: 1, 2, 3, 4
     rationale: One-based counting; `a[4]` is out of range and `a[0]` (the first element) is missed.
@@ -15,9 +16,9 @@ options:
     text: 0, 1, 2, 3, 4
     rationale: Mixes zero-based start with a one-based end; `a[a.length]` throws a `RangeError`.
   - id: d
-    text: Any integer, because a Dart list grows automatically when you index past the end.
-    rationale: A growable list only grows through `add`/`insert`; indexing past the end is always an error.
-answer: a
+    text: 0, 1, 2, 3
+    rationale: Dart lists are zero-based, so a list of length 4 has indexes 0 through `length - 1`.
+answer: d
 spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, collections.list_growth]
 dart_notes: >-
   Pseudocode arrays are fixed-size and sometimes one-based; Dart's `List` is

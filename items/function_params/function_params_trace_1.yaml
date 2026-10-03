@@ -1,13 +1,14 @@
 id: function_params_trace_1
 concept: function_params
 type: tracing
+dag_node: scope_and_shadowing
 prompt: |
   What does this program print?
 code_file: function_params_trace_1.dart
 options:
   - id: a
-    text: "3 100\n100"
-    rationale: Arguments bind by position (`size` gets 3, `count` gets 100); inside `show` the parameter `size` shadows the top-level one, which is unchanged.
+    text: "3 100\n3"
+    rationale: Treats the parameter `size` as the top-level variable itself, so binding 3 to it would overwrite the 100 that `main` prints afterwards.
   - id: b
     text: "100 3\n100"
     rationale: Binds arguments to parameters by matching names instead of by position.
@@ -15,9 +16,9 @@ options:
     text: "100 100\n100"
     rationale: Reads the top-level `size` inside `show`, not noticing that the parameter `size` shadows it.
   - id: d
-    text: "3 100\n3"
-    rationale: Treats the parameter `size` as the top-level variable itself, so binding 3 to it would overwrite the 100 that `main` prints afterwards.
-answer: a
+    text: "3 100\n100"
+    rationale: Arguments bind by position (`size` gets 3, `count` gets 100); inside `show` the parameter `size` shadows the top-level one, which is unchanged.
+answer: d
 spec_areas: [expressions.function_invocation, functions.required_formals, expressions.identifier_reference, variables, statements.print]
 dart_notes: >-
   Dart has no "global" keyword; a top-level variable is simply shadowed by any

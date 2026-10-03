@@ -15,7 +15,7 @@ void main() {
   });
 
   group('function_params_complete_1', () {
-    test('key b: between(low, high)', () => expectOutput(c1.optionB, '2 3 4'));
+    test('key c: between(low, high)', () => expectOutput(c1.optionC, '2 3 4'));
     test('a: swapped args never loop', () => expectOutput(c1.optionA, ''));
     test('d: high + 1 goes too far', () => expectOutput(c1.optionD, '2 3 4 5'));
   });

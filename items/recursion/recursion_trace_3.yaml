@@ -1,13 +1,14 @@
 id: recursion_trace_3
 concept: recursion
 type: tracing
+dag_node: recursion
 prompt: |
   What does this program print?
 code_file: recursion_trace_3.dart
 options:
   - id: a
-    text: "11"
-    rationale: Starting at index 1 adds `items[1]` and `items[2]` (5 + 6) and stops when `i` reaches the length.
+    text: "0"
+    rationale: Takes the base case's `return 0` as the final result instead of the value the outer calls add to it.
   - id: b
     text: "15"
     rationale: Ignores the starting index and sums every element (4 + 5 + 6).
@@ -15,9 +16,9 @@ options:
     text: "5"
     rationale: Stops one element early, treating `i == items.length` as if it were reached at the last index.
   - id: d
-    text: "0"
-    rationale: Takes the base case's `return 0` as the final result instead of the value the outer calls add to it.
-answer: a
+    text: "11"
+    rationale: Starting at index 1 adds `items[1]` and `items[2]` (5 + 6) and stops when `i` reaches the length.
+answer: d
 spec_areas: [expressions.function_invocation, statements.return, statements.if, expressions.index, expressions.lists, expressions.additive, statements.print]
 dart_notes: >-
   `items.length` is a property, not a function call, and lists are 0-indexed

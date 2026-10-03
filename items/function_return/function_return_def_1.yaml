@@ -1,6 +1,7 @@
 id: function_return_def_1
 concept: function_return
 type: definitional
+dag_node: return_values
 prompt: |
   Inside a function, what happens when a `return 7;` statement runs?
 options:

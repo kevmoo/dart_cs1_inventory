@@ -25,8 +25,8 @@ void main() {
   });
 
   group('loops_definite_complete_1', () {
-    test('key b: i <= 5', () => expectOutput(c1.optionB, '1 2 3 4 5'));
-    test('a: i < 5 stops early', () => expectOutput(c1.optionA, '1 2 3 4'));
+    test('key a: i <= 5', () => expectOutput(c1.optionA, '1 2 3 4 5'));
+    test('b: i < 5 stops early', () => expectOutput(c1.optionB, '1 2 3 4'));
     test(
       'c: i <= 6 goes too far',
       () => expectOutput(c1.optionC, '1 2 3 4 5 6'),

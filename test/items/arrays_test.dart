@@ -22,12 +22,12 @@ void main() {
   });
 
   group('arrays_complete_1', () {
-    test('key b: a.length - 1', () => expectOutput(c1.optionB, '42'));
+    test('key c: a.length - 1', () => expectOutput(c1.optionC, '42'));
     test('a: a.length throws RangeError', () {
       expect(() => captureOutput(c1.optionA), throwsRangeError);
     });
-    test('c: a.length - 2 is second-to-last', () {
-      expectOutput(c1.optionC, '23');
+    test('b: a.length - 2 is second-to-last', () {
+      expectOutput(c1.optionB, '23');
     });
   });
 }

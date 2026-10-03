@@ -1,13 +1,14 @@
 id: loops_indefinite_trace_1
 concept: loops_indefinite
 type: tracing
+dag_node: indefinite_loops
 prompt: |
   What does this program print?
 code_file: loops_indefinite_trace_1.dart
 options:
   - id: a
-    text: "4 1"
-    rationale: n goes 20, 10, 5, 2, 1 in four passes; the loop stops as soon as `n > 1` is false.
+    text: "1 10"
+    rationale: Treats `while` like an `if`, running the body only once instead of until the condition fails.
   - id: b
     text: "5 0"
     rationale: Reads the condition as `n > 0` and runs one pass too many (1 ~/ 2 = 0).
@@ -15,9 +16,9 @@ options:
     text: "5 0.625"
     rationale: Treats `~/` as ordinary `/`, halving 20 to 10, 5, 2.5, 1.25, 0.625 before stopping.
   - id: d
-    text: "1 10"
-    rationale: Treats `while` like an `if`, running the body only once instead of until the condition fails.
-answer: a
+    text: "4 1"
+    rationale: n goes 20, 10, 5, 2, 1 in four passes; the loop stops as soon as `n > 1` is false.
+answer: d
 spec_areas: [statements.while, expressions.multiplicative, expressions.relational, expressions.postfix, expressions.strings, statements.print]
 dart_notes: >-
   Pseudocode "n / 2" on integers is usually integer division; in Dart `/`

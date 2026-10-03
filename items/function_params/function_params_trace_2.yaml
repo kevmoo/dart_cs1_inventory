@@ -1,23 +1,24 @@
 id: function_params_trace_2
 concept: function_params
 type: tracing
+dag_node: list_parameters
 prompt: |
   What does this program print?
 code_file: function_params_trace_2.dart
 options:
   - id: a
-    text: "5\n[6, 2]"
-    rationale: Reassigning the parameter `n` only changes the local copy of the reference, but `items[0] = n` mutates the one shared list.
+    text: "5\n[1, 2]"
+    rationale: Assumes the function receives a private copy of the list as well as of the int.
   - id: b
     text: "6\n[6, 2]"
     rationale: Assumes parameters are passed by reference, so `n = n + 1` would also change `main`'s `n`.
   - id: c
-    text: "5\n[1, 2]"
-    rationale: Assumes the function receives a private copy of the list as well as of the int.
+    text: "5\n[6, 2]"
+    rationale: Reassigning the parameter `n` only changes the local copy of the reference, but `items[0] = n` mutates the one shared list.
   - id: d
     text: "5\n[5, 2]"
     rationale: Uses `main`'s `n` for `items[0] = n`, not the function's own `n` that was just incremented.
-answer: a
+answer: c
 spec_areas: [expressions.function_invocation, functions.required_formals, expressions.assignment, expressions.index, expressions.object_identity, statements.print]
 dart_notes: >-
   Dart passes every argument by sharing (a copy of the reference): rebinding a

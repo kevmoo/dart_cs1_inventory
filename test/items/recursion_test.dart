@@ -23,8 +23,8 @@ void main() {
   });
 
   group('recursion_complete_1', () {
-    test('key c: n == 0', () => expectOutput(c1.optionC, '6'));
+    test('key b: n == 0', () => expectOutput(c1.optionB, '6'));
     test('a: n == 1 stops early', () => expectOutput(c1.optionA, '5'));
-    test('b: n > 0 returns at once', () => expectOutput(c1.optionB, '0'));
+    test('c: n > 0 returns at once', () => expectOutput(c1.optionC, '0'));
   });
 }

@@ -13,7 +13,7 @@ void optionA() {
 }
 
 // KEY
-void optionB() {
+void optionC() {
   var high = 4;
   var low = 2;
   between(low, high);

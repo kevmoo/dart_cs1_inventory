@@ -1,10 +1,10 @@
 // KEY
-int squareB(int n) {
+int squareD(int n) {
   return n * n;
 }
 
-void optionB() {
-  var result = squareB(3);
+void optionD() {
+  var result = squareD(3);
   print(result);
 }
 
@@ -18,13 +18,13 @@ void optionC() {
   print(result);
 }
 
-int squareD(int n) {
+int squareB(int n) {
   n * n;
   return n;
 }
 
-void optionD() {
-  var result = squareD(3);
+void optionB() {
+  var result = squareB(3);
   print(result);
 }
 

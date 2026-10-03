@@ -1,23 +1,24 @@
 id: loops_definite_trace_4
 concept: loops_definite
 type: tracing
+dag_node: lists_iteration
 prompt: |
   What does this program print?
 code_file: loops_definite_trace_4.dart
 options:
   - id: a
-    text: "12"
-    rationale: 2 + 4 + 6 = 12; `for-in` visits every element of the list in order.
+    text: "6"
+    rationale: Takes only the last element, assuming `sum` is overwritten rather than accumulated.
   - id: b
     text: "3"
     rationale: Counts elements instead of summing their values (confuses index with element).
   - id: c
-    text: "6"
-    rationale: Takes only the last element, assuming `sum` is overwritten rather than accumulated.
+    text: "12"
+    rationale: 2 + 4 + 6 = 12; `for-in` visits every element of the list in order.
   - id: d
     text: "0 2 4 6"
     rationale: Expects the loop body to print; only the final `print(sum)` produces output.
-answer: a
+answer: c
 spec_areas: [statements.for_in, expressions.lists, expressions.assignment, expressions.additive, statements.print]
 dart_notes: >-
   `for-in` has no pseudocode counterpart in FCS1 (which indexes arrays), but

@@ -1,11 +1,11 @@
 // KEY
-void optionA() {
+void optionB() {
   var x = 5;
   x = x * 3;
   print(x);
 }
 
-void optionB() {
+void optionA() {
   var x = 5;
   x * 3;
   print(x);

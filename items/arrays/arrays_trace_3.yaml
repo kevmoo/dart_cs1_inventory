@@ -1,6 +1,7 @@
 id: arrays_trace_3
 concept: arrays
 type: tracing
+dag_node: aliasing_references
 prompt: |
   What does this program print?
 code_file: arrays_trace_3.dart
@@ -8,8 +9,8 @@ options:
   - id: a
     text: |-
       [9, 2, 5]
-      [9, 2, 5]
-    rationale: "`b = a` makes both names refer to the same list, so every element update is visible through either name."
+      [9, 2, 3]
+    rationale: Imagines a one-way link the other way, where `b` can change `a` but later changes through `a` do not reach `b`.
   - id: b
     text: |-
       [1, 2, 5]
@@ -23,9 +24,9 @@ options:
   - id: d
     text: |-
       [9, 2, 5]
-      [9, 2, 3]
-    rationale: Imagines a one-way link the other way, where `b` can change `a` but later changes through `a` do not reach `b`.
-answer: a
+      [9, 2, 5]
+    rationale: "`b = a` makes both names refer to the same list, so every element update is visible through either name."
+answer: d
 spec_areas: [expressions.lists, expressions.index, expressions.object_identity, expressions.assignment, statements.print]
 dart_notes: >-
   Pseudocode arrays are often value types (assignment copies); Dart lists are

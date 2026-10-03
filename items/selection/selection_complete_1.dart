@@ -1,4 +1,4 @@
-void optionA() {
+void optionB() {
   var line = '';
   for (var n = 1; n <= 5; n++) {
     if (n > 3) {
@@ -14,7 +14,7 @@ void optionA() {
 }
 
 // KEY
-void optionB() {
+void optionA() {
   var line = '';
   for (var n = 1; n <= 5; n++) {
     if (n > 3) {

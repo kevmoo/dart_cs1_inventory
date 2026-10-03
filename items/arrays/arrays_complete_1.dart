@@ -4,12 +4,12 @@ void optionA() {
 }
 
 // KEY
-void optionB() {
+void optionC() {
   var a = [4, 8, 15, 16, 23, 42];
   print(a[a.length - 1]);
 }
 
-void optionC() {
+void optionB() {
   var a = [4, 8, 15, 16, 23, 42];
   print(a[a.length - 2]);
 }

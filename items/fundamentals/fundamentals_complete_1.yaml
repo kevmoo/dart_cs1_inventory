@@ -1,6 +1,7 @@
 id: fundamentals_complete_1
 concept: fundamentals
 type: completion
+dag_node: variables_assignment
 prompt: |
   Fill in the blank so the program prints `15`.
 code_file: fundamentals_complete_1.dart
@@ -12,11 +13,11 @@ template: |
   }
 options:
   - id: a
-    text: "x = x * 3;"
-    rationale: Computes 5 * 3 and stores 15 back into `x`.
-  - id: b
     text: "x * 3;"
     rationale: Evaluates 15 but never stores it; without `=` the variable keeps 5, so the program prints `5`.
+  - id: b
+    text: "x = x * 3;"
+    rationale: Computes 5 * 3 and stores 15 back into `x`.
   - id: c
     text: "x += 15;"
     rationale: Confuses `+=` with `=`; `x += 15` adds 15 to the existing 5, printing `20`.
@@ -24,7 +25,8 @@ options:
     text: "var x = 15;"
     rationale: Tries to change a value by declaring the variable again; the analyzer rejects it with `duplicate_definition` (The name 'x' is already defined).
     compile_error: true
-answer: a
+    diagnostic: duplicate_definition
+answer: b
 spec_areas: [expressions.assignment, expressions.multiplicative, statements.local_variable, statements.expression, statements.print]
 dart_notes: >-
   `x * 3;` is a legal expression statement in Dart (no analyzer error by

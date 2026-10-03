@@ -1,23 +1,24 @@
 id: oop_trace_2
 concept: oop
 type: tracing
+dag_node: object_aliasing
 prompt: |
   What does this program print?
 code_file: oop_trace_2.dart
 options:
   - id: a
-    text: "6 6 5"
-    rationale: "`b = a` makes both names refer to the same object, so bumping through `b` is visible through `a`; `c` is a separate object."
+    text: "6 6 6"
+    rationale: Assumes two objects built from the same arguments are the same object; `Counter(5)` creates a fresh one each time.
   - id: b
     text: "5 6 5"
     rationale: Assumes `b = a` copies the object, so only `b`'s copy changes.
   - id: c
-    text: "6 6 6"
-    rationale: Assumes two objects built from the same arguments are the same object; `Counter(5)` creates a fresh one each time.
+    text: "6 6 5"
+    rationale: "`b = a` makes both names refer to the same object, so bumping through `b` is visible through `a`; `c` is a separate object."
   - id: d
     text: "5 5 5"
     rationale: Assumes `bump()` cannot change a field, so all three keep the constructor value.
-answer: a
+answer: c
 spec_areas: [expressions.object_identity, classes.instance_variables, classes.instance_methods, expressions.instance_creation, expressions.method_invocation, expressions.property_extraction, expressions.assignment, statements.print]
 dart_notes: >-
   Assigning an object to another variable copies the reference, never the

@@ -20,6 +20,8 @@ spec, and a proposed prerequisite DAG for teaching programming through Dart.
 | `data/translation_issues.yaml` | Pseudocode → Dart hazards and the decision taken for each. |
 | `data/dag.yaml` | Prerequisite graph nodes and edges with rationale. |
 | `tool/report.dart` | Generates `coverage.md` and `dag.md` deterministically. |
+| `tool/balance_keys.dart` | Rebalances answer-key positions across YAML, Dart and tests (seeded). |
+| `test/compile_error_test.dart` | Substitutes every `compile_error` option into its template and asserts `dart analyze` reports the named diagnostic. |
 | `coverage.md` | Generated: item matrix, spec areas exercised, gap list, translation issues, drill candidates. |
 | `dag.md` | Generated: Mermaid graph, levels, node table, open questions. |
 
@@ -29,6 +31,7 @@ spec, and a proposed prerequisite DAG for teaching programming through Dart.
 dart test                          # item tests + invariants
 dart run tool/report.dart          # regenerate coverage.md and dag.md
 dart run tool/report.dart --check  # fail if the generated files are stale
+dart run tool/balance_keys.dart    # spread answer keys across a/b/c/d
 ```
 
 ## Authoring an item

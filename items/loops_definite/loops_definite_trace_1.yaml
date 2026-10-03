@@ -1,6 +1,7 @@
 id: loops_definite_trace_1
 concept: loops_definite
 type: tracing
+dag_node: definite_loops
 prompt: |
   What does this program print?
 code_file: loops_definite_trace_1.dart

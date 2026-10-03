@@ -15,8 +15,8 @@ void main() {
   });
 
   group('function_return_complete_1', () {
-    test('key b: return n * n', () => expectOutput(c1.optionB, '9'));
+    test('key d: return n * n', () => expectOutput(c1.optionD, '9'));
     test('c: prints then returns n', () => expectOutput(c1.optionC, '9\n3'));
-    test('d: computes but returns n', () => expectOutput(c1.optionD, '3'));
+    test('b: computes but returns n', () => expectOutput(c1.optionB, '3'));
   });
 }

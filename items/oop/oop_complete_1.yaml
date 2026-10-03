@@ -1,6 +1,7 @@
 id: oop_complete_1
 concept: oop
 type: completion
+dag_node: methods_and_this
 prompt: |
   Fill in the blank so the program prints `5`.
 code_file: oop_complete_1.dart
@@ -35,6 +36,7 @@ options:
     text: "c.count += 1;"
     rationale: Refers to `main`'s variable `c`, which is not in scope inside the class; the analyzer reports `undefined_identifier`.
     compile_error: true
+    diagnostic: undefined_identifier
 answer: a
 spec_areas: [classes.instance_methods, classes.instance_variables, expressions.this, expressions.assignment, expressions.identifier_reference, expressions.method_invocation, statements.print]
 dart_notes: >-

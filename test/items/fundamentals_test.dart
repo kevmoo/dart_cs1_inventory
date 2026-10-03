@@ -20,8 +20,8 @@ void main() {
   });
 
   group('fundamentals_complete_1', () {
-    test('key a: x = x * 3;', () => expectOutput(c1.optionA, '15'));
-    test('b: x * 3; does not store', () => expectOutput(c1.optionB, '5'));
+    test('key b: x = x * 3;', () => expectOutput(c1.optionB, '15'));
+    test('a: x * 3; does not store', () => expectOutput(c1.optionA, '5'));
     test('c: x += 15; adds', () => expectOutput(c1.optionC, '20'));
   });
 }

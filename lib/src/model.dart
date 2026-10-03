@@ -59,6 +59,10 @@ final class const Option({
 
   /// Distractor that does not compile; cannot be exercised at runtime.
   required final bool compileError,
+
+  /// Analyzer diagnostic code expected for a [compileError] option
+  /// (verified by `test/compile_error_test.dart`).
+  required final String? diagnostic,
 });
 
 final class const Item({
@@ -66,6 +70,12 @@ final class const Item({
   required final String concept,
   required final ItemType type,
   required final String prompt,
+
+  /// Completion only: the program with `____` where an option goes.
+  required final String? template,
+
+  /// Node in `data/dag.yaml` this item provides evidence for.
+  required final String dagNode,
 
   /// Relative (to the item's directory) path to the Dart program under test;
   /// `null` for definitional items.
@@ -198,6 +208,7 @@ Item _loadItem(File file, String root) {
         text: o['text'].toString(),
         rationale: o['rationale'] as String,
         compileError: (o['compile_error'] as bool?) ?? false,
+        diagnostic: o['diagnostic'] as String?,
       ),
   ];
   return Item(
@@ -205,6 +216,8 @@ Item _loadItem(File file, String root) {
     concept: m['concept'] as String,
     type: ItemType.parse(m['type'] as String),
     prompt: m['prompt'] as String,
+    template: m['template'] as String?,
+    dagNode: m['dag_node'] as String,
     codeFile: m['code_file'] as String?,
     options: options,
     answer: m['answer'] as String,

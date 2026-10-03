@@ -1,6 +1,7 @@
 id: arrays_complete_1
 concept: arrays
 type: completion
+dag_node: lists_indexing
 prompt: |
   Fill in the blank so the program prints the last element of the list, `42`.
 code_file: arrays_complete_1.dart
@@ -14,16 +15,17 @@ options:
     text: "a.length"
     rationale: One-based thinking; `a[6]` is past the end and throws a `RangeError` at run time.
   - id: b
-    text: "a.length - 1"
-    rationale: With zero-based indexes the last element is at index `length - 1`.
-  - id: c
     text: "a.length - 2"
     rationale: Over-corrects the off-by-one and prints the second-to-last element, `23`.
+  - id: c
+    text: "a.length - 1"
+    rationale: With zero-based indexes the last element is at index `length - 1`.
   - id: d
     text: "length - 1"
     rationale: Forgets the receiver; the analyzer reports `undefined_identifier` for `length`.
     compile_error: true
-answer: b
+    diagnostic: undefined_identifier
+answer: c
 spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, expressions.additive, statements.print]
 dart_notes: >-
   Pseudocode may write `a[length(a)]` for a one-based last element, or offer

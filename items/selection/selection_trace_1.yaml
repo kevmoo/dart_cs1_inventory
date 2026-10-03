@@ -1,6 +1,7 @@
 id: selection_trace_1
 concept: selection
 type: tracing
+dag_node: selection
 prompt: |
   What does this program print?
 code_file: selection_trace_1.dart

@@ -1,6 +1,7 @@
 id: fundamentals_trace_2
 concept: fundamentals
 type: tracing
+dag_node: sequencing
 prompt: |
   What does this program print?
 code_file: fundamentals_trace_2.dart
@@ -9,13 +10,13 @@ options:
     text: "5 x 2 = 10"
     rationale: Spreadsheet-formula misconception; `area` stored the value 6 when it was assigned and is not recomputed when `width` changes.
   - id: b
-    text: "5 x 2 = 6"
-    rationale: "`area` was computed as 3 * 2 = 6 before `width` changed; the later assignment only affects `width`."
-  - id: c
     text: "3 x 2 = 6"
     rationale: Ignores the reassignment `width = 5`, treating the first value of a variable as permanent.
+  - id: c
+    text: "5 x 2 = 6"
+    rationale: "`area` was computed as 3 * 2 = 6 before `width` changed; the later assignment only affects `width`."
   - id: d
     text: "width x height = area"
     rationale: Does not know that `$name` inside a string is replaced by the variable's value (string interpolation).
-answer: b
+answer: c
 spec_areas: [statements.local_variable, expressions.assignment, expressions.multiplicative, expressions.strings, statements.print]

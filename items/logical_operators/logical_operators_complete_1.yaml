@@ -1,6 +1,7 @@
 id: logical_operators_complete_1
 concept: logical_operators
 type: completion
+dag_node: logical_operators
 prompt: |
   The loop tries each `n` from 0 to 11. Fill in the blank so `count` is the
   number of values that are between 1 and 10 inclusive, i.e. the program
@@ -30,6 +31,7 @@ options:
     text: "1 <= n <= 10"
     rationale: Mathematical chained comparison; the analyzer rejects it (`equality_cannot_be_equality_operand`, `undefined_operator` for `<=` on `bool`).
     compile_error: true
+    diagnostic: undefined_operator
 answer: a
 spec_areas: [expressions.logical, expressions.relational, statements.if, statements.for, statements.print]
 dart_notes: >-

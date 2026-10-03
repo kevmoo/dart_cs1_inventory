@@ -14,6 +14,7 @@ items/<concept>/<concept>_<trace|complete>_<n>.dart
 id: loops_definite_trace_1          # == file basename
 concept: loops_definite             # id from data/concepts.yaml
 type: tracing                       # definitional | tracing | completion
+dag_node: definite_loops            # node in data/dag.yaml this item is evidence for
 prompt: |                           # what the student reads above the code
   What does this program print?
 code_file: loops_definite_trace_1.dart   # omit for definitional
@@ -24,6 +25,8 @@ options:                            # exactly 4, ids a..d, one is the key
     text: "30"
     rationale: Why it is right / wrong (one sentence, names the misconception).
     compile_error: true             # optional; distractor can't be run
+    diagnostic: non_bool_condition  # required with compile_error; checked by
+                                    # test/compile_error_test.dart via dart analyze
 answer: b
 spec_areas: [statements.for, expressions.assignment]   # ids from data/spec_areas.yaml
 dart_notes: >-                      # optional: pseudocode -> Dart hazards
@@ -43,3 +46,7 @@ dart_notes: >-                      # optional: pseudocode -> Dart hazards
   idioms unless the item is *about* that idiom. Keep programs under ~15 lines.
 - Every tracing/completion item id appears as a `group('<id>', ...)` in
   `test/items/<concept>_test.dart`; `test/inventory_test.dart` enforces this.
+- Answer-key positions must stay balanced (no letter > 40%). Write the item
+  with whatever order reads naturally, then run
+  `dart run tool/balance_keys.dart` — it swaps YAML blocks, `optionX`
+  functions and test references consistently.

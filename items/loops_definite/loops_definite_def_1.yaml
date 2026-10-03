@@ -1,6 +1,7 @@
 id: loops_definite_def_1
 concept: loops_definite
 type: definitional
+dag_node: definite_loops
 prompt: |
   In the loop header `for (var i = 0; i < 5; i++)`, when is the condition
   `i < 5` checked?

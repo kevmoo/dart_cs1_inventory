@@ -1,6 +1,7 @@
 id: recursion_def_1
 concept: recursion
 type: definitional
+dag_node: recursion
 prompt: |
   In a recursive function, what is the job of the *base case*?
 options:

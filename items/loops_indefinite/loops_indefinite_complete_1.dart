@@ -1,4 +1,4 @@
-void optionA() {
+void optionB() {
   var n = 1;
   var line = '';
   while (n < 20) {
@@ -9,7 +9,7 @@ void optionA() {
 }
 
 // KEY
-void optionB() {
+void optionA() {
   var n = 1;
   var line = '';
   while (n < 20) {

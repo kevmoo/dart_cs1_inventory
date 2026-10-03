@@ -1,23 +1,24 @@
 id: selection_trace_2
 concept: selection
 type: tracing
+dag_node: selection
 prompt: |
   What does this program print?
 code_file: selection_trace_2.dart
 options:
   - id: a
-    text: "end"
-    rationale: "`age >= 13` is true, so the outer `else` is skipped; the inner `if` is false and has no `else`, so only `end` prints."
+    text: "enter\nend"
+    rationale: Assumes that once the outer condition is true the nested body runs unconditionally; the inner `if` has its own test, and 0 > 0 is `false`.
   - id: b
     text: "too young\nend"
     rationale: Attaches the `else` to the inner `if (tickets > 0)`; the braces make it belong to the outer `if (age >= 13)`.
   - id: c
-    text: "enter\nend"
-    rationale: Assumes that once the outer condition is true the nested body runs unconditionally; the inner `if` has its own test, and 0 > 0 is `false`.
+    text: "end"
+    rationale: "`age >= 13` is true, so the outer `else` is skipped; the inner `if` is false and has no `else`, so only `end` prints."
   - id: d
     text: "too young"
     rationale: Combines the attached-to-inner-`if` error with forgetting that `print('end')` is outside every `if` and always runs.
-answer: a
+answer: c
 spec_areas: [statements.if, statements.blocks, expressions.relational, statements.print]
 dart_notes: >-
   Dart requires braces-or-single-statement like C; the dangling-else

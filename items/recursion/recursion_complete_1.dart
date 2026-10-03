@@ -9,20 +9,8 @@ void optionA() {
   print(sumToA(3));
 }
 
-int sumToB(int n) {
-  if (n > 0) {
-    return 0;
-  }
-  return n + sumToB(n - 1);
-}
-
-void optionB() {
-  print(sumToB(3));
-}
-
-// KEY
 int sumToC(int n) {
-  if (n == 0) {
+  if (n > 0) {
     return 0;
   }
   return n + sumToC(n - 1);
@@ -30,4 +18,16 @@ int sumToC(int n) {
 
 void optionC() {
   print(sumToC(3));
+}
+
+// KEY
+int sumToB(int n) {
+  if (n == 0) {
+    return 0;
+  }
+  return n + sumToB(n - 1);
+}
+
+void optionB() {
+  print(sumToB(3));
 }

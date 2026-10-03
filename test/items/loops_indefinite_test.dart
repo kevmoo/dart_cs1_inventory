@@ -22,10 +22,10 @@ void main() {
   });
 
   group('loops_indefinite_complete_1', () {
-    test('key b: n = n * 2', () => expectOutput(c1.optionB, '1 2 4 8 16'));
-    test('a: n++ counts 1..19', () {
+    test('key a: n = n * 2', () => expectOutput(c1.optionA, '1 2 4 8 16'));
+    test('b: n++ counts 1..19', () {
       final oneToNineteen = List.generate(19, (i) => i + 1).join(' ');
-      expectOutput(c1.optionA, oneToNineteen);
+      expectOutput(c1.optionB, oneToNineteen);
     });
     test('c: n = n + 2 gives odds', () {
       expectOutput(c1.optionC, '1 3 5 7 9 11 13 15 17 19');

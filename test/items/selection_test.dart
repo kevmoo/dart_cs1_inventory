@@ -18,10 +18,10 @@ void main() {
   });
 
   group('selection_complete_1', () {
-    test('key b: else if chain', () => expectOutput(c1.optionB, 'SMMBB'));
+    test('key a: else if chain', () => expectOutput(c1.optionA, 'SMMBB'));
     test(
       'a: independent if adds two letters',
-      () => expectOutput(c1.optionA, 'SMMBMBM'),
+      () => expectOutput(c1.optionB, 'SMMBMBM'),
     );
     test('c: inclusive bound', () => expectOutput(c1.optionC, 'MMMBB'));
   });

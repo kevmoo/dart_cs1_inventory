@@ -1,6 +1,7 @@
 id: function_params_def_1
 concept: function_params
 type: definitional
+dag_node: function_calls_and_params
 prompt: |
   A function is declared as `void greet(String name, int times)`.
   In the call `greet(x, y)`, how does Dart decide which argument goes into
@@ -10,13 +11,13 @@ options:
     text: The argument whose variable is also called `name`; the names must match.
     rationale: Confuses parameter names with argument names; the caller's variable names play no role in binding.
   - id: b
-    text: The first argument, because `name` is the first parameter; arguments are matched by position.
-    rationale: Required positional parameters bind strictly by position, left to right.
+    text: The argument that was declared first in `main`.
+    rationale: Where the caller declared its variables is irrelevant; only the order written inside the parentheses matters.
   - id: c
     text: Whichever argument is a `String`; Dart matches arguments to parameters by type.
     rationale: Types are checked after binding, not used to choose the binding; a mismatch is a compile error, not a reordering.
   - id: d
-    text: The argument that was declared first in `main`.
-    rationale: Where the caller declared its variables is irrelevant; only the order written inside the parentheses matters.
-answer: b
+    text: The first argument, because `name` is the first parameter; arguments are matched by position.
+    rationale: Required positional parameters bind strictly by position, left to right.
+answer: d
 spec_areas: [expressions.function_invocation, functions.required_formals, functions.declarations]
