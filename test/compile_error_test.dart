@@ -1,3 +1,7 @@
+// Copyright 2026 Google LLC
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 // Verifies that every `compile_error: true` option really fails to compile,
 // with the diagnostic named in the YAML. Each option is substituted into the
 // item's `template:` and all programs are analyzed in one `dart analyze` run.

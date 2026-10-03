@@ -26,6 +26,13 @@ FCS1, SCS1, or any other access-restricted assessment.
   secure summative measure, and no validity study has been done. Do not cite
   scores from it as comparable to FCS1/SCS1 results.
 
+## License
+
+BSD-3-Clause (see [LICENSE](LICENSE)) for code, data and item text alike.
+Source files under `lib/`, `tool/` and `test/` carry the standard header;
+the student-facing programs under `items/` deliberately do not, so that what
+the learner reads is exactly the program under question.
+
 ## Layout
 
 | Path | What |

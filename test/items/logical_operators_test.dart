@@ -1,3 +1,7 @@
+// Copyright 2026 Google LLC
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:test/test.dart';
 
 import '../../items/logical_operators/logical_operators_complete_1.dart' as c1;

@@ -1,3 +1,7 @@
+// Copyright 2026 Google LLC
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 // Data model for the inventory. Loaded from `data/*.yaml` and
 // `items/**/*.yaml`. Everything here is a plain value type so that
 // `tool/report.dart` and the tests can share one deterministic view of the
