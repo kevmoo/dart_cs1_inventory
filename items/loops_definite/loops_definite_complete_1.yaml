@@ -20,12 +20,15 @@ options:
   - id: b
     text: "i < 5"
     rationale: Exclusive bound starting at 1 stops at 4; prints `1 2 3 4`.
+    misconception: bool.strict_vs_inclusive
   - id: c
     text: "i <= 6"
     rationale: Inclusive bound one too far; prints `1 2 3 4 5 6`.
+    misconception: bounds.off_by_one
   - id: d
     text: "i == 5"
     rationale: The condition is false on the first check (`1 == 5`), so the body never runs; prints an empty line.
+    misconception: loop.eq_condition_as_until
 answer: a
 spec_areas: [statements.for, expressions.relational, expressions.equality, expressions.strings]
 dart_notes: >-

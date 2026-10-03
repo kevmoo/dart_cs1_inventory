@@ -11,11 +11,14 @@ options:
   - id: b
     text: It is an error, because no number can equal itself plus one.
     rationale: Reads `=` as a mathematical equation instead of an assignment that stores a value.
+    misconception: assign.equation
   - id: c
     text: It links `x` to the formula `x + 1`, so `x` grows by 1 every time it is read.
     rationale: Spreadsheet-formula misconception; a variable stores one value, not a live expression.
+    misconception: assign.spreadsheet
   - id: d
     text: It checks whether `x` is equal to `x + 1` and stores `true` or `false`.
     rationale: Confuses the assignment operator `=` with the equality operator `==`.
+    misconception: assign.eq_vs_eqeq
 answer: a
 spec_areas: [expressions.assignment, expressions.additive, statements.expression]

@@ -9,15 +9,18 @@ options:
   - id: a
     text: "enter\nend"
     rationale: Assumes that once the outer condition is true the nested body runs unconditionally; the inner `if` has its own test, and 0 > 0 is `false`.
+    misconception: if.nested_unconditional
   - id: b
     text: "too young\nend"
     rationale: Attaches the `else` to the inner `if (tickets > 0)`; the braces make it belong to the outer `if (age >= 13)`.
+    misconception: if.else_binds_inner
   - id: c
     text: "end"
     rationale: "`age >= 13` is true, so the outer `else` is skipped; the inner `if` is false and has no `else`, so only `end` prints."
   - id: d
     text: "too young"
     rationale: Combines the attached-to-inner-`if` error with forgetting that `print('end')` is outside every `if` and always runs.
+    misconception: if.after_block_skipped
 answer: c
 spec_areas: [statements.if, statements.blocks, expressions.relational, statements.print]
 dart_notes: >-

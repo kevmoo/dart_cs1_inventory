@@ -1,0 +1,326 @@
+# Catalog of misconceptions. Every distractor in `items/**/*.yaml` names one
+# of these ids in `misconception:`; the key names none. Ids are
+# `<family>.<name>`; a family is a loose grouping, not a DAG node.
+#
+# This is the signal a tutor acts on: a wrong answer is evidence for a
+# specific wrong model, not just "missed an item". Reuse an existing id when
+# it fits; add a new one when a distractor genuinely probes something new.
+# `test/inventory_test.dart` fails on unknown ids and on catalog entries no
+# item uses.
+misconceptions:
+  # ------------------------------------------------------------ assignment
+  - id: assign.equation
+    title: "`=` is a mathematical equation"
+    description: >-
+      Reads `a = b` as a statement of equality that holds over time, rather
+      than a one-off copy of a value into a variable.
+  - id: assign.spreadsheet
+    title: Variables are live formulas
+    description: >-
+      Believes a variable assigned from an expression is recomputed when its
+      inputs later change, like a spreadsheet cell.
+  - id: assign.eq_vs_eqeq
+    title: "`=` vs `==`"
+    description: Confuses assignment with the equality test.
+  - id: assign.right_to_left
+    title: Assignment copies right-to-left
+    description: Reads `a = b` as "b gets a".
+  - id: assign.swap
+    title: "`a = b; b = a;` swaps"
+    description: >-
+      Does not see that the first assignment overwrites `a` before the second
+      one reads it.
+  - id: assign.first_value_permanent
+    title: Reassignment ignored
+    description: Treats the first value a variable received as permanent.
+  - id: assign.expression_without_store
+    title: Evaluating is storing
+    description: >-
+      Believes computing an expression changes the variable it was computed
+      from, without `=` or `return`.
+  - id: assign.compound_vs_plain
+    title: "`+=` vs `=`"
+    description: Confuses compound assignment with plain assignment.
+  - id: assign.redeclare
+    title: Redeclare to change
+    description: Tries to change a variable by declaring it again.
+
+  # ------------------------------------------------------------ arithmetic
+  - id: arith.int_division_slash
+    title: "`/` truncates on ints"
+    description: Assumes `7 / 2` is 3, as in C or Java; in Dart it is 3.5.
+  - id: arith.truncdiv_rounds
+    title: "`~/` rounds"
+    description: Believes truncating division rounds to nearest.
+  - id: arith.truncdiv_as_slash
+    title: "`~/` is ordinary division"
+    description: Treats `~/` as if it produced a fraction.
+  - id: arith.mod_fraction
+    title: "`%` is the fractional part"
+    description: Reads remainder as the fraction left after dividing.
+
+  # ---------------------------------------------------------------- output
+  - id: output.no_interpolation
+    title: "`$x` is literal text"
+    description: Does not know `'$x'` substitutes the variable's value.
+  - id: output.phantom_print
+    title: Output without `print`
+    description: Expects a line of output from a statement that does not print.
+  - id: output.print_as_computation
+    title: "`print` does the work"
+    description: >-
+      Treats printing as if it returned, stored, or mutated the value it
+      displays.
+
+  # -------------------------------------------------------------- booleans
+  - id: bool.english_or
+    title: "English \"or\""
+    description: Writes `x == 1 || 2` expecting both to be compared.
+  - id: bool.lenient_compiler
+    title: Compiler drops what it cannot use
+    description: Assumes a malformed operand is silently ignored, not rejected.
+  - id: bool.truthiness
+    title: Truthiness
+    description: Imports implicit conversion to `bool` from Python/JavaScript.
+  - id: bool.or_for_between
+    title: "`||` for \"between\""
+    description: Uses `||` where a range needs `&&`.
+  - id: bool.chained_comparison
+    title: Chained comparison
+    description: Writes `1 <= x <= 10` as in mathematics.
+  - id: bool.not_scope_widens
+    title: "`!` applies to the whole expression"
+    description: Reads `!a && b` as `!(a && b)`.
+  - id: bool.demorgan_distribute
+    title: "`!` distributes unchanged"
+    description: Rewrites `!(a && b)` as `!a && !b`.
+  - id: bool.no_short_circuit
+    title: No short-circuit
+    description: Assumes both operands of `&&` / `||` are always evaluated.
+  - id: bool.ne_as_eq
+    title: "`!=` read as `==`"
+    description: Misreads the inequality operator.
+  - id: bool.strict_vs_inclusive
+    title: "`<` vs `<=`"
+    description: Confuses strict and inclusive comparison at an endpoint.
+
+  # -------------------------------------------------------------- selection
+  - id: if.chain_as_independent
+    title: "`else if` chain as independent `if`s"
+    description: Believes several branches of one chain can run.
+  - id: if.independent_as_chain
+    title: "Independent `if`s as a chain"
+    description: Believes a true `if` prevents the next, unrelated `if`.
+  - id: if.all_branches_run
+    title: All branches run
+    description: Reads `if` / `else` as a sequence of statements.
+  - id: if.last_true_wins
+    title: Last true condition wins
+    description: Believes a chain runs its *last* true branch, not the first.
+  - id: if.false_skips_else
+    title: False skips the whole `if`
+    description: Forgets that a false condition is exactly when `else` runs.
+  - id: if.nested_unconditional
+    title: Nested body is unconditional
+    description: Assumes that once the outer condition holds, the inner `if` is not tested.
+  - id: if.else_binds_inner
+    title: "`else` binds to the wrong `if`"
+    description: Believes an `else` attaches to the inner `if` despite the braces.
+  - id: if.else_with_condition
+    title: "`else` takes a condition"
+    description: Writes `else (x > 3)`.
+  - id: if.after_block_skipped
+    title: Code after a block is part of it
+    description: Treats a statement after an `if` as conditional.
+
+  # ------------------------------------------------------------------ loops
+  - id: bounds.off_by_one
+    title: Off by one
+    description: >-
+      Starts or stops one step early or late at a boundary. Symptom bucket:
+      prefer `bool.strict_vs_inclusive` when the error is `<` vs `<=`, and
+      `list.length_is_last_index` when it is `length` vs `length - 1`.
+  - id: loop.eq_condition_as_until
+    title: "`i == n` means \"until\""
+    description: Reads an equality loop condition as the exit condition.
+  - id: loop.condition_checked_once
+    title: Condition checked only once
+    description: >-
+      Treats the loop condition like the initializer: evaluated once before
+      the loop starts.
+  - id: loop.body_before_test
+    title: Body runs before the test
+    description: >-
+      Treats `while` / `for` like `do-while`: the body runs at least once
+      even when the condition is false from the start.
+  - id: loop.test_before_body
+    title: "`do-while` tests first"
+    description: Treats `do-while` like `while`, skipping the first pass.
+  - id: loop.extra_pass_after_false
+    title: One more pass after false
+    description: Believes a loop runs its body once more after the test fails.
+  - id: loop.exit_mid_body
+    title: Exit mid-body
+    description: >-
+      Believes a loop stops the moment its condition would become false,
+      without finishing the current pass.
+  - id: loop.update_decides_exit
+    title: Update decides the exit
+    description: Thinks the `for` update, not the condition, ends the loop.
+  - id: loop.test_placement_prevents_infinite
+    title: Test placement prevents infinite loops
+    description: Believes where the test sits can stop a loop whose body never changes it.
+  - id: loop.while_as_if
+    title: "`while` as `if`"
+    description: Runs the body once instead of until the condition fails.
+  - id: loop.inner_fixed_trip_count
+    title: Inner loop always runs the same number of times
+    description: Ignores that the inner bound depends on the outer variable.
+  - id: loop.inner_runs_once
+    title: Inner loop runs once in total
+    description: Does not restart the inner loop on each outer pass.
+  - id: loop.accumulator_overwritten
+    title: Accumulator overwritten
+    description: Reads `sum += x` as `sum = x`.
+  - id: break.deferred
+    title: "`break` at end of pass"
+    description: Believes `break` finishes the current pass first.
+  - id: break.as_continue
+    title: "`break` as `continue`"
+    description: Skips one element instead of leaving the loop.
+  - id: break.ignored
+    title: "`break` ignored"
+    description: Traces the loop as if `break` were not there.
+  - id: postfix.no_side_effect
+    title: "`i++` does not change `i`"
+    description: Believes postfix increment only yields a value.
+  - id: loop.update_before_first_pass
+    title: Update runs before the first pass
+    description: Applies the `for` update before the body's first execution.
+
+  # ------------------------------------------------------------------ lists
+  - id: list.one_based
+    title: One-based indexing
+    description: Treats `a[1]` as the first element.
+  - id: list.length_is_last_index
+    title: "`length` is the last index"
+    description: Believes `a[a.length]` is the last element.
+  - id: list.index_grows
+    title: Indexing past the end grows the list
+    description: Believes `a[a.length] = x` appends.
+  - id: list.element_assign_no_effect
+    title: "`a[i] = v` does not change the list"
+    description: Treats element assignment as producing a value only.
+  - id: list.index_vs_element
+    title: Index vs element
+    description: Uses `i` where `a[i]` is meant, or vice versa.
+  - id: syntax.missing_receiver
+    title: Missing receiver
+    description: Writes `length` for `a.length`.
+
+  # --------------------------------------------------------------- aliasing
+  - id: alias.copy_on_assign
+    title: Assignment copies the object
+    description: Believes `b = a` (or passing `a`) duplicates a list or object.
+  - id: alias.one_way_link
+    title: One-way link
+    description: Believes changes propagate from one name to the other but not back.
+  - id: alias.equal_args_same_object
+    title: Equal arguments, same object
+    description: Believes two `Counter(5)` calls yield one object.
+
+  # -------------------------------------------------------------- functions
+  - id: param.bind_by_name
+    title: Arguments bind by name
+    description: Matches caller variable names to parameter names.
+  - id: param.bind_by_declaration_order
+    title: Arguments bind by declaration order
+    description: Uses the order the caller declared its variables, not the call.
+  - id: param.bind_by_type
+    title: Arguments bind by type
+    description: Believes types pick which parameter receives which argument.
+  - id: param.named_for_positional
+    title: Named syntax for positional parameters
+    description: "Writes `f(low: 2)` for a positional `low`."
+  - id: param.by_reference
+    title: Pass by reference
+    description: Believes reassigning a parameter changes the caller's variable.
+  - id: scope.param_is_global
+    title: Parameter is the outer variable
+    description: Believes binding a parameter overwrites a same-named top-level variable.
+  - id: scope.shadow_ignored
+    title: Shadowing ignored
+    description: Reads the outer variable where a same-named local or parameter is in scope.
+  - id: scope.local_shadows_field
+    title: Local instead of field
+    description: Declares a local that shadows the field it meant to update.
+  - id: scope.outer_local_visible
+    title: Outer locals visible everywhere
+    description: Refers to `main`'s variable from inside a class or function.
+  - id: call.outer_first
+    title: Outer call evaluated first
+    description: Evaluates `f(g(x))` as "f, then g".
+  - id: call.outer_ignored
+    title: Only the inner call counts
+    description: >-
+      Takes the inner call's value as the value of `f(g(x))`, never applying
+      `f`.
+  - id: return.as_print
+    title: "`return` prints"
+    description: Expects `return` to produce output.
+  - id: return.does_not_exit
+    title: "`return` does not exit"
+    description: Continues the function (or loop) after an executed `return`.
+  - id: return.only_at_end
+    title: "The last `return` is the real one"
+    description: >-
+      Believes the function's value is whatever the final `return` says;
+      earlier returns are ignored or impossible.
+  - id: return.exits_program
+    title: "`return` ends the program"
+    description: Believes a `return` deep in a call chain stops everything.
+
+  # -------------------------------------------------------------- recursion
+  - id: recursion.base_vs_recursive_case
+    title: Base case vs recursive case
+    description: Swaps the roles of the two branches.
+  - id: recursion.base_is_first_call
+    title: Base case is the first call
+    description: Believes the base case runs first rather than deepest.
+  - id: recursion.base_value_is_result
+    title: Base case value is the result
+    description: Forgets that waiting calls combine the base value on the way back.
+  - id: recursion.one_level
+    title: Only one level recurses
+    description: Treats the recursive call as returning its base value immediately.
+  - id: recursion.call_deferred
+    title: Recursive call deferred
+    description: Believes the current body finishes before the recursive call runs.
+  - id: recursion.unwind_order
+    title: Unwind order
+    description: Believes lines printed after the recursive call appear in call order rather than return order.
+
+  # -------------------------------------------------------------------- oop
+  - id: oop.this_formal_is_param
+    title: "`this.x` is an ordinary parameter"
+    description: Does not see that an initializing formal stores into the field.
+  - id: oop.field_as_method
+    title: Field read as method call
+    description: Misreads `this.count` as a call.
+  - id: oop.field_shared
+    title: Fields shared across instances
+    description: Treats an instance field as class-level state.
+  - id: oop.method_cannot_mutate
+    title: Methods cannot change fields
+    description: Assumes an object's fields are fixed after construction.
+
+  # ---------------------------------------------------------------- tracing
+  - id: trace.wrong_operation
+    title: Wrong operation
+    description: >-
+      Applies the wrong operator or update (adds instead of multiplies, steps
+      by one instead of doubling). Low-information bucket; prefer a specific
+      id when one exists.
+  - id: trace.ignores_initial_value
+    title: Initial value ignored
+    description: Assumes the computation starts from 0 instead of the given argument or starting index.

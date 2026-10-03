@@ -28,14 +28,17 @@ options:
   - id: b
     text: "if (n > 1)"
     rationale: Makes an independent `if`, so for n = 4 and 5 both `B` and `M` are added; prints `SMMBMBM`.
+    misconception: if.chain_as_independent
   - id: c
     text: "else if (n >= 1)"
     rationale: Chain is right but the bound is inclusive, so n = 1 gets `M` instead of `S`; prints `MMMBB`.
+    misconception: bool.strict_vs_inclusive
   - id: d
     text: "else (n > 1)"
     rationale: "`else` cannot take a condition; the analyzer reports `expected_token` (Expected to find ';')."
     compile_error: true
     diagnostic: expected_token
+    misconception: if.else_with_condition
 answer: a
 spec_areas: [statements.if, statements.blocks, expressions.relational, statements.for, statements.print]
 dart_notes: >-

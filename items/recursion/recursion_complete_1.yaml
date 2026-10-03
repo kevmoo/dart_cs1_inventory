@@ -20,17 +20,20 @@ options:
   - id: a
     text: "n == 1"
     rationale: Stops one step early, so the 1 is never added; prints `5`.
+    misconception: bounds.off_by_one
   - id: b
     text: "n == 0"
     rationale: Stops when there is nothing left to add; 3 + 2 + 1 + 0 = 6.
   - id: c
     text: "n > 0"
     rationale: Writes the condition for the recursive case instead of the base case, so `sumTo(3)` returns 0 immediately.
+    misconception: recursion.base_vs_recursive_case
   - id: d
     text: "n = 0"
     rationale: Uses assignment instead of comparison; `n = 0` is an `int`, not a `bool`, so the analyzer reports `non_bool_condition`.
     compile_error: true
     diagnostic: non_bool_condition
+    misconception: assign.eq_vs_eqeq
 answer: b
 spec_areas: [expressions.function_invocation, statements.return, statements.if, expressions.equality, expressions.relational, statements.print]
 dart_notes: >-

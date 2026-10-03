@@ -12,12 +12,15 @@ options:
   - id: b
     text: "3 10"
     rationale: Believes `break` only takes effect at the end of the current pass, so -1 is added and `i` incremented first.
+    misconception: break.deferred
   - id: c
     text: "4 23"
     rationale: Treats `break` like `continue`, skipping the sentinel and summing the remaining positives 9 and 3.
+    misconception: break.as_continue
   - id: d
     text: "5 22"
     rationale: Ignores `break` entirely and sums every element of the list.
+    misconception: break.ignored
 answer: a
 spec_areas: [statements.while, statements.break, statements.if, expressions.index, expressions.relational, expressions.booleans, statements.print]
 dart_notes: >-

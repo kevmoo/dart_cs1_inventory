@@ -9,12 +9,15 @@ options:
   - id: a
     text: Any integer, because a Dart list grows automatically when you index past the end.
     rationale: A growable list only grows through `add`/`insert`; indexing past the end is always an error.
+    misconception: list.index_grows
   - id: b
     text: 1, 2, 3, 4
     rationale: One-based counting; `a[4]` is out of range and `a[0]` (the first element) is missed.
+    misconception: list.one_based
   - id: c
     text: 0, 1, 2, 3, 4
     rationale: Mixes zero-based start with a one-based end; `a[a.length]` throws a `RangeError`.
+    misconception: list.length_is_last_index
   - id: d
     text: 0, 1, 2, 3
     rationale: Dart lists are zero-based, so a list of length 4 has indexes 0 through `length - 1`.

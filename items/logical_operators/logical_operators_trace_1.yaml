@@ -9,15 +9,18 @@ options:
   - id: a
     text: "true\ntrue\ntrue"
     rationale: Reads `!sunny && warm` as `!(sunny && warm)`; `!` has higher precedence than `&&` and applies only to `sunny`.
+    misconception: bool.not_scope_widens
   - id: b
     text: "false\ntrue\ntrue"
     rationale: "`!` binds only to `sunny` in line 1 (false && false); line 2 negates the whole `&&` (true); line 3 is false || true (true)."
   - id: c
     text: "false\nfalse\ntrue"
     rationale: Distributes `!` as `!sunny && !warm` for line 2; De Morgan says `!(a && b)` equals `!a || !b`, not `!a && !b`.
+    misconception: bool.demorgan_distribute
   - id: d
     text: "false\ntrue\nfalse"
     rationale: Reads `!sunny || !warm` as `!(sunny || warm)`; each `!` negates only its own operand, so line 3 is false || true.
+    misconception: bool.not_scope_widens
 answer: b
 spec_areas: [expressions.logical, expressions.unary, expressions.relational, expressions.booleans, statements.print]
 dart_notes: >-

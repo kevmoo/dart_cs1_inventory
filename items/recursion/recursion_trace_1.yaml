@@ -9,14 +9,17 @@ options:
   - id: a
     text: "10"
     rationale: Adds the arguments (4 + 3 + 2 + 1) instead of multiplying them.
+    misconception: trace.wrong_operation
   - id: b
     text: "1"
     rationale: Takes the base case's `return 1` as the final answer, forgetting each waiting call multiplies by its own `n`.
+    misconception: recursion.base_value_is_result
   - id: c
     text: "24"
     rationale: "`product(4)` is 4 * product(3) = 4 * 3 * 2 * product(1) = 4 * 3 * 2 * 1 = 24."
   - id: d
     text: "4"
     rationale: Performs only one level, treating `product(n - 1)` as if it immediately returned 1.
+    misconception: recursion.one_level
 answer: c
 spec_areas: [expressions.function_invocation, statements.return, statements.if, expressions.multiplicative, expressions.equality, statements.print]

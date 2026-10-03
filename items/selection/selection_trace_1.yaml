@@ -12,11 +12,14 @@ options:
   - id: b
     text: "B\nC\npass\nok"
     rationale: Treats the `else if` chain like independent `if`s, so `C` also prints; after `B` runs the rest of the chain is skipped.
+    misconception: if.chain_as_independent
   - id: c
     text: "B\npass"
     rationale: Treats the two separate `if` statements as if they were a chain, stopping after `pass`; independent `if`s are all tested.
+    misconception: if.independent_as_chain
   - id: d
     text: "C\npass\nok"
     rationale: Last-true-wins misconception in the chain; the first true condition (`score >= 80`) is the one that runs.
+    misconception: if.last_true_wins
 answer: a
 spec_areas: [statements.if, expressions.relational, statements.print]

@@ -10,12 +10,15 @@ options:
   - id: a
     text: The argument whose variable is also called `name`; the names must match.
     rationale: Confuses parameter names with argument names; the caller's variable names play no role in binding.
+    misconception: param.bind_by_name
   - id: b
     text: The argument that was declared first in `main`.
     rationale: Where the caller declared its variables is irrelevant; only the order written inside the parentheses matters.
+    misconception: param.bind_by_declaration_order
   - id: c
     text: Whichever argument is a `String`; Dart matches arguments to parameters by type.
     rationale: Types are checked after binding, not used to choose the binding; a mismatch is a compile error, not a reordering.
+    misconception: param.bind_by_type
   - id: d
     text: The first argument, because `name` is the first parameter; arguments are matched by position.
     rationale: Required positional parameters bind strictly by position, left to right.

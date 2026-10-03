@@ -9,14 +9,17 @@ options:
   - id: a
     text: "13 13"
     rationale: Treats `count` as one value shared by all `Counter` objects, so every bump adds to the same number.
+    misconception: oop.field_shared
   - id: b
     text: "2 11"
     rationale: Each object has its own `count`; `a` starts at 0 and is bumped twice, `b` starts at 10 and is bumped once.
   - id: c
     text: "0 10"
     rationale: Assumes `bump()` cannot change the object's field, so each `count` keeps its constructor value.
+    misconception: oop.method_cannot_mutate
   - id: d
     text: "2 1"
     rationale: Ignores the constructor argument, assuming every counter starts from 0 and only counts bumps.
+    misconception: trace.ignores_initial_value
 answer: b
 spec_areas: [classes.instance_variables, classes.instance_methods, classes.constructors, expressions.instance_creation, expressions.method_invocation, expressions.property_extraction, statements.print]

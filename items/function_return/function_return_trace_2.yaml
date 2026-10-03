@@ -9,14 +9,17 @@ options:
   - id: a
     text: "7\n15"
     rationale: Gets the first line right but reads the second call left to right as `addOne(twice(x))`.
+    misconception: call.outer_first
   - id: b
     text: "8\n18"
     rationale: Applies the outer function first (reads `addOne(twice(3))` as "add one, then double").
+    misconception: call.outer_first
   - id: c
     text: "7\n16"
     rationale: Inner calls are evaluated first; `twice(3)` is 6, `addOne(6)` is 7, then `addOne(7)` is 8 and `twice(8)` is 16.
   - id: d
     text: "7\n8"
     rationale: Drops the outer `twice` in the second line, treating the inner call's value as the whole expression.
+    misconception: call.outer_ignored
 answer: c
 spec_areas: [statements.return, expressions.function_invocation, expressions.additive, expressions.multiplicative, statements.print]

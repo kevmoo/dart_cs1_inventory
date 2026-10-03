@@ -9,6 +9,7 @@ options:
   - id: a
     text: "done 10"
     rationale: Treats `do-while` like `while`, skipping the body because `10 < 5` is false at the start.
+    misconception: loop.test_before_body
   - id: b
     text: |-
       tick 10
@@ -20,10 +21,12 @@ options:
       tick 11
       done 12
     rationale: Believes a `do-while` makes one more pass after the condition is found false.
+    misconception: loop.extra_pass_after_false
   - id: d
     text: |-
       tick 10
       done 10
     rationale: Believes the loop exits right after `print`, before the increment statement runs.
+    misconception: loop.exit_mid_body
 answer: b
 spec_areas: [statements.do, expressions.relational, expressions.additive, expressions.strings, statements.print]

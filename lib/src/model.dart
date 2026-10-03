@@ -63,6 +63,19 @@ final class const Option({
   /// Analyzer diagnostic code expected for a [compileError] option
   /// (verified by `test/compile_error_test.dart`).
   required final String? diagnostic,
+
+  /// Id in `data/misconceptions.yaml` that choosing this distractor is
+  /// evidence for; `null` for the key.
+  required final String? misconception,
+});
+
+/// A named wrong model (see `data/misconceptions.yaml`). The unit a tutor
+/// reasons about: a wrong answer is evidence for a misconception, not just
+/// a missed item.
+final class const Misconception({
+  required final String id,
+  required final String title,
+  required final String description,
 });
 
 final class const Item({
@@ -121,10 +134,20 @@ final class const Inventory({
   required final List<Item> items,
   required final List<DagNode> dag,
   required final List<TranslationIssue> translationIssues,
+  required final List<Misconception> misconceptions,
 }) {
   /// Loads from [root] (defaults to the current directory).
   factory Inventory.load([String? root]) {
     root ??= Directory.current.path;
+    final misconceptions = _loadList(
+      p.join(root, 'data', 'misconceptions.yaml'),
+      'misconceptions',
+      (m) => Misconception(
+        id: m['id'] as String,
+        title: m['title'] as String,
+        description: m['description'] as String,
+      ),
+    );
     final concepts = _loadList(
       p.join(root, 'data', 'concepts.yaml'),
       'concepts',
@@ -189,6 +212,7 @@ final class const Inventory({
       items: items,
       dag: dag,
       translationIssues: issues,
+      misconceptions: misconceptions,
     );
   }
 
@@ -209,6 +233,7 @@ Item _loadItem(File file, String root) {
         rationale: o['rationale'] as String,
         compileError: (o['compile_error'] as bool?) ?? false,
         diagnostic: o['diagnostic'] as String?,
+        misconception: o['misconception'] as String?,
       ),
   ];
   return Item(

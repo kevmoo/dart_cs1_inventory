@@ -23,7 +23,9 @@ template: |                         # completion only: code with `____`
 options:                            # exactly 4, ids a..d, one is the key
   - id: a
     text: "30"
-    rationale: Why it is right / wrong (one sentence, names the misconception).
+    rationale: Why it is right / wrong, in one sentence a student can read.
+    misconception: bounds.off_by_one # distractors only; which wrong model this
+                                     # is evidence for (data/misconceptions.yaml)
     compile_error: true             # optional; distractor can't be run
     diagnostic: non_bool_condition  # required with compile_error; checked by
                                     # test/compile_error_test.dart via dart analyze

@@ -18,18 +18,21 @@ options:
       4
       30
     rationale: Uses one-based indexing, treating `a[1]` as the first element and `a[3]` as the third.
+    misconception: list.one_based
   - id: c
     text: |-
       20
       3
       30
     rationale: Believes `length` is the last index (3) rather than the number of elements.
+    misconception: list.length_is_last_index
   - id: d
     text: |-
       20
       4
       30
     rationale: Believes `a[a.length - 1]` is the second-to-last element, as if the last index were `length`.
+    misconception: list.length_is_last_index
 answer: a
 spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, expressions.additive, statements.print]
 dart_notes: >-

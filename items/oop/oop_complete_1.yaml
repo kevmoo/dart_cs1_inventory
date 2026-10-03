@@ -29,14 +29,17 @@ options:
   - id: b
     text: "var count = this.count + 1;"
     rationale: Declares a local variable that shadows the field and vanishes when `bump()` returns; the field stays 3.
+    misconception: scope.local_shadows_field
   - id: c
     text: "print(count + 1);"
     rationale: Prints instead of changing the field, so the output is `4`, `4`, then `3`.
+    misconception: output.print_as_computation
   - id: d
     text: "c.count += 1;"
     rationale: Refers to `main`'s variable `c`, which is not in scope inside the class; the analyzer reports `undefined_identifier`.
     compile_error: true
     diagnostic: undefined_identifier
+    misconception: scope.outer_local_visible
 answer: a
 spec_areas: [classes.instance_methods, classes.instance_variables, expressions.this, expressions.assignment, expressions.identifier_reference, expressions.method_invocation, statements.print]
 dart_notes: >-

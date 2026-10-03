@@ -9,14 +9,17 @@ options:
   - id: a
     text: "5 x 2 = 10"
     rationale: Spreadsheet-formula misconception; `area` stored the value 6 when it was assigned and is not recomputed when `width` changes.
+    misconception: assign.spreadsheet
   - id: b
     text: "3 x 2 = 6"
     rationale: Ignores the reassignment `width = 5`, treating the first value of a variable as permanent.
+    misconception: assign.first_value_permanent
   - id: c
     text: "5 x 2 = 6"
     rationale: "`area` was computed as 3 * 2 = 6 before `width` changed; the later assignment only affects `width`."
   - id: d
     text: "width x height = area"
     rationale: Does not know that `$name` inside a string is replaced by the variable's value (string interpolation).
+    misconception: output.no_interpolation
 answer: c
 spec_areas: [statements.local_variable, expressions.assignment, expressions.multiplicative, expressions.strings, statements.print]

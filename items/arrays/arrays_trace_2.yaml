@@ -9,15 +9,18 @@ options:
   - id: a
     text: "[6, 2, 4]"
     rationale: Treats `i < a.length` as excluding the last element (off-by-one), so index 2 is never updated.
+    misconception: bounds.off_by_one
   - id: b
     text: "[3, 1, 4]"
     rationale: Believes assigning to `a[i]` produces a new value without changing the list itself.
+    misconception: list.element_assign_no_effect
   - id: c
     text: "[6, 2, 8]"
     rationale: Each pass reads `a[i]`, doubles it, and stores it back into the same slot.
   - id: d
     text: "[0, 2, 4]"
     rationale: Confuses the index with the element, computing `i * 2` instead of `a[i] * 2`.
+    misconception: list.index_vs_element
 answer: c
 spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, statements.for, expressions.assignment, expressions.multiplicative, statements.print]
 dart_notes: >-
