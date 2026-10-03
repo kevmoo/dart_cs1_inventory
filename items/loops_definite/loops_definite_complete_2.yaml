@@ -1,0 +1,41 @@
+id: loops_definite_complete_2
+concept: loops_definite
+type: completion
+dag_node: nested_loops
+prompt: |
+  Fill in the blank so the program prints this triangle:
+
+  ```
+  *
+  **
+  ***
+  ```
+code_file: loops_definite_complete_2.dart
+template: |
+  void main() {
+    for (var i = 1; i <= 3; i++) {
+      var row = '';
+      for (var j = 1; ____; j++) {
+        row += '*';
+      }
+      print(row);
+    }
+  }
+options:
+  - id: a
+    text: "j <= i"
+    rationale: Row `i` gets `i` stars because the inner loop runs `j` = 1..i.
+  - id: b
+    text: "j < i"
+    rationale: Strict bound gives one star too few per row; prints an empty line, then `*`, then `**`.
+    misconception: bool.strict_vs_inclusive
+  - id: c
+    text: "j <= 3"
+    rationale: A fixed inner bound prints `***` three times; the inner bound must depend on `i`.
+    misconception: loop.inner_fixed_trip_count
+  - id: d
+    text: "j <= i + 1"
+    rationale: Starts one star too wide; prints `**`, `***`, `****`.
+    misconception: bounds.off_by_one
+answer: a
+spec_areas: [statements.for, statements.blocks, expressions.relational, expressions.strings, expressions.assignment, statements.print]

@@ -1,43 +1,59 @@
 void optionB() {
-  var line = '';
-  for (var n = 1; n <= 5; n++) {
-    if (n > 3) {
-      line += 'B';
-    }
-    if (n > 1) {
-      line += 'M';
-    } else {
-      line += 'S';
-    }
+  var n = 1;
+  if (n > 3) {
+    print('B');
   }
-  print(line);
+  if (n > 1) {
+    print('M');
+  } else {
+    print('S');
+  }
+  n = 4;
+  if (n > 3) {
+    print('B');
+  }
+  if (n > 1) {
+    print('M');
+  } else {
+    print('S');
+  }
 }
 
 // KEY
 void optionA() {
-  var line = '';
-  for (var n = 1; n <= 5; n++) {
-    if (n > 3) {
-      line += 'B';
-    } else if (n > 1) {
-      line += 'M';
-    } else {
-      line += 'S';
-    }
+  var n = 1;
+  if (n > 3) {
+    print('B');
+  } else if (n > 1) {
+    print('M');
+  } else {
+    print('S');
   }
-  print(line);
+  n = 4;
+  if (n > 3) {
+    print('B');
+  } else if (n > 1) {
+    print('M');
+  } else {
+    print('S');
+  }
 }
 
 void optionC() {
-  var line = '';
-  for (var n = 1; n <= 5; n++) {
-    if (n > 3) {
-      line += 'B';
-    } else if (n >= 1) {
-      line += 'M';
-    } else {
-      line += 'S';
-    }
+  var n = 1;
+  if (n > 3) {
+    print('B');
+  } else if (n >= 1) {
+    print('M');
+  } else {
+    print('S');
   }
-  print(line);
+  n = 4;
+  if (n > 3) {
+    print('B');
+  } else if (n >= 1) {
+    print('M');
+  } else {
+    print('S');
+  }
 }

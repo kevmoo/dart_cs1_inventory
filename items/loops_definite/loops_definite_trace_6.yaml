@@ -1,0 +1,37 @@
+id: loops_definite_trace_6
+concept: loops_definite
+type: tracing
+dag_node: definite_loops
+prompt: |
+  What does this program print?
+code_file: loops_definite_trace_6.dart
+options:
+  - id: a
+    text: |-
+      3
+      8
+    rationale: Believes `i` stops at the last value the body saw (3); the update to 4 is what makes the test fail.
+    misconception: loop.var_ends_at_last_body_value
+  - id: b
+    text: |-
+      5
+      10
+    rationale: Runs the body one more time after `i < 4` is already false.
+    misconception: loop.extra_pass_after_false
+  - id: c
+    text: |-
+      0
+      8
+    rationale: Believes the loop works on its own private `i`, leaving the outer `i` at 0.
+    misconception: loop.header_var_is_private
+  - id: d
+    text: |-
+      4
+      8
+    rationale: The body runs for `i` = 0, 1, 2, 3 (four passes, `count` = 8); the loop ends only after `i++` makes `i` 4 and `4 < 4` fails.
+answer: d
+spec_areas: [statements.for, statements.local_variable, expressions.postfix, expressions.relational, expressions.assignment, statements.print]
+dart_notes: >-
+  A variable declared in the header (`for (var i = ...)`) is not visible after
+  the loop in Dart, so `i` is declared before the loop to make the question
+  askable.

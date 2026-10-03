@@ -51,7 +51,7 @@ nodes:
   - id: boolean_expressions
     title: Comparisons produce booleans
     concept: logical_operators
-    prerequisites: [arithmetic_expressions, values_and_types]
+    prerequisites: [arithmetic_expressions, values_and_types, variables_assignment]
     rationale: >-
       `x > 3` is a value of type `bool`, not a command. Required before any
       condition in `if` or a loop.

@@ -1,0 +1,36 @@
+id: fundamentals_complete_2
+concept: fundamentals
+type: completion
+dag_node: output_and_strings
+prompt: |
+  Fill in the blank so the program prints `Total: 12`.
+code_file: fundamentals_complete_2.dart
+template: |
+  void main() {
+    var price = 4;
+    var count = 3;
+    print(____);
+  }
+options:
+  - id: a
+    text: "'Total: ${price * count}'"
+    rationale: "`${...}` evaluates the whole expression `price * count` and inserts 12 into the text."
+  - id: b
+    text: "'Total: $price * count'"
+    rationale: "Believes a `$` reaches across the rest of the expression; a bare `$name` substitutes only that one variable, so this prints `Total: 4 * count`."
+    misconception: output.dollar_covers_expression
+  - id: c
+    text: "'Total: price * count'"
+    rationale: "Believes variable names inside quotes are replaced automatically; without `$` they are plain text, so this prints `Total: price * count`."
+    misconception: output.bare_name_interpolates
+  - id: d
+    text: "'Total: ' + price * count"
+    rationale: Believes `+` can glue a number onto a string; Dart rejects it with `argument_type_not_assignable` because `String +` needs a `String`.
+    compile_error: true
+    diagnostic: argument_type_not_assignable
+    misconception: types.string_plus_number
+answer: a
+spec_areas: [expressions.strings, expressions.multiplicative, statements.local_variable, statements.print]
+dart_notes: >-
+  Many languages (Java, JavaScript) let `"Total: " + 12` coerce the number to
+  text; Dart does not, which is why interpolation is the idiom to teach.

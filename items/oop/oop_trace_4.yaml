@@ -1,0 +1,29 @@
+id: oop_trace_4
+concept: oop
+type: tracing
+dag_node: methods_and_this
+prompt: |
+  What does this program print?
+code_file: oop_trace_4.dart
+options:
+  - id: a
+    text: "10\n20\n23 46"
+    rationale: Assumes calling `doubled()` stores the doubled value back into `liters`, so each call compounds on the last.
+    misconception: assign.expression_without_store
+  - id: b
+    text: "10\n10\n8 16"
+    rationale: "`doubled()` returns `liters * 2` without changing `liters`, so both calls give 10; `add(3)` does change the field to 8, after which `doubled()` returns 16."
+  - id: c
+    text: "5\n5\n8 8"
+    rationale: Takes the method's return value to be the field itself, ignoring the `* 2` applied before `return`.
+    misconception: oop.return_is_field
+  - id: d
+    text: "10\n10\n5 10"
+    rationale: Assumes `add(3)` cannot change the object's field, so `liters` stays 5.
+    misconception: oop.method_cannot_mutate
+answer: b
+spec_areas: [classes.instance_methods, classes.instance_variables, statements.return, expressions.method_invocation, expressions.property_extraction, expressions.assignment, expressions.multiplicative, statements.print]
+dart_notes: >-
+  A method that only `return`s an expression is a plain computation on the
+  receiver's field; only an assignment such as `liters += amount` changes the
+  object.

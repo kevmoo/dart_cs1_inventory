@@ -1,0 +1,29 @@
+id: selection_trace_3
+concept: selection
+type: tracing
+dag_node: selection
+prompt: |
+  What does this program print?
+code_file: selection_trace_3.dart
+options:
+  - id: a
+    text: "start\nhot\nsticky\nend"
+    rationale: Assumes that once the outer condition is true the inner `if` body runs too; the inner condition `humidity > 60` is tested separately and 40 > 60 is `false`.
+    misconception: if.nested_unconditional
+  - id: b
+    text: "start\nhot\nmild\nend"
+    rationale: Attaches the `else` to the inner `if (humidity > 60)`; the braces make it belong to `if (temp > 25)`, which was true, so `mild` never prints.
+    misconception: if.else_binds_inner
+  - id: c
+    text: "start\nhot"
+    rationale: Treats `print('end')` as part of the `else` block; it comes after the whole `if`/`else` statement and always runs.
+    misconception: if.after_block_skipped
+  - id: d
+    text: "start\nhot\nend"
+    rationale: "`temp > 25` is true, so `hot` prints and the outer `else` is skipped; the inner `if` is false and has no `else`; `end` is outside every block."
+answer: d
+spec_areas: [statements.if, statements.blocks, expressions.relational, statements.print]
+dart_notes: >-
+  Both conditions are computed from `int` variables rather than written as
+  `true`/`false` literals, because the analyzer would flag the untaken
+  branches as dead code.

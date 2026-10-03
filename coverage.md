@@ -22,17 +22,17 @@
 
 | Concept | FCS1 name | definitional | tracing | completion |
 | --- | --- | ---: | ---: | ---: |
-| `fundamentals` | Fundamentals | 1 | 3 | 1 |
-| `logical_operators` | Logical Operators | 1 | 2 | 1 |
-| `selection` | Selection | 1 | 2 | 1 |
-| `loops_definite` | Definite Loops | 1 | 4 | 1 |
+| `fundamentals` | Fundamentals | 1 | 9 | 3 |
+| `logical_operators` | Logical Operators | 1 | 4 | 1 |
+| `selection` | Selection | 1 | 3 | 1 |
+| `loops_definite` | Definite Loops | 1 | 7 | 2 |
 | `loops_indefinite` | Indefinite Loops | 1 | 3 | 1 |
 | `arrays` | Arrays | 1 | 3 | 1 |
-| `function_params` | Function Parameters | 1 | 2 | 1 |
-| `function_return` | Function Return Values | 1 | 2 | 1 |
+| `function_params` | Function Parameters | 1 | 3 | 2 |
+| `function_return` | Function Return Values | 1 | 3 | 1 |
 | `recursion` | Recursion | 1 | 3 | 1 |
-| `oop` | Object-Oriented Basics | 1 | 2 | 1 |
-| **total** | | | | **46** |
+| `oop` | Object-Oriented Basics | 1 | 4 | 1 |
+| **total** | | | | **66** |
 
 ## Spec areas exercised
 
@@ -42,43 +42,43 @@ area no item exercises yet.
 | Area | Spec reference | Items |
 | --- | --- | --- |
 | `variables` — Variables (declaration, initialization, `var`/`final`) | Variables | `function_params_trace_1` |
-| `statements.local_variable` — Local variable declaration | Statements › Local Variable Declaration | `fundamentals_complete_1`, `fundamentals_trace_1`, `fundamentals_trace_2` |
-| `expressions.numbers` — Numeric literals, `int` vs `double` | Expressions › Numbers | `fundamentals_trace_1` |
-| `expressions.strings` — String literals and interpolation | Expressions › Strings | `fundamentals_trace_2`, `fundamentals_trace_3`, `logical_operators_def_1`, `loops_definite_complete_1`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2` |
-| `expressions.booleans` — Boolean literals | Expressions › Booleans | `logical_operators_def_1`, `logical_operators_trace_1`, `loops_indefinite_def_1`, `loops_indefinite_trace_3` |
-| `expressions.assignment` — Assignment and compound assignment (`=`, `+=`) | Expressions › Assignment | `arrays_trace_2`, `arrays_trace_3`, `function_params_trace_2`, `fundamentals_complete_1`, `fundamentals_def_1`, `fundamentals_trace_2`, `fundamentals_trace_3`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_4`, `loops_indefinite_complete_1`, `oop_complete_1`, `oop_trace_2` |
-| `expressions.additive` — Additive expressions (`+`, `-`) | Expressions › Additive Expressions | `arrays_complete_1`, `arrays_trace_1`, `function_return_trace_2`, `fundamentals_def_1`, `loops_definite_trace_4`, `loops_indefinite_complete_1`, `loops_indefinite_trace_2`, `recursion_trace_3` |
-| `expressions.multiplicative` — Multiplicative expressions (`*`, `/`, `~/`, `%`) | Expressions › Multiplicative Expressions | `arrays_trace_2`, `function_return_complete_1`, `function_return_trace_2`, `fundamentals_complete_1`, `fundamentals_trace_1`, `fundamentals_trace_2`, `logical_operators_trace_2`, `loops_definite_trace_1`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `recursion_trace_1` |
+| `statements.local_variable` — Local variable declaration | Statements › Local Variable Declaration | `fundamentals_complete_1`, `fundamentals_complete_2`, `fundamentals_trace_1`, `fundamentals_trace_2`, `fundamentals_trace_4`, `fundamentals_trace_6`, `fundamentals_trace_8`, `fundamentals_trace_9`, `logical_operators_trace_3`, `loops_definite_trace_6` |
+| `expressions.numbers` — Numeric literals, `int` vs `double` | Expressions › Numbers | `fundamentals_complete_3`, `fundamentals_trace_1`, `fundamentals_trace_4`, `fundamentals_trace_5`, `fundamentals_trace_7` |
+| `expressions.strings` — String literals and interpolation | Expressions › Strings | `fundamentals_complete_2`, `fundamentals_trace_2`, `fundamentals_trace_3`, `fundamentals_trace_4`, `fundamentals_trace_6`, `fundamentals_trace_9`, `logical_operators_def_1`, `logical_operators_trace_4`, `loops_definite_complete_1`, `loops_definite_complete_2`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2` |
+| `expressions.booleans` — Boolean literals | Expressions › Booleans | `logical_operators_def_1`, `logical_operators_trace_1`, `logical_operators_trace_3`, `logical_operators_trace_4`, `loops_indefinite_def_1`, `loops_indefinite_trace_3` |
+| `expressions.assignment` — Assignment and compound assignment (`=`, `+=`) | Expressions › Assignment | `arrays_trace_2`, `arrays_trace_3`, `function_params_trace_2`, `function_return_trace_3`, `fundamentals_complete_1`, `fundamentals_def_1`, `fundamentals_trace_2`, `fundamentals_trace_3`, `fundamentals_trace_8`, `fundamentals_trace_9`, `logical_operators_trace_3`, `loops_definite_complete_2`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_4`, `loops_definite_trace_5`, `loops_definite_trace_6`, `loops_indefinite_complete_1`, `oop_complete_1`, `oop_trace_2`, `oop_trace_4` |
+| `expressions.additive` — Additive expressions (`+`, `-`) | Expressions › Additive Expressions | `arrays_complete_1`, `arrays_trace_1`, `function_params_complete_2`, `function_params_trace_3`, `function_return_trace_2`, `fundamentals_complete_3`, `fundamentals_def_1`, `fundamentals_trace_4`, `fundamentals_trace_6`, `fundamentals_trace_7`, `fundamentals_trace_8`, `logical_operators_trace_4`, `loops_definite_trace_4`, `loops_indefinite_complete_1`, `loops_indefinite_trace_2`, `recursion_trace_3` |
+| `expressions.multiplicative` — Multiplicative expressions (`*`, `/`, `~/`, `%`) | Expressions › Multiplicative Expressions | `arrays_trace_2`, `function_return_complete_1`, `function_return_trace_2`, `fundamentals_complete_1`, `fundamentals_complete_2`, `fundamentals_complete_3`, `fundamentals_trace_1`, `fundamentals_trace_2`, `fundamentals_trace_5`, `fundamentals_trace_7`, `logical_operators_trace_2`, `loops_definite_trace_1`, `loops_definite_trace_5`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `oop_trace_4`, `recursion_trace_1` |
 | `expressions.unary` — Unary expressions (`-x`, `!b`, prefix `++`) | Expressions › Unary Expressions | `logical_operators_trace_1` |
-| `expressions.postfix` — Postfix expressions (`i++`, `i--`) | Expressions › Postfix Expressions | `loops_definite_def_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1` |
-| `expressions.relational` — Relational expressions (`<`, `<=`, `>`, `>=`) | Expressions › Relational Expressions | `function_return_trace_1`, `logical_operators_complete_1`, `logical_operators_trace_1`, `logical_operators_trace_2`, `loops_definite_complete_1`, `loops_definite_def_1`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2`, `loops_indefinite_trace_3`, `recursion_complete_1`, `selection_complete_1`, `selection_def_1`, `selection_trace_1`, `selection_trace_2` |
-| `expressions.equality` — Equality (`==`, `!=`) | Expressions › Equality | `logical_operators_def_1`, `logical_operators_trace_2`, `loops_definite_complete_1`, `recursion_complete_1`, `recursion_trace_1` |
+| `expressions.postfix` — Postfix expressions (`i++`, `i--`) | Expressions › Postfix Expressions | `loops_definite_def_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_definite_trace_6`, `loops_definite_trace_7`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1` |
+| `expressions.relational` — Relational expressions (`<`, `<=`, `>`, `>=`) | Expressions › Relational Expressions | `function_return_trace_1`, `logical_operators_complete_1`, `logical_operators_trace_1`, `logical_operators_trace_2`, `logical_operators_trace_3`, `loops_definite_complete_1`, `loops_definite_complete_2`, `loops_definite_def_1`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_definite_trace_6`, `loops_definite_trace_7`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2`, `loops_indefinite_trace_3`, `recursion_complete_1`, `selection_complete_1`, `selection_def_1`, `selection_trace_1`, `selection_trace_2`, `selection_trace_3` |
+| `expressions.equality` — Equality (`==`, `!=`) | Expressions › Equality | `fundamentals_trace_5`, `logical_operators_def_1`, `logical_operators_trace_2`, `logical_operators_trace_4`, `loops_definite_complete_1`, `loops_definite_trace_5`, `recursion_complete_1`, `recursion_trace_1` |
 | `expressions.logical` — Logical boolean expressions (`&&`, `\|\|`, short-circuit) | Expressions › Logical Boolean Expressions | `logical_operators_complete_1`, `logical_operators_def_1`, `logical_operators_trace_1`, `logical_operators_trace_2` |
-| `expressions.function_invocation` — Function invocation and binding actuals to formals | Expressions › Function Invocation › Binding Actuals to Formals | `function_params_complete_1`, `function_params_def_1`, `function_params_trace_1`, `function_params_trace_2`, `function_return_complete_1`, `function_return_def_1`, `function_return_trace_1`, `function_return_trace_2`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3` |
-| `expressions.identifier_reference` — Identifier reference and lexical scope | Expressions › Identifier Reference | `function_params_trace_1`, `oop_complete_1` |
+| `expressions.function_invocation` — Function invocation and binding actuals to formals | Expressions › Function Invocation › Binding Actuals to Formals | `function_params_complete_1`, `function_params_complete_2`, `function_params_def_1`, `function_params_trace_1`, `function_params_trace_2`, `function_params_trace_3`, `function_return_complete_1`, `function_return_def_1`, `function_return_trace_1`, `function_return_trace_2`, `function_return_trace_3`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3` |
+| `expressions.identifier_reference` — Identifier reference and lexical scope | Expressions › Identifier Reference | `function_params_trace_1`, `function_params_trace_3`, `oop_complete_1` |
 | `expressions.lists` — List literals | Expressions › Collection Literals › Lists | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `arrays_trace_2`, `arrays_trace_3`, `loops_definite_trace_4`, `recursion_trace_3` |
 | `expressions.index` — Index access and index assignment (`a[i]`, `a[i] = v`) | Expressions › Assignable Expressions | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `arrays_trace_2`, `arrays_trace_3`, `function_params_trace_2`, `loops_indefinite_trace_3`, `recursion_trace_3` |
 | `expressions.object_identity` — Object identity and aliasing | Expressions › Object Identity | `arrays_trace_3`, `function_params_trace_2`, `oop_trace_2` |
-| `expressions.instance_creation` — Instance creation (`Point(1, 2)`) | Expressions › Instance Creation | `oop_def_1`, `oop_trace_1`, `oop_trace_2` |
-| `expressions.property_extraction` — Property access (`p.x`) | Expressions › Property Extraction | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `arrays_trace_2`, `oop_trace_1`, `oop_trace_2` |
-| `expressions.method_invocation` — Method invocation (`p.move()`) | Expressions › Method Invocation | `oop_complete_1`, `oop_trace_1`, `oop_trace_2` |
-| `expressions.this` — `this` | Expressions › This | `oop_complete_1`, `oop_def_1` |
+| `expressions.instance_creation` — Instance creation (`Point(1, 2)`) | Expressions › Instance Creation | `oop_def_1`, `oop_trace_1`, `oop_trace_2`, `oop_trace_3` |
+| `expressions.property_extraction` — Property access (`p.x`) | Expressions › Property Extraction | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `arrays_trace_2`, `oop_trace_1`, `oop_trace_2`, `oop_trace_3`, `oop_trace_4` |
+| `expressions.method_invocation` — Method invocation (`p.move()`) | Expressions › Method Invocation | `oop_complete_1`, `oop_trace_1`, `oop_trace_2`, `oop_trace_4` |
+| `expressions.this` — `this` | Expressions › This | `oop_complete_1`, `oop_def_1`, `oop_trace_3` |
 | `functions.declarations` — Function declarations | Functions › Function Declarations | `function_params_def_1`, `function_return_complete_1`, `function_return_def_1` |
-| `functions.required_formals` — Required positional parameters | Functions › Formal Parameters › Required Formals | `function_params_complete_1`, `function_params_def_1`, `function_params_trace_1`, `function_params_trace_2` |
-| `classes.instance_variables` — Instance variables (fields) | Classes › Instance Variables | `oop_complete_1`, `oop_def_1`, `oop_trace_1`, `oop_trace_2` |
-| `classes.instance_methods` — Instance methods | Classes › Instance Methods | `oop_complete_1`, `oop_trace_1`, `oop_trace_2` |
-| `classes.constructors` — Generative constructors and initializing formals (`this.x`) | Classes › Constructors | `oop_def_1`, `oop_trace_1` |
-| `statements.blocks` — Blocks and block scope | Statements › Blocks | `selection_complete_1`, `selection_def_1`, `selection_trace_2` |
-| `statements.expression` — Expression statements | Statements › Expression Statements | `fundamentals_complete_1`, `fundamentals_def_1`, `fundamentals_trace_3` |
-| `statements.if` — `if` / `else` | Statements › If | `function_return_trace_1`, `logical_operators_complete_1`, `logical_operators_trace_2`, `loops_indefinite_trace_3`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3`, `selection_complete_1`, `selection_def_1`, `selection_trace_1`, `selection_trace_2` |
-| `statements.for` — C-style `for` loop | Statements › For | `arrays_trace_2`, `function_params_complete_1`, `logical_operators_complete_1`, `loops_definite_complete_1`, `loops_definite_def_1`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `selection_complete_1` |
+| `functions.required_formals` — Required positional parameters | Functions › Formal Parameters › Required Formals | `function_params_complete_1`, `function_params_complete_2`, `function_params_def_1`, `function_params_trace_1`, `function_params_trace_2`, `function_params_trace_3` |
+| `classes.instance_variables` — Instance variables (fields) | Classes › Instance Variables | `oop_complete_1`, `oop_def_1`, `oop_trace_1`, `oop_trace_2`, `oop_trace_3`, `oop_trace_4` |
+| `classes.instance_methods` — Instance methods | Classes › Instance Methods | `oop_complete_1`, `oop_trace_1`, `oop_trace_2`, `oop_trace_4` |
+| `classes.constructors` — Generative constructors and initializing formals (`this.x`) | Classes › Constructors | `oop_def_1`, `oop_trace_1`, `oop_trace_3` |
+| `statements.blocks` — Blocks and block scope | Statements › Blocks | `loops_definite_complete_2`, `loops_definite_trace_7`, `selection_complete_1`, `selection_def_1`, `selection_trace_2`, `selection_trace_3` |
+| `statements.expression` — Expression statements | Statements › Expression Statements | `function_return_trace_3`, `fundamentals_complete_1`, `fundamentals_def_1`, `fundamentals_trace_3` |
+| `statements.if` — `if` / `else` | Statements › If | `function_return_trace_1`, `logical_operators_complete_1`, `logical_operators_trace_2`, `loops_definite_trace_5`, `loops_indefinite_trace_3`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3`, `selection_complete_1`, `selection_def_1`, `selection_trace_1`, `selection_trace_2`, `selection_trace_3` |
+| `statements.for` — C-style `for` loop | Statements › For | `arrays_trace_2`, `function_params_complete_1`, `loops_definite_complete_1`, `loops_definite_complete_2`, `loops_definite_def_1`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_definite_trace_5`, `loops_definite_trace_6`, `loops_definite_trace_7` |
 | `statements.for_in` — `for-in` loop | Statements › For | `function_return_trace_1`, `loops_definite_trace_4` |
 | `statements.while` — `while` | Statements › While | `loops_indefinite_complete_1`, `loops_indefinite_def_1`, `loops_indefinite_trace_1`, `loops_indefinite_trace_3` |
 | `statements.do` — `do-while` | Statements › Do | `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
-| `statements.return` — `return` | Statements › Return | `function_return_complete_1`, `function_return_def_1`, `function_return_trace_1`, `function_return_trace_2`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3` |
+| `statements.return` — `return` | Statements › Return | `function_return_complete_1`, `function_return_def_1`, `function_return_trace_1`, `function_return_trace_2`, `function_return_trace_3`, `oop_trace_4`, `recursion_complete_1`, `recursion_def_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3` |
 | `statements.break` — `break` | Statements › Break | `loops_indefinite_trace_3` |
-| ⚠️ `statements.continue` — `continue` | Statements › Continue | — |
-| `statements.print` — `print` as the observable output channel | Libraries and Scripts › Scripts | `arrays_complete_1`, `arrays_trace_1`, `arrays_trace_2`, `arrays_trace_3`, `function_params_complete_1`, `function_params_trace_1`, `function_params_trace_2`, `function_return_complete_1`, `function_return_trace_1`, `function_return_trace_2`, `fundamentals_complete_1`, `fundamentals_trace_1`, `fundamentals_trace_2`, `fundamentals_trace_3`, `logical_operators_complete_1`, `logical_operators_trace_1`, `logical_operators_trace_2`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_definite_trace_4`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2`, `loops_indefinite_trace_3`, `oop_complete_1`, `oop_trace_1`, `oop_trace_2`, `recursion_complete_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3`, `selection_complete_1`, `selection_trace_1`, `selection_trace_2` |
+| `statements.continue` — `continue` | Statements › Continue | `loops_definite_trace_5` |
+| `statements.print` — `print` as the observable output channel | Libraries and Scripts › Scripts | `arrays_complete_1`, `arrays_trace_1`, `arrays_trace_2`, `arrays_trace_3`, `function_params_complete_1`, `function_params_complete_2`, `function_params_trace_1`, `function_params_trace_2`, `function_params_trace_3`, `function_return_complete_1`, `function_return_trace_1`, `function_return_trace_2`, `function_return_trace_3`, `fundamentals_complete_1`, `fundamentals_complete_2`, `fundamentals_complete_3`, `fundamentals_trace_1`, `fundamentals_trace_2`, `fundamentals_trace_3`, `fundamentals_trace_4`, `fundamentals_trace_5`, `fundamentals_trace_6`, `fundamentals_trace_7`, `fundamentals_trace_8`, `fundamentals_trace_9`, `logical_operators_complete_1`, `logical_operators_trace_1`, `logical_operators_trace_2`, `logical_operators_trace_3`, `logical_operators_trace_4`, `loops_definite_complete_2`, `loops_definite_trace_1`, `loops_definite_trace_2`, `loops_definite_trace_3`, `loops_definite_trace_4`, `loops_definite_trace_5`, `loops_definite_trace_6`, `loops_definite_trace_7`, `loops_indefinite_complete_1`, `loops_indefinite_trace_1`, `loops_indefinite_trace_2`, `loops_indefinite_trace_3`, `oop_complete_1`, `oop_trace_1`, `oop_trace_2`, `oop_trace_3`, `oop_trace_4`, `recursion_complete_1`, `recursion_trace_1`, `recursion_trace_2`, `recursion_trace_3`, `selection_complete_1`, `selection_trace_1`, `selection_trace_2`, `selection_trace_3` |
 
 ## Areas outside CS1 scope that items still touch
 
@@ -316,22 +316,35 @@ evidence on their own.
 
 | Misconception | # | Items |
 | --- | ---: | --- |
-| `assign.equation` — `=` is a mathematical equation | 2 | `fundamentals_def_1`, `fundamentals_trace_3` |
-| `assign.spreadsheet` — Variables are live formulas | 2 | `fundamentals_def_1`, `fundamentals_trace_2` |
+| `types.quoted_digits_are_numbers` — Quoted digits are numbers | 1 | `fundamentals_trace_4` |
+| `types.mixed_arith_yields_int` — Mixed int/double arithmetic gives an int | 2 | `fundamentals_trace_4`, `fundamentals_trace_5` |
+| `types.int_double_unequal` — `7 == 7.0` is false | 1 | `fundamentals_trace_5` |
+| `types.string_plus_number` — `'text' + number` concatenates | 1 | `fundamentals_complete_2` |
+| `assign.equation` — `=` is a mathematical equation | 3 | `fundamentals_def_1`, `fundamentals_trace_3`, `fundamentals_trace_8` |
+| `assign.spreadsheet` — Variables are live formulas | 5 | `fundamentals_def_1`, `fundamentals_trace_2`, `fundamentals_trace_8`, `fundamentals_trace_9`, `logical_operators_trace_3` |
 | `assign.eq_vs_eqeq` — `=` vs `==` | 2 | `fundamentals_def_1`, `recursion_complete_1` |
-| `assign.right_to_left` — Assignment copies right-to-left | 1 | `fundamentals_trace_3` |
-| `assign.swap` — `a = b; b = a;` swaps | 1 | `fundamentals_trace_3` |
-| `assign.first_value_permanent` — Reassignment ignored | 1 | `fundamentals_trace_2` |
-| `assign.expression_without_store` — Evaluating is storing | 2 | `function_return_complete_1`, `fundamentals_complete_1` |
+| `assign.right_to_left` — Assignment copies right-to-left | 2 | `fundamentals_trace_3`, `fundamentals_trace_9` |
+| `assign.swap` — `a = b; b = a;` swaps | 2 | `fundamentals_trace_3`, `fundamentals_trace_9` |
+| `assign.first_value_permanent` — Reassignment ignored | 2 | `fundamentals_trace_2`, `logical_operators_trace_3` |
+| `assign.expression_without_store` — Evaluating is storing | 4 | `function_params_trace_3`, `function_return_complete_1`, `fundamentals_complete_1`, `oop_trace_4` |
 | `assign.compound_vs_plain` — `+=` vs `=` | 1 | `fundamentals_complete_1` |
 | `assign.redeclare` — Redeclare to change | 1 | `fundamentals_complete_1` |
-| `arith.int_division_slash` — `/` truncates on ints | 1 | `fundamentals_trace_1` |
+| `arith.int_division_slash` — `/` truncates on ints | 3 | `fundamentals_complete_3`, `fundamentals_trace_1`, `fundamentals_trace_5` |
 | `arith.truncdiv_rounds` — `~/` rounds | 1 | `fundamentals_trace_1` |
 | `arith.truncdiv_as_slash` — `~/` is ordinary division | 1 | `loops_indefinite_trace_1` |
 | `arith.mod_fraction` — `%` is the fractional part | 1 | `fundamentals_trace_1` |
-| `output.no_interpolation` — `$x` is literal text | 1 | `fundamentals_trace_2` |
-| `output.phantom_print` — Output without `print` | 1 | `loops_definite_trace_4` |
+| `arith.left_to_right` — Strict left-to-right evaluation | 2 | `fundamentals_complete_3`, `fundamentals_trace_7` |
+| `arith.right_assoc` — Same-level operators group from the right | 1 | `fundamentals_trace_7` |
+| `arith.mod_binds_tighter` — `%` binds tighter than `*` | 1 | `fundamentals_trace_7` |
+| `arith.mod_as_quotient` — `%` is whole-number division | 1 | `fundamentals_complete_3` |
+| `output.no_interpolation` — `$x` is literal text | 2 | `fundamentals_trace_2`, `fundamentals_trace_6` |
+| `output.phantom_print` — Output without `print` | 2 | `function_return_trace_3`, `loops_definite_trace_4` |
 | `output.print_as_computation` — `print` does the work | 2 | `function_return_complete_1`, `oop_complete_1` |
+| `output.quotes_printed` — `print` shows the quotes | 1 | `fundamentals_trace_4` |
+| `output.interpolation_evaluates_text` — Text between `$` variables is computed | 1 | `fundamentals_trace_6` |
+| `output.interpolation_concatenates` — `${a + b}` joins digits | 1 | `fundamentals_trace_6` |
+| `output.bare_name_interpolates` — Variable names in quotes are substituted | 1 | `fundamentals_complete_2` |
+| `output.dollar_covers_expression` — `$name` extends over the rest of the expression | 1 | `fundamentals_complete_2` |
 | `bool.english_or` — English "or" | 1 | `logical_operators_def_1` |
 | `bool.lenient_compiler` — Compiler drops what it cannot use | 1 | `logical_operators_def_1` |
 | `bool.truthiness` — Truthiness | 1 | `logical_operators_def_1` |
@@ -340,35 +353,43 @@ evidence on their own.
 | `bool.not_scope_widens` — `!` applies to the whole expression | 1 | `logical_operators_trace_1` |
 | `bool.demorgan_distribute` — `!` distributes unchanged | 1 | `logical_operators_trace_1` |
 | `bool.no_short_circuit` — No short-circuit | 1 | `logical_operators_trace_2` |
-| `bool.ne_as_eq` — `!=` read as `==` | 1 | `logical_operators_trace_2` |
-| `bool.strict_vs_inclusive` — `<` vs `<=` | 4 | `function_params_complete_1`, `logical_operators_complete_1`, `loops_definite_complete_1`, `selection_complete_1` |
-| `if.chain_as_independent` — `else if` chain as independent `if`s | 3 | `selection_complete_1`, `selection_def_1`, `selection_trace_1` |
-| `if.independent_as_chain` — Independent `if`s as a chain | 1 | `selection_trace_1` |
+| `bool.ne_as_eq` — `!=` read as `==` | 2 | `logical_operators_trace_2`, `logical_operators_trace_4` |
+| `bool.strict_vs_inclusive` — `<` vs `<=` | 6 | `function_params_complete_1`, `logical_operators_complete_1`, `loops_definite_complete_1`, `loops_definite_complete_2`, `loops_definite_trace_7`, `selection_complete_1` |
+| `bool.comparison_is_command` — Comparison is a command, not a value | 1 | `logical_operators_trace_3` |
+| `bool.string_eq_ignores_case` — String `==` ignores case | 1 | `logical_operators_trace_4` |
+| `bool.eq_before_plus` — `==` binds tighter than `+` | 1 | `logical_operators_trace_4` |
+| `if.chain_as_independent` — `else if` chain as independent `if`s | 2 | `selection_def_1`, `selection_trace_1` |
+| `if.independent_as_chain` — Independent `if`s as a chain | 2 | `selection_complete_1`, `selection_trace_1` |
 | `if.all_branches_run` — All branches run | 1 | `selection_def_1` |
 | `if.last_true_wins` — Last true condition wins | 2 | `selection_def_1`, `selection_trace_1` |
 | `if.false_skips_else` — False skips the whole `if` | 1 | `logical_operators_trace_2` |
-| `if.nested_unconditional` — Nested body is unconditional | 1 | `selection_trace_2` |
-| `if.else_binds_inner` — `else` binds to the wrong `if` | 1 | `selection_trace_2` |
+| `if.nested_unconditional` — Nested body is unconditional | 2 | `selection_trace_2`, `selection_trace_3` |
+| `if.else_binds_inner` — `else` binds to the wrong `if` | 2 | `selection_trace_2`, `selection_trace_3` |
 | `if.else_with_condition` — `else` takes a condition | 1 | `selection_complete_1` |
-| `if.after_block_skipped` — Code after a block is part of it | 1 | `selection_trace_2` |
-| `bounds.off_by_one` — Off by one | 7 | `arrays_complete_1`, `arrays_trace_2`, `loops_definite_complete_1`, `loops_definite_trace_1`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `recursion_complete_1` |
+| `if.after_block_skipped` — Code after a block is part of it | 2 | `selection_trace_2`, `selection_trace_3` |
+| `bounds.off_by_one` — Off by one | 8 | `arrays_complete_1`, `arrays_trace_2`, `loops_definite_complete_1`, `loops_definite_complete_2`, `loops_definite_trace_1`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `recursion_complete_1` |
 | `loop.eq_condition_as_until` — `i == n` means "until" | 1 | `loops_definite_complete_1` |
 | `loop.condition_checked_once` — Condition checked only once | 1 | `loops_definite_def_1` |
 | `loop.body_before_test` — Body runs before the test | 1 | `loops_definite_def_1` |
 | `loop.test_before_body` — `do-while` tests first | 2 | `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
-| `loop.extra_pass_after_false` — One more pass after false | 3 | `loops_definite_trace_3`, `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
+| `loop.extra_pass_after_false` — One more pass after false | 4 | `loops_definite_trace_3`, `loops_definite_trace_6`, `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
 | `loop.exit_mid_body` — Exit mid-body | 1 | `loops_indefinite_trace_2` |
 | `loop.update_decides_exit` — Update decides the exit | 1 | `loops_definite_def_1` |
 | `loop.test_placement_prevents_infinite` — Test placement prevents infinite loops | 1 | `loops_indefinite_def_1` |
 | `loop.while_as_if` — `while` as `if` | 1 | `loops_indefinite_trace_1` |
-| `loop.inner_fixed_trip_count` — Inner loop always runs the same number of times | 1 | `loops_definite_trace_2` |
-| `loop.inner_runs_once` — Inner loop runs once in total | 1 | `loops_definite_trace_2` |
-| `loop.accumulator_overwritten` — Accumulator overwritten | 1 | `loops_definite_trace_4` |
+| `loop.inner_fixed_trip_count` — Inner loop always runs the same number of times | 3 | `loops_definite_complete_2`, `loops_definite_trace_2`, `loops_definite_trace_7` |
+| `loop.inner_runs_once` — Inner loop runs once in total | 2 | `loops_definite_trace_2`, `loops_definite_trace_7` |
+| `loop.accumulator_overwritten` — Accumulator overwritten | 2 | `fundamentals_trace_8`, `loops_definite_trace_4` |
+| `loop.update_before_first_pass` — Update runs before the first pass | 1 | `loops_definite_trace_3` |
+| `loop.var_ends_at_last_body_value` — Loop variable ends at its last body value | 1 | `loops_definite_trace_6` |
+| `loop.header_var_is_private` — Loop header uses a private variable | 1 | `loops_definite_trace_6` |
 | `break.deferred` — `break` at end of pass | 1 | `loops_indefinite_trace_3` |
 | `break.as_continue` — `break` as `continue` | 1 | `loops_indefinite_trace_3` |
 | `break.ignored` — `break` ignored | 1 | `loops_indefinite_trace_3` |
 | `postfix.no_side_effect` — `i++` does not change `i` | 1 | `loops_definite_trace_2` |
-| `loop.update_before_first_pass` — Update runs before the first pass | 1 | `loops_definite_trace_3` |
+| `continue.as_break` — `continue` as `break` | 1 | `loops_definite_trace_5` |
+| `continue.ignored` — `continue` ignored | 1 | `loops_definite_trace_5` |
+| `continue.skips_update` — `continue` skips the `for` update | 1 | `loops_definite_trace_5` |
 | `list.one_based` — One-based indexing | 2 | `arrays_def_1`, `arrays_trace_1` |
 | `list.length_is_last_index` — `length` is the last index | 4 | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `recursion_trace_3` |
 | `list.index_grows` — Indexing past the end grows the list | 1 | `arrays_def_1` |
@@ -378,31 +399,37 @@ evidence on their own.
 | `alias.copy_on_assign` — Assignment copies the object | 3 | `arrays_trace_3`, `function_params_trace_2`, `oop_trace_2` |
 | `alias.one_way_link` — One-way link | 1 | `arrays_trace_3` |
 | `alias.equal_args_same_object` — Equal arguments, same object | 1 | `oop_trace_2` |
-| `param.bind_by_name` — Arguments bind by name | 2 | `function_params_def_1`, `function_params_trace_1` |
-| `param.bind_by_declaration_order` — Arguments bind by declaration order | 2 | `function_params_complete_1`, `function_params_def_1` |
+| `param.bind_by_name` — Arguments bind by name | 3 | `function_params_def_1`, `function_params_trace_1`, `function_params_trace_3` |
+| `param.bind_by_declaration_order` — Arguments bind by declaration order | 3 | `function_params_complete_1`, `function_params_complete_2`, `function_params_def_1` |
 | `param.bind_by_type` — Arguments bind by type | 1 | `function_params_def_1` |
 | `param.named_for_positional` — Named syntax for positional parameters | 1 | `function_params_complete_1` |
 | `param.by_reference` — Pass by reference | 1 | `function_params_trace_2` |
+| `param.arg_not_evaluated` — Parameter bound to the variable, not the value | 1 | `function_params_trace_3` |
+| `param.required_omitted` — Required argument left out | 1 | `function_params_complete_2` |
+| `param.passes_result` — Passes the answer as an argument | 1 | `function_params_complete_2` |
 | `scope.param_is_global` — Parameter is the outer variable | 1 | `function_params_trace_1` |
 | `scope.shadow_ignored` — Shadowing ignored | 2 | `function_params_trace_1`, `function_params_trace_2` |
 | `scope.local_shadows_field` — Local instead of field | 1 | `oop_complete_1` |
 | `scope.outer_local_visible` — Outer locals visible everywhere | 1 | `oop_complete_1` |
 | `call.outer_first` — Outer call evaluated first | 1 | `function_return_trace_2` |
 | `call.outer_ignored` — Only the inner call counts | 1 | `function_return_trace_2` |
-| `return.as_print` — `return` prints | 2 | `function_return_def_1`, `function_return_trace_1` |
+| `return.as_print` — `return` prints | 3 | `function_return_def_1`, `function_return_trace_1`, `function_return_trace_3` |
 | `return.does_not_exit` — `return` does not exit | 2 | `function_return_def_1`, `function_return_trace_1` |
 | `return.only_at_end` — The last `return` is the real one | 2 | `function_return_def_1`, `function_return_trace_1` |
 | `return.exits_program` — `return` ends the program | 1 | `recursion_trace_2` |
+| `return.bare_call_prints` — A bare call prints its result | 1 | `function_return_trace_3` |
 | `recursion.base_vs_recursive_case` — Base case vs recursive case | 2 | `recursion_complete_1`, `recursion_def_1` |
 | `recursion.base_is_first_call` — Base case is the first call | 1 | `recursion_def_1` |
 | `recursion.base_value_is_result` — Base case value is the result | 3 | `recursion_def_1`, `recursion_trace_1`, `recursion_trace_3` |
 | `recursion.one_level` — Only one level recurses | 1 | `recursion_trace_1` |
 | `recursion.call_deferred` — Recursive call deferred | 1 | `recursion_trace_2` |
 | `recursion.unwind_order` — Unwind order | 1 | `recursion_trace_2` |
-| `oop.this_formal_is_param` — `this.x` is an ordinary parameter | 1 | `oop_def_1` |
+| `oop.this_formal_is_param` — `this.x` is an ordinary parameter | 2 | `oop_def_1`, `oop_trace_3` |
 | `oop.field_as_method` — Field read as method call | 1 | `oop_def_1` |
-| `oop.field_shared` — Fields shared across instances | 2 | `oop_def_1`, `oop_trace_1` |
-| `oop.method_cannot_mutate` — Methods cannot change fields | 2 | `oop_trace_1`, `oop_trace_2` |
+| `oop.field_shared` — Fields shared across instances | 3 | `oop_def_1`, `oop_trace_1`, `oop_trace_3` |
+| `oop.method_cannot_mutate` — Methods cannot change fields | 3 | `oop_trace_1`, `oop_trace_2`, `oop_trace_4` |
+| `oop.ctor_binds_by_field_order` — Constructor binds by field order | 1 | `oop_trace_3` |
+| `oop.return_is_field` — Method returns the field itself | 1 | `oop_trace_4` |
 | `trace.wrong_operation` — Wrong operation | 3 | `loops_definite_trace_1`, `loops_indefinite_complete_1`, `recursion_trace_1` |
 | `trace.ignores_initial_value` — Initial value ignored | 2 | `oop_trace_1`, `recursion_trace_3` |
 
@@ -416,28 +443,45 @@ evidence on their own.
 | `arrays_trace_2` | tracing | `expressions.lists`, `expressions.index`, `expressions.property_extraction`, `statements.for`, `expressions.assignment`, `expressions.multiplicative`, `statements.print` |
 | `arrays_trace_3` | tracing | `expressions.lists`, `expressions.index`, `expressions.object_identity`, `expressions.assignment`, `statements.print` |
 | `function_params_complete_1` | completion | `expressions.function_invocation`, `functions.required_formals`, `statements.for`, `statements.print` |
+| `function_params_complete_2` | completion | `expressions.function_invocation`, `functions.required_formals`, `expressions.additive`, `statements.print` |
 | `function_params_def_1` | definitional | `expressions.function_invocation`, `functions.required_formals`, `functions.declarations` |
 | `function_params_trace_1` | tracing | `expressions.function_invocation`, `functions.required_formals`, `expressions.identifier_reference`, `variables`, `statements.print` |
 | `function_params_trace_2` | tracing | `expressions.function_invocation`, `functions.required_formals`, `expressions.assignment`, `expressions.index`, `expressions.object_identity`, `statements.print` |
+| `function_params_trace_3` | tracing | `expressions.function_invocation`, `functions.required_formals`, `expressions.additive`, `expressions.identifier_reference`, `statements.print` |
 | `function_return_complete_1` | completion | `statements.return`, `functions.declarations`, `expressions.function_invocation`, `expressions.multiplicative`, `statements.print` |
 | `function_return_def_1` | definitional | `statements.return`, `expressions.function_invocation`, `functions.declarations` |
 | `function_return_trace_1` | tracing | `statements.return`, `statements.for_in`, `statements.if`, `expressions.function_invocation`, `expressions.relational`, `statements.print` |
 | `function_return_trace_2` | tracing | `statements.return`, `expressions.function_invocation`, `expressions.additive`, `expressions.multiplicative`, `statements.print` |
+| `function_return_trace_3` | tracing | `statements.return`, `expressions.function_invocation`, `statements.expression`, `expressions.assignment`, `statements.print` |
 | `fundamentals_complete_1` | completion | `expressions.assignment`, `expressions.multiplicative`, `statements.local_variable`, `statements.expression`, `statements.print` |
+| `fundamentals_complete_2` | completion | `expressions.strings`, `expressions.multiplicative`, `statements.local_variable`, `statements.print` |
+| `fundamentals_complete_3` | completion | `expressions.additive`, `expressions.multiplicative`, `expressions.numbers`, `statements.print` |
 | `fundamentals_def_1` | definitional | `expressions.assignment`, `expressions.additive`, `statements.expression` |
 | `fundamentals_trace_1` | tracing | `expressions.multiplicative`, `expressions.numbers`, `statements.local_variable`, `statements.print` |
 | `fundamentals_trace_2` | tracing | `statements.local_variable`, `expressions.assignment`, `expressions.multiplicative`, `expressions.strings`, `statements.print` |
 | `fundamentals_trace_3` | tracing | `expressions.assignment`, `statements.expression`, `expressions.strings`, `statements.print` |
-| `logical_operators_complete_1` | completion | `expressions.logical`, `expressions.relational`, `statements.if`, `statements.for`, `statements.print` |
+| `fundamentals_trace_4` | tracing | `expressions.strings`, `expressions.numbers`, `expressions.additive`, `statements.local_variable`, `statements.print` |
+| `fundamentals_trace_5` | tracing | `expressions.numbers`, `expressions.equality`, `expressions.multiplicative`, `statements.print` |
+| `fundamentals_trace_6` | tracing | `expressions.strings`, `expressions.additive`, `statements.local_variable`, `statements.print` |
+| `fundamentals_trace_7` | tracing | `expressions.additive`, `expressions.multiplicative`, `expressions.numbers`, `statements.print` |
+| `fundamentals_trace_8` | tracing | `expressions.assignment`, `expressions.additive`, `statements.local_variable`, `statements.print` |
+| `fundamentals_trace_9` | tracing | `expressions.assignment`, `statements.local_variable`, `expressions.strings`, `statements.print` |
+| `logical_operators_complete_1` | completion | `expressions.logical`, `expressions.relational`, `statements.if`, `statements.print` |
 | `logical_operators_def_1` | definitional | `expressions.logical`, `expressions.equality`, `expressions.booleans`, `expressions.strings` |
 | `logical_operators_trace_1` | tracing | `expressions.logical`, `expressions.unary`, `expressions.relational`, `expressions.booleans`, `statements.print` |
 | `logical_operators_trace_2` | tracing | `expressions.logical`, `expressions.equality`, `expressions.relational`, `expressions.multiplicative`, `statements.if`, `statements.print` |
+| `logical_operators_trace_3` | tracing | `expressions.relational`, `expressions.booleans`, `statements.local_variable`, `expressions.assignment`, `statements.print` |
+| `logical_operators_trace_4` | tracing | `expressions.equality`, `expressions.additive`, `expressions.booleans`, `expressions.strings`, `statements.print` |
 | `loops_definite_complete_1` | completion | `statements.for`, `expressions.relational`, `expressions.equality`, `expressions.strings` |
+| `loops_definite_complete_2` | completion | `statements.for`, `statements.blocks`, `expressions.relational`, `expressions.strings`, `expressions.assignment`, `statements.print` |
 | `loops_definite_def_1` | definitional | `statements.for`, `expressions.relational`, `expressions.postfix` |
 | `loops_definite_trace_1` | tracing | `statements.for`, `expressions.assignment`, `expressions.multiplicative`, `expressions.relational`, `statements.print` |
 | `loops_definite_trace_2` | tracing | `statements.for`, `expressions.assignment`, `expressions.relational`, `expressions.postfix`, `statements.print` |
 | `loops_definite_trace_3` | tracing | `statements.for`, `expressions.relational`, `expressions.postfix`, `expressions.strings`, `statements.print` |
 | `loops_definite_trace_4` | tracing | `statements.for_in`, `expressions.lists`, `expressions.assignment`, `expressions.additive`, `statements.print` |
+| `loops_definite_trace_5` | tracing | `statements.for`, `statements.continue`, `statements.if`, `expressions.multiplicative`, `expressions.equality`, `expressions.assignment`, `statements.print` |
+| `loops_definite_trace_6` | tracing | `statements.for`, `statements.local_variable`, `expressions.postfix`, `expressions.relational`, `expressions.assignment`, `statements.print` |
+| `loops_definite_trace_7` | tracing | `statements.for`, `statements.blocks`, `expressions.relational`, `expressions.postfix`, `statements.print` |
 | `loops_indefinite_complete_1` | completion | `statements.while`, `expressions.assignment`, `expressions.multiplicative`, `expressions.additive`, `expressions.postfix`, `expressions.relational`, `statements.print` |
 | `loops_indefinite_def_1` | definitional | `statements.do`, `statements.while`, `expressions.booleans` |
 | `loops_indefinite_trace_1` | tracing | `statements.while`, `expressions.multiplicative`, `expressions.relational`, `expressions.postfix`, `expressions.strings`, `statements.print` |
@@ -447,13 +491,16 @@ evidence on their own.
 | `oop_def_1` | definitional | `classes.constructors`, `classes.instance_variables`, `expressions.instance_creation`, `expressions.this` |
 | `oop_trace_1` | tracing | `classes.instance_variables`, `classes.instance_methods`, `classes.constructors`, `expressions.instance_creation`, `expressions.method_invocation`, `expressions.property_extraction`, `statements.print` |
 | `oop_trace_2` | tracing | `expressions.object_identity`, `classes.instance_variables`, `classes.instance_methods`, `expressions.instance_creation`, `expressions.method_invocation`, `expressions.property_extraction`, `expressions.assignment`, `statements.print` |
+| `oop_trace_3` | tracing | `classes.constructors`, `classes.instance_variables`, `expressions.instance_creation`, `expressions.property_extraction`, `expressions.this`, `statements.print` |
+| `oop_trace_4` | tracing | `classes.instance_methods`, `classes.instance_variables`, `statements.return`, `expressions.method_invocation`, `expressions.property_extraction`, `expressions.assignment`, `expressions.multiplicative`, `statements.print` |
 | `recursion_complete_1` | completion | `expressions.function_invocation`, `statements.return`, `statements.if`, `expressions.equality`, `expressions.relational`, `statements.print` |
 | `recursion_def_1` | definitional | `expressions.function_invocation`, `statements.return`, `statements.if` |
 | `recursion_trace_1` | tracing | `expressions.function_invocation`, `statements.return`, `statements.if`, `expressions.multiplicative`, `expressions.equality`, `statements.print` |
 | `recursion_trace_2` | tracing | `expressions.function_invocation`, `statements.return`, `statements.if`, `statements.print` |
 | `recursion_trace_3` | tracing | `expressions.function_invocation`, `statements.return`, `statements.if`, `expressions.index`, `expressions.lists`, `expressions.additive`, `statements.print` |
-| `selection_complete_1` | completion | `statements.if`, `statements.blocks`, `expressions.relational`, `statements.for`, `statements.print` |
+| `selection_complete_1` | completion | `statements.if`, `statements.blocks`, `expressions.relational`, `statements.print` |
 | `selection_def_1` | definitional | `statements.if`, `statements.blocks`, `expressions.relational` |
 | `selection_trace_1` | tracing | `statements.if`, `expressions.relational`, `statements.print` |
 | `selection_trace_2` | tracing | `statements.if`, `statements.blocks`, `expressions.relational`, `statements.print` |
+| `selection_trace_3` | tracing | `statements.if`, `statements.blocks`, `expressions.relational`, `statements.print` |
 <!-- prettier-ignore-end -->

@@ -1,0 +1,25 @@
+id: fundamentals_trace_8
+concept: fundamentals
+type: tracing
+dag_node: sequencing
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_8.dart
+options:
+  - id: a
+    text: "10\n20"
+    rationale: Reads `x = x + 1` as an impossible equation that changes nothing; it stores 11 into `x`, and `y + x` then uses that 11.
+    misconception: assign.equation
+  - id: b
+    text: "11\n21"
+    rationale: "`y` receives a copy of 10; `x` becomes 11; `y = y + x` stores 10 + 11 = 21 into `y`."
+  - id: c
+    text: "11\n22"
+    rationale: Believes `y = x` keeps `y` linked to `x`, so `y` becomes 11 when `x` does; assignment copies the value once.
+    misconception: assign.spreadsheet
+  - id: d
+    text: "11\n11"
+    rationale: Reads `y = y + x` as simply `y = x`, throwing away the old value of `y` instead of adding to it.
+    misconception: loop.accumulator_overwritten
+answer: b
+spec_areas: [expressions.assignment, expressions.additive, statements.local_variable, statements.print]

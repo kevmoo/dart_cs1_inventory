@@ -1,0 +1,30 @@
+id: function_params_trace_3
+concept: function_params
+type: tracing
+dag_node: function_calls_and_params
+prompt: |
+  What does this program print?
+code_file: function_params_trace_3.dart
+options:
+  - id: a
+    text: "1 5\n4 1"
+    rationale: Each argument is evaluated first (`x + 1` is 5) and then bound by position, so the first argument always becomes `x` whatever the caller's variables are called.
+  - id: b
+    text: "5 1\n4 1"
+    rationale: Matches the caller's `x` and `y` to the parameters `x` and `y` by name, so the first line comes out reversed.
+    misconception: param.bind_by_name
+  - id: c
+    text: "1 5\n5 1"
+    rationale: Assumes evaluating `x + 1` in the first call changes `main`'s `x` to 5, which the second call then passes.
+    misconception: assign.expression_without_store
+  - id: d
+    text: "1 4\n4 1"
+    rationale: Passes the variable `x` instead of the value of `x + 1`, losing the addition before the call.
+    misconception: param.arg_not_evaluated
+answer: a
+spec_areas: [expressions.function_invocation, functions.required_formals, expressions.additive, expressions.identifier_reference, statements.print]
+dart_notes: >-
+  The caller's variables are deliberately named like the parameters and
+  declared in the opposite order; Dart binds required positional arguments
+  strictly left to right, and an argument expression is fully evaluated
+  before the call begins.
