@@ -314,96 +314,97 @@ Every distractor names an id from `data/misconceptions.yaml`; a wrong answer
 is evidence for that wrong model. Ids probed by a single item are weak
 evidence on their own.
 
-| Misconception | Items |
-| --- | --- |
-| `assign.equation` — `=` is a mathematical equation | `fundamentals_def_1`, `fundamentals_trace_3` |
-| `assign.spreadsheet` — Variables are live formulas | `fundamentals_def_1`, `fundamentals_trace_2` |
-| `assign.eq_vs_eqeq` — `=` vs `==` | `fundamentals_def_1`, `recursion_complete_1` |
-| `assign.right_to_left` — Assignment copies right-to-left | `fundamentals_trace_3` |
-| `assign.swap` — `a = b; b = a;` swaps | `fundamentals_trace_3` |
-| `assign.first_value_permanent` — Reassignment ignored | `fundamentals_trace_2` |
-| `assign.expression_without_store` — Evaluating is storing | `function_return_complete_1`, `fundamentals_complete_1` |
-| `assign.compound_vs_plain` — `+=` vs `=` | `fundamentals_complete_1` |
-| `assign.redeclare` — Redeclare to change | `fundamentals_complete_1` |
-| `arith.int_division_slash` — `/` truncates on ints | `fundamentals_trace_1` |
-| `arith.truncdiv_rounds` — `~/` rounds | `fundamentals_trace_1` |
-| `arith.truncdiv_as_slash` — `~/` is ordinary division | `loops_indefinite_trace_1` |
-| `arith.mod_fraction` — `%` is the fractional part | `fundamentals_trace_1` |
-| `output.no_interpolation` — `$x` is literal text | `fundamentals_trace_2` |
-| `output.phantom_print` — Output without `print` | `loops_definite_trace_4` |
-| `output.print_as_computation` — `print` does the work | `function_return_complete_1`, `oop_complete_1` |
-| `bool.english_or` — English "or" | `logical_operators_def_1` |
-| `bool.lenient_compiler` — Compiler drops what it cannot use | `logical_operators_def_1` |
-| `bool.truthiness` — Truthiness | `logical_operators_def_1` |
-| `bool.or_for_between` — `\|\|` for "between" | `logical_operators_complete_1` |
-| `bool.chained_comparison` — Chained comparison | `logical_operators_complete_1` |
-| `bool.not_scope_widens` — `!` applies to the whole expression | `logical_operators_trace_1` |
-| `bool.demorgan_distribute` — `!` distributes unchanged | `logical_operators_trace_1` |
-| `bool.no_short_circuit` — No short-circuit | `logical_operators_trace_2` |
-| `compare.ne_as_eq` — `!=` read as `==` | `logical_operators_trace_2` |
-| `compare.strict_vs_inclusive` — `<` vs `<=` | `logical_operators_complete_1`, `selection_complete_1` |
-| `if.chain_as_independent` — `else if` chain as independent `if`s | `selection_complete_1`, `selection_def_1`, `selection_trace_1` |
-| `if.independent_as_chain` — Independent `if`s as a chain | `selection_trace_1` |
-| `if.all_branches_run` — All branches run | `selection_def_1` |
-| `if.last_true_wins` — Last true condition wins | `selection_def_1`, `selection_trace_1` |
-| `if.false_skips_else` — False skips the whole `if` | `logical_operators_trace_2` |
-| `if.nested_unconditional` — Nested body is unconditional | `selection_trace_2` |
-| `if.else_binds_inner` — `else` binds to the wrong `if` | `selection_trace_2` |
-| `if.else_with_condition` — `else` takes a condition | `selection_complete_1` |
-| `seq.after_block_skipped` — Code after a block is part of it | `selection_trace_2` |
-| `bounds.off_by_one` — Off by one | `arrays_complete_1`, `arrays_trace_2`, `function_params_complete_1`, `loops_definite_complete_1`, `loops_definite_trace_1`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `recursion_complete_1`, `recursion_trace_3` |
-| `loop.eq_condition_as_until` — `i == n` means "until" | `loops_definite_complete_1` |
-| `loop.init_runs_each_pass` — Initializer runs every pass | `loops_definite_def_1` |
-| `loop.body_before_test` — Body runs before the test | `loops_definite_def_1`, `loops_definite_trace_3` |
-| `loop.test_before_body` — `do-while` tests first | `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
-| `loop.extra_pass_after_false` — One more pass after false | `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
-| `loop.exit_mid_body` — Exit mid-body | `loops_indefinite_trace_2` |
-| `loop.update_decides_exit` — Update decides the exit | `loops_definite_def_1` |
-| `loop.test_placement_prevents_infinite` — Test placement prevents infinite loops | `loops_indefinite_def_1` |
-| `loop.while_as_if` — `while` as `if` | `loops_indefinite_trace_1` |
-| `loop.inner_fixed_trip_count` — Inner loop always runs the same number of times | `loops_definite_trace_2` |
-| `loop.inner_runs_once` — Inner loop runs once in total | `loops_definite_trace_2` |
-| `loop.accumulator_overwritten` — Accumulator overwritten | `loops_definite_trace_4` |
-| `break.deferred` — `break` at end of pass | `loops_indefinite_trace_3` |
-| `break.as_continue` — `break` as `continue` | `loops_indefinite_trace_3` |
-| `break.ignored` — `break` ignored | `loops_indefinite_trace_3` |
-| `postfix.no_side_effect` — `i++` does not change `i` | `loops_definite_trace_2` |
-| `postfix.prefix_timing` — Postfix applied early | `loops_definite_trace_3` |
-| `list.one_based` — One-based indexing | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1` |
-| `list.length_is_last_index` — `length` is the last index | `arrays_def_1`, `arrays_trace_1` |
-| `list.index_grows` — Indexing past the end grows the list | `arrays_def_1` |
-| `list.element_assign_no_effect` — `a[i] = v` does not change the list | `arrays_trace_2` |
-| `list.index_vs_element` — Index vs element | `arrays_trace_2`, `loops_definite_trace_4` |
-| `syntax.missing_receiver` — Missing receiver | `arrays_complete_1` |
-| `alias.copy_on_assign` — Assignment copies the object | `arrays_trace_3`, `function_params_trace_2`, `oop_trace_2` |
-| `alias.one_way_link` — One-way link | `arrays_trace_3` |
-| `alias.equal_args_same_object` — Equal arguments, same object | `oop_trace_2` |
-| `param.bind_by_name` — Arguments bind by name | `function_params_def_1`, `function_params_trace_1` |
-| `param.bind_by_declaration_order` — Arguments bind by declaration order | `function_params_complete_1`, `function_params_def_1` |
-| `param.bind_by_type` — Arguments bind by type | `function_params_def_1` |
-| `param.named_for_positional` — Named syntax for positional parameters | `function_params_complete_1` |
-| `param.by_reference` — Pass by reference | `function_params_trace_2` |
-| `scope.param_is_global` — Parameter is the outer variable | `function_params_trace_1` |
-| `scope.shadow_ignored` — Shadowing ignored | `function_params_trace_1`, `function_params_trace_2` |
-| `scope.local_shadows_field` — Local instead of field | `oop_complete_1` |
-| `scope.outer_local_visible` — Outer locals visible everywhere | `oop_complete_1` |
-| `call.outer_first` — Outer call evaluated first | `function_return_trace_2` |
-| `return.as_print` — `return` prints | `function_return_def_1`, `function_return_trace_1` |
-| `return.does_not_exit` — `return` does not exit | `function_return_def_1`, `function_return_trace_1` |
-| `return.only_at_end` — `return` only at the end | `function_return_def_1` |
-| `return.exits_program` — `return` ends the program | `recursion_trace_2` |
-| `recursion.base_vs_recursive_case` — Base case vs recursive case | `recursion_complete_1`, `recursion_def_1` |
-| `recursion.base_is_first_call` — Base case is the first call | `recursion_def_1` |
-| `recursion.base_value_is_result` — Base case value is the result | `recursion_def_1`, `recursion_trace_1`, `recursion_trace_3` |
-| `recursion.one_level` — Only one level recurses | `recursion_trace_1` |
-| `recursion.call_deferred` — Recursive call deferred | `recursion_trace_2` |
-| `recursion.unwind_order` — Unwind order | `recursion_trace_2` |
-| `oop.this_formal_is_param` — `this.x` is an ordinary parameter | `oop_def_1` |
-| `oop.field_as_method` — Field read as method call | `oop_def_1` |
-| `oop.field_shared` — Fields shared across instances | `oop_def_1`, `oop_trace_1` |
-| `oop.method_cannot_mutate` — Methods cannot change fields | `oop_trace_1`, `oop_trace_2` |
-| `trace.wrong_operation` — Wrong operation | `function_return_trace_2`, `loops_definite_trace_1`, `loops_indefinite_complete_1`, `recursion_trace_1` |
-| `trace.ignores_initial_value` — Initial value ignored | `oop_trace_1`, `recursion_trace_3` |
+| Misconception | # | Items |
+| --- | ---: | --- |
+| `assign.equation` — `=` is a mathematical equation | 2 | `fundamentals_def_1`, `fundamentals_trace_3` |
+| `assign.spreadsheet` — Variables are live formulas | 2 | `fundamentals_def_1`, `fundamentals_trace_2` |
+| `assign.eq_vs_eqeq` — `=` vs `==` | 2 | `fundamentals_def_1`, `recursion_complete_1` |
+| `assign.right_to_left` — Assignment copies right-to-left | 1 | `fundamentals_trace_3` |
+| `assign.swap` — `a = b; b = a;` swaps | 1 | `fundamentals_trace_3` |
+| `assign.first_value_permanent` — Reassignment ignored | 1 | `fundamentals_trace_2` |
+| `assign.expression_without_store` — Evaluating is storing | 2 | `function_return_complete_1`, `fundamentals_complete_1` |
+| `assign.compound_vs_plain` — `+=` vs `=` | 1 | `fundamentals_complete_1` |
+| `assign.redeclare` — Redeclare to change | 1 | `fundamentals_complete_1` |
+| `arith.int_division_slash` — `/` truncates on ints | 1 | `fundamentals_trace_1` |
+| `arith.truncdiv_rounds` — `~/` rounds | 1 | `fundamentals_trace_1` |
+| `arith.truncdiv_as_slash` — `~/` is ordinary division | 1 | `loops_indefinite_trace_1` |
+| `arith.mod_fraction` — `%` is the fractional part | 1 | `fundamentals_trace_1` |
+| `output.no_interpolation` — `$x` is literal text | 1 | `fundamentals_trace_2` |
+| `output.phantom_print` — Output without `print` | 1 | `loops_definite_trace_4` |
+| `output.print_as_computation` — `print` does the work | 2 | `function_return_complete_1`, `oop_complete_1` |
+| `bool.english_or` — English "or" | 1 | `logical_operators_def_1` |
+| `bool.lenient_compiler` — Compiler drops what it cannot use | 1 | `logical_operators_def_1` |
+| `bool.truthiness` — Truthiness | 1 | `logical_operators_def_1` |
+| `bool.or_for_between` — `\|\|` for "between" | 1 | `logical_operators_complete_1` |
+| `bool.chained_comparison` — Chained comparison | 1 | `logical_operators_complete_1` |
+| `bool.not_scope_widens` — `!` applies to the whole expression | 1 | `logical_operators_trace_1` |
+| `bool.demorgan_distribute` — `!` distributes unchanged | 1 | `logical_operators_trace_1` |
+| `bool.no_short_circuit` — No short-circuit | 1 | `logical_operators_trace_2` |
+| `bool.ne_as_eq` — `!=` read as `==` | 1 | `logical_operators_trace_2` |
+| `bool.strict_vs_inclusive` — `<` vs `<=` | 4 | `function_params_complete_1`, `logical_operators_complete_1`, `loops_definite_complete_1`, `selection_complete_1` |
+| `if.chain_as_independent` — `else if` chain as independent `if`s | 3 | `selection_complete_1`, `selection_def_1`, `selection_trace_1` |
+| `if.independent_as_chain` — Independent `if`s as a chain | 1 | `selection_trace_1` |
+| `if.all_branches_run` — All branches run | 1 | `selection_def_1` |
+| `if.last_true_wins` — Last true condition wins | 2 | `selection_def_1`, `selection_trace_1` |
+| `if.false_skips_else` — False skips the whole `if` | 1 | `logical_operators_trace_2` |
+| `if.nested_unconditional` — Nested body is unconditional | 1 | `selection_trace_2` |
+| `if.else_binds_inner` — `else` binds to the wrong `if` | 1 | `selection_trace_2` |
+| `if.else_with_condition` — `else` takes a condition | 1 | `selection_complete_1` |
+| `if.after_block_skipped` — Code after a block is part of it | 1 | `selection_trace_2` |
+| `bounds.off_by_one` — Off by one | 7 | `arrays_complete_1`, `arrays_trace_2`, `loops_definite_complete_1`, `loops_definite_trace_1`, `loops_definite_trace_3`, `loops_indefinite_trace_1`, `recursion_complete_1` |
+| `loop.eq_condition_as_until` — `i == n` means "until" | 1 | `loops_definite_complete_1` |
+| `loop.condition_checked_once` — Condition checked only once | 1 | `loops_definite_def_1` |
+| `loop.body_before_test` — Body runs before the test | 1 | `loops_definite_def_1` |
+| `loop.test_before_body` — `do-while` tests first | 2 | `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
+| `loop.extra_pass_after_false` — One more pass after false | 3 | `loops_definite_trace_3`, `loops_indefinite_def_1`, `loops_indefinite_trace_2` |
+| `loop.exit_mid_body` — Exit mid-body | 1 | `loops_indefinite_trace_2` |
+| `loop.update_decides_exit` — Update decides the exit | 1 | `loops_definite_def_1` |
+| `loop.test_placement_prevents_infinite` — Test placement prevents infinite loops | 1 | `loops_indefinite_def_1` |
+| `loop.while_as_if` — `while` as `if` | 1 | `loops_indefinite_trace_1` |
+| `loop.inner_fixed_trip_count` — Inner loop always runs the same number of times | 1 | `loops_definite_trace_2` |
+| `loop.inner_runs_once` — Inner loop runs once in total | 1 | `loops_definite_trace_2` |
+| `loop.accumulator_overwritten` — Accumulator overwritten | 1 | `loops_definite_trace_4` |
+| `break.deferred` — `break` at end of pass | 1 | `loops_indefinite_trace_3` |
+| `break.as_continue` — `break` as `continue` | 1 | `loops_indefinite_trace_3` |
+| `break.ignored` — `break` ignored | 1 | `loops_indefinite_trace_3` |
+| `postfix.no_side_effect` — `i++` does not change `i` | 1 | `loops_definite_trace_2` |
+| `loop.update_before_first_pass` — Update runs before the first pass | 1 | `loops_definite_trace_3` |
+| `list.one_based` — One-based indexing | 2 | `arrays_def_1`, `arrays_trace_1` |
+| `list.length_is_last_index` — `length` is the last index | 4 | `arrays_complete_1`, `arrays_def_1`, `arrays_trace_1`, `recursion_trace_3` |
+| `list.index_grows` — Indexing past the end grows the list | 1 | `arrays_def_1` |
+| `list.element_assign_no_effect` — `a[i] = v` does not change the list | 1 | `arrays_trace_2` |
+| `list.index_vs_element` — Index vs element | 2 | `arrays_trace_2`, `loops_definite_trace_4` |
+| `syntax.missing_receiver` — Missing receiver | 1 | `arrays_complete_1` |
+| `alias.copy_on_assign` — Assignment copies the object | 3 | `arrays_trace_3`, `function_params_trace_2`, `oop_trace_2` |
+| `alias.one_way_link` — One-way link | 1 | `arrays_trace_3` |
+| `alias.equal_args_same_object` — Equal arguments, same object | 1 | `oop_trace_2` |
+| `param.bind_by_name` — Arguments bind by name | 2 | `function_params_def_1`, `function_params_trace_1` |
+| `param.bind_by_declaration_order` — Arguments bind by declaration order | 2 | `function_params_complete_1`, `function_params_def_1` |
+| `param.bind_by_type` — Arguments bind by type | 1 | `function_params_def_1` |
+| `param.named_for_positional` — Named syntax for positional parameters | 1 | `function_params_complete_1` |
+| `param.by_reference` — Pass by reference | 1 | `function_params_trace_2` |
+| `scope.param_is_global` — Parameter is the outer variable | 1 | `function_params_trace_1` |
+| `scope.shadow_ignored` — Shadowing ignored | 2 | `function_params_trace_1`, `function_params_trace_2` |
+| `scope.local_shadows_field` — Local instead of field | 1 | `oop_complete_1` |
+| `scope.outer_local_visible` — Outer locals visible everywhere | 1 | `oop_complete_1` |
+| `call.outer_first` — Outer call evaluated first | 1 | `function_return_trace_2` |
+| `call.outer_ignored` — Only the inner call counts | 1 | `function_return_trace_2` |
+| `return.as_print` — `return` prints | 2 | `function_return_def_1`, `function_return_trace_1` |
+| `return.does_not_exit` — `return` does not exit | 2 | `function_return_def_1`, `function_return_trace_1` |
+| `return.only_at_end` — The last `return` is the real one | 2 | `function_return_def_1`, `function_return_trace_1` |
+| `return.exits_program` — `return` ends the program | 1 | `recursion_trace_2` |
+| `recursion.base_vs_recursive_case` — Base case vs recursive case | 2 | `recursion_complete_1`, `recursion_def_1` |
+| `recursion.base_is_first_call` — Base case is the first call | 1 | `recursion_def_1` |
+| `recursion.base_value_is_result` — Base case value is the result | 3 | `recursion_def_1`, `recursion_trace_1`, `recursion_trace_3` |
+| `recursion.one_level` — Only one level recurses | 1 | `recursion_trace_1` |
+| `recursion.call_deferred` — Recursive call deferred | 1 | `recursion_trace_2` |
+| `recursion.unwind_order` — Unwind order | 1 | `recursion_trace_2` |
+| `oop.this_formal_is_param` — `this.x` is an ordinary parameter | 1 | `oop_def_1` |
+| `oop.field_as_method` — Field read as method call | 1 | `oop_def_1` |
+| `oop.field_shared` — Fields shared across instances | 2 | `oop_def_1`, `oop_trace_1` |
+| `oop.method_cannot_mutate` — Methods cannot change fields | 2 | `oop_trace_1`, `oop_trace_2` |
+| `trace.wrong_operation` — Wrong operation | 3 | `loops_definite_trace_1`, `loops_indefinite_complete_1`, `recursion_trace_1` |
+| `trace.ignores_initial_value` — Initial value ignored | 2 | `oop_trace_1`, `recursion_trace_3` |
 
 ## Appendix: item → spec area mapping
 

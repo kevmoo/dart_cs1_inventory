@@ -32,7 +32,7 @@ options:
   - id: c
     text: "else if (n >= 1)"
     rationale: Chain is right but the bound is inclusive, so n = 1 gets `M` instead of `S`; prints `MMMBB`.
-    misconception: compare.strict_vs_inclusive
+    misconception: bool.strict_vs_inclusive
   - id: d
     text: "else (n > 1)"
     rationale: "`else` cannot take a condition; the analyzer reports `expected_token` (Expected to find ';')."

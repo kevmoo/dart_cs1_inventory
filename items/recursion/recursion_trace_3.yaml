@@ -17,7 +17,7 @@ options:
   - id: c
     text: "5"
     rationale: Stops one element early, treating `i == items.length` as if it were reached at the last index.
-    misconception: bounds.off_by_one
+    misconception: list.length_is_last_index
   - id: d
     text: "11"
     rationale: Starting at index 1 adds `items[1]` and `items[2]` (5 + 6) and stops when `i` reaches the length.

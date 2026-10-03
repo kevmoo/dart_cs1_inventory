@@ -97,10 +97,10 @@ misconceptions:
   - id: bool.no_short_circuit
     title: No short-circuit
     description: Assumes both operands of `&&` / `||` are always evaluated.
-  - id: compare.ne_as_eq
+  - id: bool.ne_as_eq
     title: "`!=` read as `==`"
     description: Misreads the inequality operator.
-  - id: compare.strict_vs_inclusive
+  - id: bool.strict_vs_inclusive
     title: "`<` vs `<=`"
     description: Confuses strict and inclusive comparison at an endpoint.
 
@@ -122,32 +122,37 @@ misconceptions:
     description: Forgets that a false condition is exactly when `else` runs.
   - id: if.nested_unconditional
     title: Nested body is unconditional
-    description: Once the outer condition holds, the inner `if` is not tested.
+    description: Assumes that once the outer condition holds, the inner `if` is not tested.
   - id: if.else_binds_inner
     title: "`else` binds to the wrong `if`"
-    description: Attaches an `else` to the inner `if` despite the braces.
+    description: Believes an `else` attaches to the inner `if` despite the braces.
   - id: if.else_with_condition
     title: "`else` takes a condition"
     description: Writes `else (x > 3)`.
-  - id: seq.after_block_skipped
+  - id: if.after_block_skipped
     title: Code after a block is part of it
     description: Treats a statement after an `if` as conditional.
 
   # ------------------------------------------------------------------ loops
   - id: bounds.off_by_one
     title: Off by one
-    description: Starts or stops one step early or late at a boundary.
+    description: >-
+      Starts or stops one step early or late at a boundary. Symptom bucket:
+      prefer `bool.strict_vs_inclusive` when the error is `<` vs `<=`, and
+      `list.length_is_last_index` when it is `length` vs `length - 1`.
   - id: loop.eq_condition_as_until
     title: "`i == n` means \"until\""
     description: Reads an equality loop condition as the exit condition.
-  - id: loop.init_runs_each_pass
-    title: Initializer runs every pass
-    description: Confuses the `for` initializer with the condition.
+  - id: loop.condition_checked_once
+    title: Condition checked only once
+    description: >-
+      Treats the loop condition like the initializer: evaluated once before
+      the loop starts.
   - id: loop.body_before_test
     title: Body runs before the test
     description: >-
-      Treats `while` / `for` like `do-while`: at least one pass, or one extra
-      pass after the condition turns false.
+      Treats `while` / `for` like `do-while`: the body runs at least once
+      even when the condition is false from the start.
   - id: loop.test_before_body
     title: "`do-while` tests first"
     description: Treats `do-while` like `while`, skipping the first pass.
@@ -189,9 +194,9 @@ misconceptions:
   - id: postfix.no_side_effect
     title: "`i++` does not change `i`"
     description: Believes postfix increment only yields a value.
-  - id: postfix.prefix_timing
-    title: Postfix applied early
-    description: Applies `i--` before the statement that uses `i`.
+  - id: loop.update_before_first_pass
+    title: Update runs before the first pass
+    description: Applies the `for` update before the body's first execution.
 
   # ------------------------------------------------------------------ lists
   - id: list.one_based
@@ -242,7 +247,7 @@ misconceptions:
     description: Believes reassigning a parameter changes the caller's variable.
   - id: scope.param_is_global
     title: Parameter is the outer variable
-    description: Binding a parameter overwrites a same-named top-level variable.
+    description: Believes binding a parameter overwrites a same-named top-level variable.
   - id: scope.shadow_ignored
     title: Shadowing ignored
     description: Reads the outer variable where a same-named local or parameter is in scope.
@@ -255,6 +260,11 @@ misconceptions:
   - id: call.outer_first
     title: Outer call evaluated first
     description: Evaluates `f(g(x))` as "f, then g".
+  - id: call.outer_ignored
+    title: Only the inner call counts
+    description: >-
+      Takes the inner call's value as the value of `f(g(x))`, never applying
+      `f`.
   - id: return.as_print
     title: "`return` prints"
     description: Expects `return` to produce output.
@@ -262,8 +272,10 @@ misconceptions:
     title: "`return` does not exit"
     description: Continues the function (or loop) after an executed `return`.
   - id: return.only_at_end
-    title: "`return` only at the end"
-    description: Treats `return` as an end-of-function marker.
+    title: "The last `return` is the real one"
+    description: >-
+      Believes the function's value is whatever the final `return` says;
+      earlier returns are ignored or impossible.
   - id: return.exits_program
     title: "`return` ends the program"
     description: Believes a `return` deep in a call chain stops everything.
@@ -286,7 +298,7 @@ misconceptions:
     description: Believes the current body finishes before the recursive call runs.
   - id: recursion.unwind_order
     title: Unwind order
-    description: Prints post-call lines in call order rather than return order.
+    description: Believes lines printed after the recursive call appear in call order rather than return order.
 
   # -------------------------------------------------------------------- oop
   - id: oop.this_formal_is_param
@@ -311,4 +323,4 @@ misconceptions:
       id when one exists.
   - id: trace.ignores_initial_value
     title: Initial value ignored
-    description: Starts from 0 instead of the given argument or starting index.
+    description: Assumes the computation starts from 0 instead of the given argument or starting index.

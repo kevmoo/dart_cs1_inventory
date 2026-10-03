@@ -28,7 +28,7 @@ options:
   - id: c
     text: "n > 1 && n < 10"
     rationale: Strict comparisons exclude the endpoints 1 and 10, counting only 8 values.
-    misconception: compare.strict_vs_inclusive
+    misconception: bool.strict_vs_inclusive
   - id: d
     text: "1 <= n <= 10"
     rationale: Mathematical chained comparison; the analyzer rejects it (`equality_cannot_be_equality_operand`, `undefined_operator` for `<=` on `bool`).

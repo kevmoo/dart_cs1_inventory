@@ -9,7 +9,7 @@ options:
   - id: a
     text: Once, before the loop starts.
     rationale: Confuses the condition with the initializer, which runs once.
-    misconception: loop.init_runs_each_pass
+    misconception: loop.condition_checked_once
   - id: b
     text: Before every iteration, including the first; the loop stops when it is false.
     rationale: The condition guards each pass; `i++` runs after the body, then the condition is re-checked.

@@ -218,8 +218,6 @@ final class const Inventory({
 
   Concept concept(String id) => concepts.firstWhere((c) => c.id == id);
   SpecArea specArea(String id) => specAreas.firstWhere((a) => a.id == id);
-  Misconception misconception(String id) =>
-      misconceptions.firstWhere((m) => m.id == id);
   Iterable<Item> itemsFor(String concept, [ItemType? type]) => items.where(
     (i) => i.concept == concept && (type == null || i.type == type),
   );

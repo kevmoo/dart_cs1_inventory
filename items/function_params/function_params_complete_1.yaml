@@ -36,7 +36,7 @@ options:
   - id: d
     text: "between(low, high + 1)"
     rationale: Assumes `i <= high` stops before `high` (as `<` would) and compensates by adding 1; prints `2 3 4 5`.
-    misconception: bounds.off_by_one
+    misconception: bool.strict_vs_inclusive
 answer: c
 spec_areas: [expressions.function_invocation, functions.required_formals, statements.for, statements.print]
 dart_notes: >-

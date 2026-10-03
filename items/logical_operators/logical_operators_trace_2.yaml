@@ -16,7 +16,7 @@ options:
   - id: c
     text: "big average\ndone"
     rationale: Misreads `!=` as `==` (so `count != 0` looks true) and assumes the division then succeeds with a large result.
-    misconception: compare.ne_as_eq
+    misconception: bool.ne_as_eq
   - id: d
     text: "done"
     rationale: Believes a false condition skips the whole `if`/`else` statement; a false condition is exactly when the `else` branch runs.

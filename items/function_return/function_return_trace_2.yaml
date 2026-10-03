@@ -20,6 +20,6 @@ options:
   - id: d
     text: "7\n8"
     rationale: Drops the outer `twice` in the second line, treating the inner call's value as the whole expression.
-    misconception: trace.wrong_operation
+    misconception: call.outer_ignored
 answer: c
 spec_areas: [statements.return, expressions.function_invocation, expressions.additive, expressions.multiplicative, statements.print]

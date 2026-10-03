@@ -14,7 +14,7 @@ options:
   - id: a
     text: "a.length"
     rationale: One-based thinking; `a[6]` is past the end and throws a `RangeError` at run time.
-    misconception: list.one_based
+    misconception: list.length_is_last_index
   - id: b
     text: "a.length - 2"
     rationale: Over-corrects the off-by-one and prints the second-to-last element, `23`.

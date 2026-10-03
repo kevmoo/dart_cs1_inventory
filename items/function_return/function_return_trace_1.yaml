@@ -9,7 +9,7 @@ options:
   - id: a
     text: "-1"
     rationale: Assumes the final `return -1` always runs and overrides the earlier return.
-    misconception: return.does_not_exit
+    misconception: return.only_at_end
   - id: b
     text: "20"
     rationale: Assumes the loop keeps going after `return`, so the last matching element wins.

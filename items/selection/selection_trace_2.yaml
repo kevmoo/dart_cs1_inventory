@@ -20,7 +20,7 @@ options:
   - id: d
     text: "too young"
     rationale: Combines the attached-to-inner-`if` error with forgetting that `print('end')` is outside every `if` and always runs.
-    misconception: seq.after_block_skipped
+    misconception: if.after_block_skipped
 answer: c
 spec_areas: [statements.if, statements.blocks, expressions.relational, statements.print]
 dart_notes: >-
