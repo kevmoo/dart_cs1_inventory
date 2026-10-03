@@ -1,0 +1,41 @@
+id: function_params_complete_2
+concept: function_params
+type: completion
+dag_node: function_calls_and_params
+prompt: |
+  Fill in the blank so the program prints `7` and then `9`.
+code_file: function_params_complete_2.dart
+template: |
+  void showRange(int start, int size) {
+    print(start);
+    print(start + size);
+  }
+
+  void main() {
+    var size = 2;
+    var start = 7;
+    ____;
+  }
+options:
+  - id: a
+    text: "showRange(size, start)"
+    rationale: Passes the variables in the order `main` declared them, so `start` becomes 2 and `size` 7, printing `2` and `9`.
+    misconception: param.bind_by_declaration_order
+  - id: b
+    text: "showRange(start, size)"
+    rationale: The first argument binds to `start` and the second to `size`, whatever order `main` declared them in.
+  - id: c
+    text: "showRange(start)"
+    rationale: Leaves out the second argument as if `size` were optional; the analyzer reports `not_enough_positional_arguments`.
+    compile_error: true
+    diagnostic: not_enough_positional_arguments
+    misconception: param.required_omitted
+  - id: d
+    text: "showRange(start, 9)"
+    rationale: Hands the function the answer it should print instead of the input it computes from, so the second line is `16`.
+    misconception: param.passes_result
+answer: b
+spec_areas: [expressions.function_invocation, functions.required_formals, expressions.additive, statements.print]
+dart_notes: >-
+  Dart has no default values for required positional parameters, so a call
+  with too few arguments is a compile error rather than a silent zero.

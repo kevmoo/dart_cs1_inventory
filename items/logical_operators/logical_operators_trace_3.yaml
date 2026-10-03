@@ -1,0 +1,29 @@
+id: logical_operators_trace_3
+concept: logical_operators
+type: tracing
+dag_node: boolean_expressions
+prompt: |
+  What does this program print?
+code_file: logical_operators_trace_3.dart
+options:
+  - id: a
+    text: "false\ntrue\ntrue"
+    rationale: Treats `big` as a live formula that is recomputed when `x` changes; `x > 10` was evaluated once, when `big` was assigned, and stored `false`.
+    misconception: assign.spreadsheet
+  - id: b
+    text: "false\nfalse\nfalse"
+    rationale: Ignores the reassignment `x = 50`; the last line compares the current `x`, which is 50, so it prints `true`.
+    misconception: assign.first_value_permanent
+  - id: c
+    text: "false\nfalse\ntrue"
+    rationale: "`x > 10` is a `bool` value computed when `big` is assigned (7 > 10 is `false`) and it does not change later; the last line compares the new `x`."
+  - id: d
+    text: "The program does not compile, because a comparison like `x > 10` can only be written inside an `if` condition."
+    rationale: Treats a comparison as a command rather than a value; `x > 10` is an ordinary expression of type `bool` that can be stored in a variable or printed.
+    misconception: bool.comparison_is_command
+answer: c
+spec_areas: [expressions.relational, expressions.booleans, statements.local_variable, expressions.assignment, statements.print]
+dart_notes: >-
+  `var big = x > 10;` infers `bool`; students used to pseudocode that only
+  shows comparisons inside `if` often do not realise a comparison is a value.
+  `print(true)` prints the text `true`, with no quotes.

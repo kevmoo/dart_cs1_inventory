@@ -1,0 +1,25 @@
+id: fundamentals_trace_7
+concept: fundamentals
+type: tracing
+dag_node: arithmetic_expressions
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_7.dart
+options:
+  - id: a
+    text: "20\n20\n3\n2"
+    rationale: Evaluates strictly left to right, doing `2 + 3` before `* 4`; multiplication binds tighter than addition, so `2 + 3 * 4` is 14.
+    misconception: arith.left_to_right
+  - id: b
+    text: "14\n20\n3\n2"
+    rationale: "`*` before `+` gives 14; parentheses force 20; `-` groups left to right so `(10 - 4) - 3` is 3; `*` and `%` share a level and go left to right, so `(2 * 3) % 4` is 2."
+  - id: c
+    text: "14\n20\n9\n2"
+    rationale: Groups subtraction from the right, computing `10 - (4 - 3)`; operators of the same level are applied left to right.
+    misconception: arith.right_assoc
+  - id: d
+    text: "14\n20\n3\n6"
+    rationale: Believes `%` binds tighter than `*`, computing `2 * (3 % 4)`; they have the same precedence and go left to right, so it is `6 % 4`.
+    misconception: arith.mod_binds_tighter
+answer: b
+spec_areas: [expressions.additive, expressions.multiplicative, expressions.numbers, statements.print]

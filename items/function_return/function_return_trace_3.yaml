@@ -1,0 +1,29 @@
+id: function_return_trace_3
+concept: function_return
+type: tracing
+dag_node: return_values
+prompt: |
+  What does this program print?
+code_file: function_return_trace_3.dart
+options:
+  - id: a
+    text: "9\n16"
+    rationale: The bare `square(3);` computes 9 and throws it away; only the two `print` statements produce output.
+  - id: b
+    text: "9\n9\n16"
+    rationale: Believes a call written as its own statement prints the value it returns.
+    misconception: return.bare_call_prints
+  - id: c
+    text: "9\n9\n16\n16"
+    rationale: Expects every statement that produces a value, including the bare call and the assignment to `r`, to display it.
+    misconception: output.phantom_print
+  - id: d
+    text: "9\n9\n9\n16\n16"
+    rationale: Treats each executed `return` as a `print`, so all three calls print on top of the two real `print` statements.
+    misconception: return.as_print
+answer: a
+spec_areas: [statements.return, expressions.function_invocation, statements.expression, expressions.assignment, statements.print]
+dart_notes: >-
+  Dart lets you discard a non-void call result silently (the analyzer only
+  warns for a few annotated APIs); nothing is printed unless `print` is
+  called.

@@ -24,7 +24,7 @@ void main() {
     dir = Directory.systemTemp.createTempSync('cs1_compile_error_');
     for (final (:item, :option) in cases) {
       File(p.join(dir.path, '${item.id}_${option.id}.dart'))
-          .writeAsStringSync(item.template!.replaceFirst('____', option.text));
+          .writeAsStringSync(item.template!.replaceAll('____', option.text));
     }
     final result = Process.runSync('dart', [
       'analyze',
@@ -55,9 +55,8 @@ void main() {
     final keysDir = Directory.systemTemp.createTempSync('cs1_keys_');
     addTearDown(() => keysDir.deleteSync(recursive: true));
     for (final item in inv.items.where((i) => i.type == ItemType.completion)) {
-      File(
-        p.join(keysDir.path, '${item.id}.dart'),
-      ).writeAsStringSync(item.template!.replaceFirst('____', item.key.text));
+      File(p.join(keysDir.path, '${item.id}.dart'))
+          .writeAsStringSync(item.template!.replaceAll('____', item.key.text));
     }
     final result = Process.runSync('dart', [
       'analyze',

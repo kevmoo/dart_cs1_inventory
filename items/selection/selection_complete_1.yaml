@@ -3,35 +3,41 @@ concept: selection
 type: completion
 dag_node: selection
 prompt: |
-  For each `n` from 1 to 5 the program should add one letter: `B` when
-  `n` is above 3, otherwise `M` when `n` is above 1, otherwise `S`. Fill in
-  the blank so it prints `SMMBB`.
+  The program classifies `n` twice, first with `n` equal to 1 and then 4.
+  Each time it should print exactly one letter: `B` when `n` is above 3,
+  otherwise `M` when `n` is above 1, otherwise `S`. The same text goes in
+  both blanks. Fill it in so the program prints `S` and then `B`.
 code_file: selection_complete_1.dart
 template: |
   void main() {
-    var line = '';
-    for (var n = 1; n <= 5; n++) {
-      if (n > 3) {
-        line += 'B';
-      } ____ {
-        line += 'M';
-      } else {
-        line += 'S';
-      }
+    var n = 1;
+    if (n > 3) {
+      print('B');
+    } ____ {
+      print('M');
+    } else {
+      print('S');
     }
-    print(line);
+    n = 4;
+    if (n > 3) {
+      print('B');
+    } ____ {
+      print('M');
+    } else {
+      print('S');
+    }
   }
 options:
   - id: a
     text: "else if (n > 1)"
-    rationale: Chains the branches so exactly one letter is added per `n`.
+    rationale: Chains the branches so exactly one letter is printed per value of `n`.
   - id: b
     text: "if (n > 1)"
-    rationale: Makes an independent `if`, so for n = 4 and 5 both `B` and `M` are added; prints `SMMBMBM`.
-    misconception: if.chain_as_independent
+    rationale: Makes an independent `if`, so for n = 4 both `B` and `M` are printed; prints `S`, `B`, `M`.
+    misconception: if.independent_as_chain
   - id: c
     text: "else if (n >= 1)"
-    rationale: Chain is right but the bound is inclusive, so n = 1 gets `M` instead of `S`; prints `MMMBB`.
+    rationale: Chain is right but the bound is inclusive, so n = 1 gets `M` instead of `S`; prints `M`, `B`.
     misconception: bool.strict_vs_inclusive
   - id: d
     text: "else (n > 1)"
@@ -40,8 +46,9 @@ options:
     diagnostic: expected_token
     misconception: if.else_with_condition
 answer: a
-spec_areas: [statements.if, statements.blocks, expressions.relational, statements.for, statements.print]
+spec_areas: [statements.if, statements.blocks, expressions.relational, statements.print]
 dart_notes: >-
-  A short loop is used so the independent-`if` distractor is observably
-  different from the chain; with a single fixed value the two are
-  indistinguishable for most inputs.
+  The chain is tested against two fixed values (1 and 4) instead of in a
+  loop, because loops come after selection in the DAG. Two values are needed
+  so the independent-`if` distractor (differs at 4) and the inclusive-bound
+  distractor (differs at 1) are both observable.

@@ -1,0 +1,29 @@
+id: fundamentals_trace_9
+concept: fundamentals
+type: tracing
+dag_node: sequencing
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_9.dart
+options:
+  - id: a
+    text: "2 1 1\n2 1 1"
+    rationale: Believes `a = b` exchanges the two values in one step; it only overwrites `a`, so `b` is still 2 at the first `print`.
+    misconception: assign.swap
+  - id: b
+    text: "2 2 2\n2 2 2"
+    rationale: Believes `temp` stays linked to `a` and changes when `a` does; `temp` received a copy of 1 and keeps it.
+    misconception: assign.spreadsheet
+  - id: c
+    text: "2 2 1\n2 1 1"
+    rationale: After `temp = a` and `a = b`, both `a` and `b` hold 2 while `temp` holds the saved 1; `b = temp` then restores the 1 into `b`.
+  - id: d
+    text: "2 2 1\n2 2 2"
+    rationale: Reads only the last line, `b = temp`, right to left as "temp gets b", leaving `b` at 2; in every assignment the value on the right is copied into the variable on the left.
+    misconception: assign.right_to_left
+answer: c
+spec_areas: [expressions.assignment, statements.local_variable, expressions.strings, statements.print]
+dart_notes: >-
+  The classic three-statement swap; the intermediate `print` exposes the
+  moment both variables hold the same value, which is what a student who
+  reads the swap as atomic will miss.

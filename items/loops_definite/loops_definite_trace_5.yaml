@@ -1,0 +1,28 @@
+id: loops_definite_trace_5
+concept: loops_definite
+type: tracing
+dag_node: definite_loops
+prompt: |
+  What does this program print?
+code_file: loops_definite_trace_5.dart
+options:
+  - id: a
+    text: "3"
+    rationale: Treats `continue` like `break`, leaving the loop at `i == 3` after adding only 1 + 2.
+    misconception: continue.as_break
+  - id: b
+    text: "21"
+    rationale: Ignores `continue` and adds every value 1..6.
+    misconception: continue.ignored
+  - id: c
+    text: "12"
+    rationale: "`continue` skips the rest of the body for 3 and 6, so 1 + 2 + 4 + 5 = 12."
+  - id: d
+    text: "The program never finishes"
+    rationale: Believes `continue` jumps straight back to the condition and skips `i++`, so `i` stays at 3 forever; in a `for` loop `continue` runs the update first.
+    misconception: continue.skips_update
+answer: c
+spec_areas: [statements.for, statements.continue, statements.if, expressions.multiplicative, expressions.equality, expressions.assignment, statements.print]
+dart_notes: >-
+  `continue` in a `for` loop jumps to the update (`i++`), not back to the
+  condition, so the loop still advances; pseudocode often has no equivalent.

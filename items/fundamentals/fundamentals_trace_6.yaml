@@ -1,0 +1,29 @@
+id: fundamentals_trace_6
+concept: fundamentals
+type: tracing
+dag_node: output_and_strings
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_6.dart
+options:
+  - id: a
+    text: "4 + 5 = 9\n4 + 5 = 9"
+    rationale: Believes the text `$a + $b` inside a string is computed; only the part inside `${...}` is evaluated, so the plain ` + ` stays as text.
+    misconception: output.interpolation_evaluates_text
+  - id: b
+    text: "$a + $b = ${a + b}\n$a + $b = $a + $b"
+    rationale: Does not know that `$a` and `${...}` inside a string are replaced by values (string interpolation).
+    misconception: output.no_interpolation
+  - id: c
+    text: "4 + 5 = 45\n4 + 5 = 4 + 5"
+    rationale: Believes `+` inside `${...}` joins the digits because it is in a string; `a + b` is ordinary int addition, giving 9.
+    misconception: output.interpolation_concatenates
+  - id: d
+    text: "4 + 5 = 9\n4 + 5 = 4 + 5"
+    rationale: "`$a` and `$b` are replaced by 4 and 5, `${a + b}` is replaced by the computed 9, and everything else is copied as text."
+answer: d
+spec_areas: [expressions.strings, expressions.additive, statements.local_variable, statements.print]
+dart_notes: >-
+  Interpolation is Dart's idiom where pseudocode would write `print(a, "+",
+  b)`; the difference between `$x` (one identifier) and `${expr}` (any
+  expression) is the thing to read carefully.

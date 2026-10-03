@@ -1,0 +1,35 @@
+id: fundamentals_complete_3
+concept: fundamentals
+type: completion
+dag_node: arithmetic_expressions
+prompt: |
+  Fill in the blank so the program prints `8`, the whole-number average of
+  `a` and `b`.
+code_file: fundamentals_complete_3.dart
+template: |
+  void main() {
+    var a = 7;
+    var b = 10;
+    print(____);
+  }
+options:
+  - id: a
+    text: "a + b ~/ 2"
+    rationale: Assumes the leftmost `+` happens first; `~/` binds tighter, so this is `7 + (10 ~/ 2)`, which prints `12`.
+    misconception: arith.left_to_right
+  - id: b
+    text: "(a + b) / 2"
+    rationale: Assumes `/` drops the fraction; in Dart `/` always gives a double, so this prints `8.5`.
+    misconception: arith.int_division_slash
+  - id: c
+    text: "(a + b) ~/ 2"
+    rationale: Parentheses add first (17), then `~/` divides and truncates to the integer 8.
+  - id: d
+    text: "(a + b) % 2"
+    rationale: Confuses `%` with whole-number division; `%` gives the remainder of 17 divided by 2, which prints `1`.
+    misconception: arith.mod_as_quotient
+answer: c
+spec_areas: [expressions.additive, expressions.multiplicative, expressions.numbers, statements.print]
+dart_notes: >-
+  Pseudocode `DIV` or Java's integer `/` is Dart's `~/`; `/` on two ints is
+  never integer division.

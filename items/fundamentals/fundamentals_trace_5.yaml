@@ -1,0 +1,30 @@
+id: fundamentals_trace_5
+concept: fundamentals
+type: tracing
+dag_node: values_and_types
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_5.dart
+options:
+  - id: a
+    text: "false\n1.0\n6.0"
+    rationale: Believes an int and a double can never be equal because they are different kinds of value; `==` compares numeric value, and 7 equals 7.0.
+    misconception: types.int_double_unequal
+  - id: b
+    text: "true\n1\n6.0"
+    rationale: Assumes `/` gives an int when it divides evenly; in Dart `/` always produces a double, and the VM prints `1 / 1` as `1.0`.
+    misconception: arith.int_division_slash
+  - id: c
+    text: "true\n1.0\n6.0"
+    rationale: "`7 == 7.0` compares values and is true; `/` always yields a double (`1.0`); multiplying an int by a double gives a double (`6.0`)."
+  - id: d
+    text: "true\n1.0\n6"
+    rationale: Believes multiplying by `3.0` gives an int because the answer is whole; any arithmetic involving a double produces a double, printed `6.0` by the VM.
+    misconception: types.mixed_arith_yields_int
+answer: c
+spec_areas: [expressions.numbers, expressions.equality, expressions.multiplicative, statements.print]
+dart_notes: >-
+  Unlike some languages, `7 == 7.0` is `true` in Dart; `/` never performs
+  integer division, so even `1 / 1` is the double `1.0`. The command-line VM
+  prints whole-valued doubles with `.0`; on the web (DartPad, dart2js) they
+  print as `1` and `6`, so check this item in the VM.

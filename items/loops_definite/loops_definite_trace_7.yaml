@@ -1,0 +1,28 @@
+id: loops_definite_trace_7
+concept: loops_definite
+type: tracing
+dag_node: nested_loops
+prompt: |
+  What does this program print?
+code_file: loops_definite_trace_7.dart
+options:
+  - id: a
+    text: "16"
+    rationale: Assumes the inner loop always runs 4 times, ignoring that its bound is `i`.
+    misconception: loop.inner_fixed_trip_count
+  - id: b
+    text: "6"
+    rationale: Reads `j <= i` as `j < i`, giving 0 + 1 + 2 + 3.
+    misconception: bool.strict_vs_inclusive
+  - id: c
+    text: "10"
+    rationale: The inner loop runs `i` times on each outer pass, so 1 + 2 + 3 + 4 = 10.
+  - id: d
+    text: "4"
+    rationale: Does not restart `j` at 1 on each outer pass, so the inner loop contributes one step per outer pass.
+    misconception: loop.inner_runs_once
+answer: c
+spec_areas: [statements.for, statements.blocks, expressions.relational, expressions.postfix, statements.print]
+dart_notes: >-
+  `j` is declared fresh in the inner header on every outer pass; there is no
+  shared counter to reset.

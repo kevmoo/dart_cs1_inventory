@@ -1,0 +1,29 @@
+id: oop_trace_3
+concept: oop
+type: tracing
+dag_node: classes_and_objects
+prompt: |
+  What does this program print?
+code_file: oop_trace_3.dart
+options:
+  - id: a
+    text: "2 5\n7 1"
+    rationale: Binds the arguments to the fields in the order the fields are declared (`width` then `height`), ignoring the constructor's own parameter order.
+    misconception: oop.ctor_binds_by_field_order
+  - id: b
+    text: "1 7\n1 7"
+    rationale: Treats `width` and `height` as shared by all boxes, so building `b` overwrites `a`'s values.
+    misconception: oop.field_shared
+  - id: c
+    text: "0 0\n0 0"
+    rationale: Reads `this.height` and `this.width` as ordinary parameters that are never stored, leaving the fields at an assumed default of 0.
+    misconception: oop.this_formal_is_param
+  - id: d
+    text: "5 2\n1 7"
+    rationale: Constructor arguments bind by position to `this.height` then `this.width`, so `Box(2, 5)` has height 2 and width 5; each object keeps its own fields.
+answer: d
+spec_areas: [classes.constructors, classes.instance_variables, expressions.instance_creation, expressions.property_extraction, expressions.this, statements.print]
+dart_notes: >-
+  `Box(this.height, this.width)` is Dart's initializing-formal shorthand; the
+  parameter order in the constructor, not the field declaration order, decides
+  which argument lands in which field.

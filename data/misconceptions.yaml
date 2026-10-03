@@ -8,7 +8,24 @@
 # `test/inventory_test.dart` fails on unknown ids and on catalog entries no
 # item uses.
 misconceptions:
-  # ------------------------------------------------------------ assignment
+  # ---------------------------------------------------------- values and types
+  - id: types.quoted_digits_are_numbers
+    title: Quoted digits are numbers
+    description: Believes `'3' + '4'` adds, treating a string of digits as an int.
+  - id: types.mixed_arith_yields_int
+    title: Mixed int/double arithmetic gives an int
+    description: >-
+      Believes arithmetic that mixes `int` and `double` (or `/` on ints)
+      produces an `int` whenever the result is a whole number; it is always
+      a `double`.
+  - id: types.int_double_unequal
+    title: "`7 == 7.0` is false"
+    description: Assumes an int and a double are never equal because they are different types.
+  - id: types.string_plus_number
+    title: "`'text' + number` concatenates"
+    description: Believes `+` glues a number onto a string, as in Java or JavaScript.
+
+  # ---------------------------------------------------------------- assignment
   - id: assign.equation
     title: "`=` is a mathematical equation"
     description: >-
@@ -45,7 +62,7 @@ misconceptions:
     title: Redeclare to change
     description: Tries to change a variable by declaring it again.
 
-  # ------------------------------------------------------------ arithmetic
+  # ---------------------------------------------------------------- arithmetic
   - id: arith.int_division_slash
     title: "`/` truncates on ints"
     description: Assumes `7 / 2` is 3, as in C or Java; in Dart it is 3.5.
@@ -58,8 +75,20 @@ misconceptions:
   - id: arith.mod_fraction
     title: "`%` is the fractional part"
     description: Reads remainder as the fraction left after dividing.
+  - id: arith.left_to_right
+    title: Strict left-to-right evaluation
+    description: Ignores precedence, applying operators in the order they appear.
+  - id: arith.right_assoc
+    title: Same-level operators group from the right
+    description: Reads `10 - 4 - 3` as `10 - (4 - 3)`.
+  - id: arith.mod_binds_tighter
+    title: "`%` binds tighter than `*`"
+    description: Reads `2 * 3 % 4` as `2 * (3 % 4)`; they share a level and go left to right.
+  - id: arith.mod_as_quotient
+    title: "`%` is whole-number division"
+    description: Confuses the remainder operator with `~/`.
 
-  # ---------------------------------------------------------------- output
+  # -------------------------------------------------------------------- output
   - id: output.no_interpolation
     title: "`$x` is literal text"
     description: Does not know `'$x'` substitutes the variable's value.
@@ -71,8 +100,23 @@ misconceptions:
     description: >-
       Treats printing as if it returned, stored, or mutated the value it
       displays.
+  - id: output.quotes_printed
+    title: "`print` shows the quotes"
+    description: Believes the quote marks around a string literal appear in the output.
+  - id: output.interpolation_evaluates_text
+    title: Text between `$` variables is computed
+    description: Reads `'$a + $b'` as if the ` + ` between them were evaluated.
+  - id: output.interpolation_concatenates
+    title: "`${a + b}` joins digits"
+    description: Believes `+` inside `${...}` concatenates because it sits inside a string.
+  - id: output.bare_name_interpolates
+    title: Variable names in quotes are substituted
+    description: "Believes `'Total: total'` prints the value of `total` without a `$`."
+  - id: output.dollar_covers_expression
+    title: "`$name` extends over the rest of the expression"
+    description: Believes `'$a * b'` evaluates `a * b`; a bare `$` substitutes only one identifier.
 
-  # -------------------------------------------------------------- booleans
+  # ------------------------------------------------------------------ booleans
   - id: bool.english_or
     title: "English \"or\""
     description: Writes `x == 1 || 2` expecting both to be compared.
@@ -103,8 +147,19 @@ misconceptions:
   - id: bool.strict_vs_inclusive
     title: "`<` vs `<=`"
     description: Confuses strict and inclusive comparison at an endpoint.
+  - id: bool.comparison_is_command
+    title: Comparison is a command, not a value
+    description: >-
+      Treats `x > 10` as a test that only `if` can perform, not a `bool`
+      value that can be stored in a variable or printed.
+  - id: bool.string_eq_ignores_case
+    title: String `==` ignores case
+    description: Believes `'a' == 'A'` is true because the letters match.
+  - id: bool.eq_before_plus
+    title: "`==` binds tighter than `+`"
+    description: Reads `2 + 2 == 4` as `2 + (2 == 4)` instead of `(2 + 2) == 4`.
 
-  # -------------------------------------------------------------- selection
+  # ----------------------------------------------------------------- selection
   - id: if.chain_as_independent
     title: "`else if` chain as independent `if`s"
     description: Believes several branches of one chain can run.
@@ -133,7 +188,7 @@ misconceptions:
     title: Code after a block is part of it
     description: Treats a statement after an `if` as conditional.
 
-  # ------------------------------------------------------------------ loops
+  # --------------------------------------------------------------------- loops
   - id: bounds.off_by_one
     title: Off by one
     description: >-
@@ -181,7 +236,20 @@ misconceptions:
     description: Does not restart the inner loop on each outer pass.
   - id: loop.accumulator_overwritten
     title: Accumulator overwritten
-    description: Reads `sum += x` as `sum = x`.
+    description: Reads `sum += x` or `sum = sum + x` as `sum = x`, replacing the running total.
+  - id: loop.update_before_first_pass
+    title: Update runs before the first pass
+    description: Applies the `for` update before the body's first execution.
+  - id: loop.var_ends_at_last_body_value
+    title: Loop variable ends at its last body value
+    description: >-
+      Believes a `for` counter stops at the last value the body saw, not the
+      value that made the condition fail.
+  - id: loop.header_var_is_private
+    title: Loop header uses a private variable
+    description: >-
+      Believes `for (i = 0; ...)` works on its own copy of `i`, leaving the
+      variable declared outside the loop unchanged.
   - id: break.deferred
     title: "`break` at end of pass"
     description: Believes `break` finishes the current pass first.
@@ -194,11 +262,19 @@ misconceptions:
   - id: postfix.no_side_effect
     title: "`i++` does not change `i`"
     description: Believes postfix increment only yields a value.
-  - id: loop.update_before_first_pass
-    title: Update runs before the first pass
-    description: Applies the `for` update before the body's first execution.
+  - id: continue.as_break
+    title: "`continue` as `break`"
+    description: Leaves the loop instead of skipping to the next pass.
+  - id: continue.ignored
+    title: "`continue` ignored"
+    description: Traces the loop as if `continue` were not there.
+  - id: continue.skips_update
+    title: "`continue` skips the `for` update"
+    description: >-
+      Believes `continue` jumps back to the condition without running `i++`,
+      so the loop repeats the same value forever.
 
-  # ------------------------------------------------------------------ lists
+  # --------------------------------------------------------------------- lists
   - id: list.one_based
     title: One-based indexing
     description: Treats `a[1]` as the first element.
@@ -218,7 +294,7 @@ misconceptions:
     title: Missing receiver
     description: Writes `length` for `a.length`.
 
-  # --------------------------------------------------------------- aliasing
+  # ------------------------------------------------------------------ aliasing
   - id: alias.copy_on_assign
     title: Assignment copies the object
     description: Believes `b = a` (or passing `a`) duplicates a list or object.
@@ -229,7 +305,7 @@ misconceptions:
     title: Equal arguments, same object
     description: Believes two `Counter(5)` calls yield one object.
 
-  # -------------------------------------------------------------- functions
+  # ----------------------------------------------------------------- functions
   - id: param.bind_by_name
     title: Arguments bind by name
     description: Matches caller variable names to parameter names.
@@ -245,6 +321,22 @@ misconceptions:
   - id: param.by_reference
     title: Pass by reference
     description: Believes reassigning a parameter changes the caller's variable.
+  - id: param.arg_not_evaluated
+    title: Parameter bound to the variable, not the value
+    description: >-
+      Believes a parameter is bound to the variable named in the argument
+      (`show(x + 1, ...)` binds `x`), so the `+ 1` is ignored or applied
+      later instead of being computed before the call.
+  - id: param.required_omitted
+    title: Required argument left out
+    description: >-
+      Omits an argument for a required positional parameter, expecting the
+      parameter to be skipped or defaulted.
+  - id: param.passes_result
+    title: Passes the answer as an argument
+    description: >-
+      Hands the function the value it is supposed to produce instead of the
+      input it computes from, treating the call as a label for the output.
   - id: scope.param_is_global
     title: Parameter is the outer variable
     description: Believes binding a parameter overwrites a same-named top-level variable.
@@ -279,8 +371,14 @@ misconceptions:
   - id: return.exits_program
     title: "`return` ends the program"
     description: Believes a `return` deep in a call chain stops everything.
+  - id: return.bare_call_prints
+    title: A bare call prints its result
+    description: >-
+      Believes a call written as its own statement (`square(3);`) prints or
+      keeps the returned value, REPL-style, instead of discarding it. Unlike
+      `output.phantom_print`, only call statements are imagined to echo.
 
-  # -------------------------------------------------------------- recursion
+  # ----------------------------------------------------------------- recursion
   - id: recursion.base_vs_recursive_case
     title: Base case vs recursive case
     description: Swaps the roles of the two branches.
@@ -300,7 +398,7 @@ misconceptions:
     title: Unwind order
     description: Believes lines printed after the recursive call appear in call order rather than return order.
 
-  # -------------------------------------------------------------------- oop
+  # ----------------------------------------------------------------------- oop
   - id: oop.this_formal_is_param
     title: "`this.x` is an ordinary parameter"
     description: Does not see that an initializing formal stores into the field.
@@ -313,8 +411,18 @@ misconceptions:
   - id: oop.method_cannot_mutate
     title: Methods cannot change fields
     description: Assumes an object's fields are fixed after construction.
+  - id: oop.ctor_binds_by_field_order
+    title: Constructor binds by field order
+    description: >-
+      Binds constructor arguments to fields in the order the fields are
+      declared, ignoring the order in the constructor's parameter list.
+  - id: oop.return_is_field
+    title: Method returns the field itself
+    description: >-
+      Takes a method's return value to be the field it reads, ignoring the
+      computation applied before `return`.
 
-  # ---------------------------------------------------------------- tracing
+  # ------------------------------------------------------------------- tracing
   - id: trace.wrong_operation
     title: Wrong operation
     description: >-

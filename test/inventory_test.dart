@@ -215,6 +215,18 @@ void main() {
       expect(covered, containsAll(conceptIds));
     });
 
+    test('every node has at least one tracing or completion item', () {
+      final evidenced = {
+        for (final i in inv.items)
+          if (i.type != ItemType.definitional) i.dagNode,
+      };
+      expect(
+        ids.difference(evidenced),
+        isEmpty,
+        reason: 'nodes the tutor can neither diagnose nor mark mastered',
+      );
+    });
+
     test('acyclic', () {
       final byId = {for (final n in inv.dag) n.id: n};
       final state = <String, int>{}; // 1 = visiting, 2 = done

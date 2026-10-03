@@ -1,30 +1,45 @@
 // KEY
 void optionA() {
-  var count = 0;
-  for (var n = 0; n <= 11; n++) {
-    if (n >= 1 && n <= 10) {
-      count++;
-    }
+  var n = 0;
+  if (n >= 1 && n <= 10) {
+    print('$n in');
   }
-  print(count);
+  n = 5;
+  if (n >= 1 && n <= 10) {
+    print('$n in');
+  }
+  n = 10;
+  if (n >= 1 && n <= 10) {
+    print('$n in');
+  }
 }
 
 void optionB() {
-  var count = 0;
-  for (var n = 0; n <= 11; n++) {
-    if (n >= 1 || n <= 10) {
-      count++;
-    }
+  var n = 0;
+  if (n >= 1 || n <= 10) {
+    print('$n in');
   }
-  print(count);
+  n = 5;
+  if (n >= 1 || n <= 10) {
+    print('$n in');
+  }
+  n = 10;
+  if (n >= 1 || n <= 10) {
+    print('$n in');
+  }
 }
 
 void optionC() {
-  var count = 0;
-  for (var n = 0; n <= 11; n++) {
-    if (n > 1 && n < 10) {
-      count++;
-    }
+  var n = 0;
+  if (n > 1 && n < 10) {
+    print('$n in');
   }
-  print(count);
+  n = 5;
+  if (n > 1 && n < 10) {
+    print('$n in');
+  }
+  n = 10;
+  if (n > 1 && n < 10) {
+    print('$n in');
+  }
 }

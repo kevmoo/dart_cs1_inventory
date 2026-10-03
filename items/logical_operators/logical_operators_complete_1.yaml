@@ -3,31 +3,37 @@ concept: logical_operators
 type: completion
 dag_node: logical_operators
 prompt: |
-  The loop tries each `n` from 0 to 11. Fill in the blank so `count` is the
-  number of values that are between 1 and 10 inclusive, i.e. the program
-  prints `10`.
+  The program tests `n` three times, with `n` equal to 0, then 5, then 10.
+  The same condition goes in every blank. Fill it in so that a value is
+  printed only when it is between 1 and 10 inclusive, i.e. the program
+  prints `5 in` and `10 in`.
 code_file: logical_operators_complete_1.dart
 template: |
   void main() {
-    var count = 0;
-    for (var n = 0; n <= 11; n++) {
-      if (____) {
-        count++;
-      }
+    var n = 0;
+    if (____) {
+      print('$n in');
     }
-    print(count);
+    n = 5;
+    if (____) {
+      print('$n in');
+    }
+    n = 10;
+    if (____) {
+      print('$n in');
+    }
   }
 options:
   - id: a
     text: "n >= 1 && n <= 10"
-    rationale: Both bounds must hold at once, so `&&` with inclusive comparisons counts exactly 1..10.
+    rationale: Both bounds must hold at once, so `&&` with inclusive comparisons accepts 5 and 10 but not 0.
   - id: b
     text: "n >= 1 || n <= 10"
-    rationale: Uses `||` for the English "between"; every integer satisfies at least one side, so all 12 values are counted.
+    rationale: Uses `||` for the English "between"; every integer satisfies at least one side, so `0 in`, `5 in` and `10 in` all print.
     misconception: bool.or_for_between
   - id: c
     text: "n > 1 && n < 10"
-    rationale: Strict comparisons exclude the endpoints 1 and 10, counting only 8 values.
+    rationale: Strict comparisons exclude the endpoint 10, so only `5 in` prints.
     misconception: bool.strict_vs_inclusive
   - id: d
     text: "1 <= n <= 10"
@@ -36,7 +42,9 @@ options:
     diagnostic: undefined_operator
     misconception: bool.chained_comparison
 answer: a
-spec_areas: [expressions.logical, expressions.relational, statements.if, statements.for, statements.print]
+spec_areas: [expressions.logical, expressions.relational, statements.if, statements.print]
 dart_notes: >-
-  A loop over 0..11 is used so that each wrong condition yields a distinct
-  count; with a single fixed `n` the options collapse to two outputs.
+  The condition is tested against three fixed values (0, 5, 10) instead of
+  in a loop, because loops come after logical operators in the DAG. Three
+  values are needed so that each wrong condition prints a distinct set of
+  lines; with a single value the options collapse to two outputs.

@@ -43,11 +43,16 @@ dart_notes: >-                      # optional: pseudocode -> Dart hazards
   complete program with that option substituted into the blank. The key is
   marked `// KEY`. Distractors that would not compile are omitted from the Dart
   file and flagged `compile_error: true` in YAML, with the analyzer diagnostic
-  named in `rationale`.
+  named in `rationale`. `____` may appear more than once in a template; every
+  occurrence receives the same option text (say so in the prompt). Use this when
+  one blank evaluated once cannot give four distinct outcomes.
 - Student-shaped code: explicit types are fine, `var` is fine, no clever idioms
   unless the item is _about_ that idiom. Keep programs under ~15 lines.
 - Every tracing/completion item id appears as a `group('<id>', ...)` in
   `test/items/<concept>_test.dart`; `test/inventory_test.dart` enforces this.
-- Answer-key positions must stay balanced (no letter > 40%). Write the item with
-  whatever order reads naturally, then run `dart run tool/balance_keys.dart` —
-  it swaps YAML blocks, `optionX` functions and test references consistently.
+- Answer-key positions must stay balanced: no letter > 40% (tested) and the
+  most- and least-used letters within 2 of each other (CI requires
+  `dart run tool/balance_keys.dart --dry-run` to plan 0 swaps). Write the item
+  with whatever order reads naturally, then run
+  `dart run tool/balance_keys.dart` — it swaps YAML blocks, `optionX` functions
+  and test references consistently.

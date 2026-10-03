@@ -1,0 +1,30 @@
+id: logical_operators_trace_4
+concept: logical_operators
+type: tracing
+dag_node: boolean_expressions
+prompt: |
+  What does this program print?
+code_file: logical_operators_trace_4.dart
+options:
+  - id: a
+    text: "true\nfalse\nfalse\ntrue"
+    rationale: "`==` tests equality and gives a `bool`; `'a'` and `'A'` are different strings, `5 != 5` is `false`, and `+` is evaluated before `==`, so `4 == 4` is `true`."
+  - id: b
+    text: "true\ntrue\nfalse\ntrue"
+    rationale: Assumes string comparison ignores case; `==` on strings is `true` only when every character is identical, and `'a'` is not `'A'`.
+    misconception: bool.string_eq_ignores_case
+  - id: c
+    text: "true\nfalse\ntrue\ntrue"
+    rationale: Reads `!=` as `==`; `!=` means "not equal", and 5 is equal to 5, so the result is `false`.
+    misconception: bool.ne_as_eq
+  - id: d
+    text: "The program does not compile, because `2 + 2 == 4` tries to add `2` to the `bool` value of `2 == 4`."
+    rationale: Believes `==` binds tighter than `+`; arithmetic operators have higher precedence than `==`, so the line means `(2 + 2) == 4`.
+    misconception: bool.eq_before_plus
+answer: a
+spec_areas: [expressions.equality, expressions.additive, expressions.booleans, expressions.strings, statements.print]
+dart_notes: >-
+  Dart's `==` on `String` compares contents (there is no separate `equals`
+  method to call, unlike Java), and it is case-sensitive. A single `=` in
+  these positions would not compile, so the `=`/`==` confusion cannot be made
+  a runnable distractor here.
