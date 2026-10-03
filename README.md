@@ -1,12 +1,30 @@
-Private, original Dart concept inventory shaped like FCS1/SCS1: ten CS1
-concepts × three question types (definitional, tracing, code completion),
-every runnable item backed by tests, a computed map onto the Dart language
-spec, and a proposed prerequisite DAG for teaching programming through Dart.
+An open, original concept inventory for learning to program *through* Dart:
+ten CS1 concepts × three question types (definitional, tracing, code
+completion), every runnable item backed by tests, a computed map onto the
+Dart language spec, and a proposed prerequisite graph for sequencing
+instruction.
 
-> **Do not publish.** FCS1 (Tew & Guzdial, 2011) and SCS1 (Parker, Guzdial
-> & Engleman, 2016) are secure instruments. No item text from either was
-> obtained or used; everything here is original. Keep this repo private so
-> the items stay useful as an assessment.
+## Provenance (clean-room statement)
+
+The ten-concept × three-question-type structure follows the published
+design of FCS1 (Tew & Guzdial, SIGCSE 2011) and SCS1 (Parker, Guzdial &
+Engleman, ICER 2016). Those are secure research instruments distributed under
+terms of use. **No item text, options, or ordering from FCS1 or SCS1 was
+obtained, viewed, or used** in creating this repository; only the concept
+list and question-type scheme described in the papers were consulted. Every
+item here is original.
+
+Contributors must keep it that way: do not contribute material derived from
+FCS1, SCS1, or any other access-restricted assessment.
+
+## What this is (and is not)
+
+- **Is:** a formative, openly inspectable item bank for teaching, self-check,
+  drills, and curriculum sequencing, with tests that pin every item's
+  behaviour to the current Dart SDK.
+- **Is not:** a validated psychometric instrument. Public items cannot be a
+  secure summative measure, and no validity study has been done. Do not cite
+  scores from it as comparable to FCS1/SCS1 results.
 
 ## Layout
 
