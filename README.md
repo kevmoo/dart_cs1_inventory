@@ -29,14 +29,11 @@ FCS1, SCS1, or any other access-restricted assessment.
 ## License and contributing
 
 BSD-3-Clause (see [LICENSE](LICENSE)) for code, data and item text alike.
-Source files under `lib/`, `tool/` and `test/` carry the standard header;
-the student-facing programs under `items/` deliberately do not, so that what
-the learner reads is exactly the program under question.
+Source files carry no per-file headers, so what the learner reads in
+`items/` is exactly the program under question.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the CLA, the clean-room rule, and
-the pre-PR checklist.
-
-This is not an officially supported Google product.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the clean-room rule and the pre-PR
+checklist.
 
 ## Layout
 

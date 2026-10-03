@@ -1,7 +1,3 @@
-// Copyright 2026 Google LLC
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 // Rebalances answer-key positions across items so no letter dominates.
 //
 //   dart run tool/balance_keys.dart            # rewrite files
