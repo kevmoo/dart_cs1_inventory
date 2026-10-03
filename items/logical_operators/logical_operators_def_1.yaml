@@ -1,0 +1,25 @@
+id: logical_operators_def_1
+concept: logical_operators
+type: definitional
+prompt: |
+  A program checks for the weekend with `if (day == 'Sat' || day == 'Sun')`.
+  A student shortens it to `if (day == 'Sat' || 'Sun')`. What happens?
+options:
+  - id: a
+    text: It behaves the same; `||` lets you list several values to compare against.
+    rationale: Treats `||` like the English word "or"; each side of `||` must be a complete `bool` expression.
+  - id: b
+    text: It does not compile; both operands of `||` must be `bool`, and `'Sun'` is a `String`.
+    rationale: Dart reports `non_bool_operand`; the comparison `day == 'Sun'` must be written out in full.
+  - id: c
+    text: It is always true, because a non-empty string counts as true.
+    rationale: Imports "truthiness" from Python or JavaScript; Dart has no implicit conversion to `bool`.
+  - id: d
+    text: It is true only on Saturday, because the `'Sun'` part is ignored.
+    rationale: Assumes the compiler silently drops an operand it cannot use; it rejects the program instead.
+answer: b
+spec_areas: [expressions.logical, expressions.equality, expressions.booleans, expressions.strings]
+dart_notes: >-
+  Dart is strict: conditions and `&&`/`||` operands must be exactly `bool`.
+  Students coming from Python/JS truthiness or from pseudocode "x == a or b"
+  both hit this.

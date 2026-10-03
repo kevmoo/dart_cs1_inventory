@@ -1,0 +1,21 @@
+id: recursion_trace_1
+concept: recursion
+type: tracing
+prompt: |
+  What does this program print?
+code_file: recursion_trace_1.dart
+options:
+  - id: a
+    text: "24"
+    rationale: "`product(4)` is 4 * product(3) = 4 * 3 * 2 * product(1) = 4 * 3 * 2 * 1 = 24."
+  - id: b
+    text: "1"
+    rationale: Takes the base case's `return 1` as the final answer, forgetting each waiting call multiplies by its own `n`.
+  - id: c
+    text: "10"
+    rationale: Adds the arguments (4 + 3 + 2 + 1) instead of multiplying them.
+  - id: d
+    text: "4"
+    rationale: Performs only one level, treating `product(n - 1)` as if it immediately returned 1.
+answer: a
+spec_areas: [expressions.function_invocation, statements.return, statements.if, expressions.multiplicative, expressions.equality, statements.print]

@@ -1,0 +1,17 @@
+name: dart_cs1_inventory
+description: >-
+  Private, original Dart concept inventory modeled on the FCS1/SCS1 concept
+  list, with per-item tests, Dart spec coverage mapping, and a prerequisite DAG.
+version: 0.1.0-wip
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  path: ^1.9.0
+  yaml: ^3.1.4
+
+dev_dependencies:
+  dart_flutter_team_lints: ^3.2.0
+  test: ^1.25.0

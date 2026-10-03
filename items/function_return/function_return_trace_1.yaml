@@ -1,0 +1,21 @@
+id: function_return_trace_1
+concept: function_return
+type: tracing
+prompt: |
+  What does this program print?
+code_file: function_return_trace_1.dart
+options:
+  - id: a
+    text: "12"
+    rationale: "`return n` exits the function on the first element greater than 10, so later iterations and the final `return -1` never run."
+  - id: b
+    text: "20"
+    rationale: Assumes the loop keeps going after `return`, so the last matching element wins.
+  - id: c
+    text: "-1"
+    rationale: Assumes the final `return -1` always runs and overrides the earlier return.
+  - id: d
+    text: "12\n20"
+    rationale: Treats `return` like `print`, emitting a line for every element that passes the test.
+answer: a
+spec_areas: [statements.return, statements.for_in, statements.if, expressions.function_invocation, expressions.relational, statements.print]

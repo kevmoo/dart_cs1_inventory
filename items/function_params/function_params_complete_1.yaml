@@ -1,0 +1,40 @@
+id: function_params_complete_1
+concept: function_params
+type: completion
+prompt: |
+  Fill in the blank so the program prints `2 3 4`.
+code_file: function_params_complete_1.dart
+template: |
+  void between(int low, int high) {
+    var line = '';
+    for (var i = low; i <= high; i++) {
+      line += '$i ';
+    }
+    print(line.trim());
+  }
+
+  void main() {
+    var high = 4;
+    var low = 2;
+    ____;
+  }
+options:
+  - id: a
+    text: "between(high, low)"
+    rationale: Passes the arguments in the order `main` declared them; `low` becomes 4 and `high` 2, so the loop never runs and an empty line prints.
+  - id: b
+    text: "between(low, high)"
+    rationale: Arguments bind by position, so `low` must come first regardless of where `main` declared it.
+  - id: c
+    text: "between(low: low, high: high)"
+    rationale: Uses named arguments for positional parameters; the analyzer reports `undefined_named_parameter`.
+    compile_error: true
+  - id: d
+    text: "between(low, high + 1)"
+    rationale: Assumes `i <= high` stops before `high` (as `<` would) and compensates by adding 1; prints `2 3 4 5`.
+answer: b
+spec_areas: [expressions.function_invocation, functions.required_formals, statements.for, statements.print]
+dart_notes: >-
+  Named parameters exist in Dart but are out of CS1 scope here; option c is
+  included because students who have seen `print(x, sep: ' ')`-style calls in
+  other languages try to label arguments.

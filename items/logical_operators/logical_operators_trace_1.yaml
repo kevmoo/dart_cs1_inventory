@@ -1,0 +1,25 @@
+id: logical_operators_trace_1
+concept: logical_operators
+type: tracing
+prompt: |
+  What does this program print?
+code_file: logical_operators_trace_1.dart
+options:
+  - id: a
+    text: "false\ntrue\ntrue"
+    rationale: "`!` binds only to `sunny` in line 1 (false && false); line 2 negates the whole `&&` (true); line 3 is false || true (true)."
+  - id: b
+    text: "true\ntrue\ntrue"
+    rationale: Reads `!sunny && warm` as `!(sunny && warm)`; `!` has higher precedence than `&&` and applies only to `sunny`.
+  - id: c
+    text: "false\nfalse\ntrue"
+    rationale: Distributes `!` as `!sunny && !warm` for line 2; De Morgan says `!(a && b)` equals `!a || !b`, not `!a && !b`.
+  - id: d
+    text: "false\ntrue\nfalse"
+    rationale: Reads `!sunny || !warm` as `!(sunny || warm)`; each `!` negates only its own operand, so line 3 is false || true.
+answer: a
+spec_areas: [expressions.logical, expressions.unary, expressions.relational, expressions.booleans, statements.print]
+dart_notes: >-
+  `sunny`/`warm` are derived from an `int` instead of written as `true`/`false`
+  literals because the analyzer's flow analysis flags `!sunny && warm` as dead
+  code when the operands are literal booleans.

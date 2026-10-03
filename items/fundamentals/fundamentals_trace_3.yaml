@@ -1,0 +1,25 @@
+id: fundamentals_trace_3
+concept: fundamentals
+type: tracing
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_3.dart
+options:
+  - id: a
+    text: "2 1"
+    rationale: Believes the two assignments swap the values; the first assignment overwrites `a`, so the old 1 is lost before `b = a` runs.
+  - id: b
+    text: "1 2"
+    rationale: Reads the two statements as equations that cancel out; each assignment actually changes a stored value.
+  - id: c
+    text: "2 2"
+    rationale: "`a = b` makes `a` hold 2; then `b = a` copies that 2 back into `b`, so both are 2."
+  - id: d
+    text: "1 1"
+    rationale: Reads assignment right-to-left (`a = b` as "b gets a"); the value on the right is copied into the variable on the left.
+answer: c
+spec_areas: [expressions.assignment, statements.expression, expressions.strings, statements.print]
+dart_notes: >-
+  Assignment is a copy of the current value; a real swap needs a temporary
+  variable. (Dart 3 records allow `(a, b) = (b, a)`, but that is out of CS1
+  scope and deliberately not shown.)

@@ -1,0 +1,21 @@
+id: recursion_trace_2
+concept: recursion
+type: tracing
+prompt: |
+  What does this program print?
+code_file: recursion_trace_2.dart
+options:
+  - id: a
+    text: "down 2\ndown 1\nup 1\nup 2"
+    rationale: Lines before the recursive call print on the way in (2, then 1); lines after it print only once each inner call has returned, so in reverse order.
+  - id: b
+    text: "down 2\nup 2\ndown 1\nup 1"
+    rationale: Assumes the recursive call is postponed until the current function body finishes.
+  - id: c
+    text: "down 2\ndown 1"
+    rationale: Assumes the base case's `return` ends the whole program, so nothing after any recursive call runs.
+  - id: d
+    text: "down 2\ndown 1\nup 2\nup 1"
+    rationale: Knows the `up` lines come after, but prints them in call order rather than in return order.
+answer: a
+spec_areas: [expressions.function_invocation, statements.return, statements.if, statements.print]

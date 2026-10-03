@@ -1,0 +1,16 @@
+# Item programs are deliberately student-shaped: `this.x` where it is not
+# needed, dead locals and bare expression statements *are* the misconceptions
+# being tested. Relax the lints that would "fix" them away.
+include: ../analysis_options.yaml
+
+analyzer:
+  errors:
+    dead_code: ignore
+    unused_local_variable: ignore
+    unnecessary_statements: ignore
+
+linter:
+  rules:
+    use_primary_constructors: false
+    unnecessary_this: false
+    unnecessary_statements: false

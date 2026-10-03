@@ -1,0 +1,36 @@
+id: arrays_trace_1
+concept: arrays
+type: tracing
+prompt: |
+  What does this program print?
+code_file: arrays_trace_1.dart
+options:
+  - id: a
+    text: |-
+      20
+      4
+      40
+    rationale: Index 1 is the second element, `length` counts the elements, and `a[a.length - 1]` is the last one.
+  - id: b
+    text: |-
+      10
+      4
+      30
+    rationale: Uses one-based indexing, treating `a[1]` as the first element and `a[3]` as the third.
+  - id: c
+    text: |-
+      20
+      3
+      30
+    rationale: Believes `length` is the last index (3) rather than the number of elements.
+  - id: d
+    text: |-
+      20
+      4
+      30
+    rationale: Believes `a[a.length - 1]` is the second-to-last element, as if the last index were `length`.
+answer: a
+spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, expressions.additive, statements.print]
+dart_notes: >-
+  Pseudocode often writes `length(a)` or `a.size`; Dart uses the `length`
+  property with no parentheses. Lists are zero-based like most pseudocode.

@@ -1,0 +1,512 @@
+# Dart language spec areas used for coverage mapping.
+#
+# `reference` is either a `Section › Subsection` title path from
+# dart-lang/language `specification/dartLangSpec.tex` (titles are stable across
+# editions; section *numbers* are not, so they are deliberately omitted), or a
+# path under dart-lang/language `accepted/<version>/` for features that live in
+# a feature specification rather than the main spec text.
+#
+# `cs1_scope: true` marks areas the FCS1/SCS1 concept list would exercise in any
+# language. Everything else is a candidate gap for a Dart-specific inventory.
+# Actual coverage is computed from `items/**/*.yaml` by `tool/report.dart`.
+areas:
+  # ---------------------------------------------------------------- CS1 scope
+  - id: variables
+    title: Variables (declaration, initialization, `var`/`final`)
+    reference: Variables
+    group: Fundamentals
+    cs1_scope: true
+  - id: statements.local_variable
+    title: Local variable declaration
+    reference: Statements › Local Variable Declaration
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.numbers
+    title: Numeric literals, `int` vs `double`
+    reference: Expressions › Numbers
+    group: Fundamentals
+    cs1_scope: true
+    note: Pseudocode has one "number" type; Dart's `int`/`double` split and `~/` vs `/` is a translation hazard.
+  - id: expressions.strings
+    title: String literals and interpolation
+    reference: Expressions › Strings
+    group: Fundamentals
+    cs1_scope: true
+    note: FCS1 uses string output in prompts only; Dart items need `'$x'` interpolation to print.
+  - id: expressions.booleans
+    title: Boolean literals
+    reference: Expressions › Booleans
+    group: Logical operators
+    cs1_scope: true
+  - id: expressions.assignment
+    title: Assignment and compound assignment (`=`, `+=`)
+    reference: Expressions › Assignment
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.additive
+    title: Additive expressions (`+`, `-`)
+    reference: Expressions › Additive Expressions
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.multiplicative
+    title: Multiplicative expressions (`*`, `/`, `~/`, `%`)
+    reference: Expressions › Multiplicative Expressions
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.unary
+    title: Unary expressions (`-x`, `!b`, prefix `++`)
+    reference: Expressions › Unary Expressions
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.postfix
+    title: Postfix expressions (`i++`, `i--`)
+    reference: Expressions › Postfix Expressions
+    group: Fundamentals
+    cs1_scope: true
+  - id: expressions.relational
+    title: Relational expressions (`<`, `<=`, `>`, `>=`)
+    reference: Expressions › Relational Expressions
+    group: Logical operators
+    cs1_scope: true
+  - id: expressions.equality
+    title: Equality (`==`, `!=`)
+    reference: Expressions › Equality
+    group: Logical operators
+    cs1_scope: true
+  - id: expressions.logical
+    title: Logical boolean expressions (`&&`, `||`, short-circuit)
+    reference: Expressions › Logical Boolean Expressions
+    group: Logical operators
+    cs1_scope: true
+  - id: expressions.function_invocation
+    title: Function invocation and binding actuals to formals
+    reference: Expressions › Function Invocation › Binding Actuals to Formals
+    group: Functions
+    cs1_scope: true
+  - id: expressions.identifier_reference
+    title: Identifier reference and lexical scope
+    reference: Expressions › Identifier Reference
+    group: Functions
+    cs1_scope: true
+    note: Shadowing (a parameter named like a global) is the spec hook for the classic FCS1 scope question.
+  - id: expressions.lists
+    title: List literals
+    reference: Expressions › Collection Literals › Lists
+    group: Arrays
+    cs1_scope: true
+  - id: expressions.index
+    title: Index access and index assignment (`a[i]`, `a[i] = v`)
+    reference: Expressions › Assignable Expressions
+    group: Arrays
+    cs1_scope: true
+  - id: expressions.object_identity
+    title: Object identity and aliasing
+    reference: Expressions › Object Identity
+    group: Arrays
+    cs1_scope: true
+    note: Reached through aliasing questions (two variables, one `List` or one object).
+  - id: expressions.instance_creation
+    title: Instance creation (`Point(1, 2)`)
+    reference: Expressions › Instance Creation
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: expressions.property_extraction
+    title: Property access (`p.x`)
+    reference: Expressions › Property Extraction
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: expressions.method_invocation
+    title: Method invocation (`p.move()`)
+    reference: Expressions › Method Invocation
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: expressions.this
+    title: "`this`"
+    reference: Expressions › This
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: functions.declarations
+    title: Function declarations
+    reference: Functions › Function Declarations
+    group: Functions
+    cs1_scope: true
+  - id: functions.required_formals
+    title: Required positional parameters
+    reference: Functions › Formal Parameters › Required Formals
+    group: Functions
+    cs1_scope: true
+  - id: classes.instance_variables
+    title: Instance variables (fields)
+    reference: Classes › Instance Variables
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: classes.instance_methods
+    title: Instance methods
+    reference: Classes › Instance Methods
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: classes.constructors
+    title: Generative constructors and initializing formals (`this.x`)
+    reference: Classes › Constructors
+    group: Object-oriented basics
+    cs1_scope: true
+  - id: statements.blocks
+    title: Blocks and block scope
+    reference: Statements › Blocks
+    group: Selection
+    cs1_scope: true
+  - id: statements.expression
+    title: Expression statements
+    reference: Statements › Expression Statements
+    group: Fundamentals
+    cs1_scope: true
+  - id: statements.if
+    title: "`if` / `else`"
+    reference: Statements › If
+    group: Selection
+    cs1_scope: true
+  - id: statements.for
+    title: C-style `for` loop
+    reference: Statements › For
+    group: Definite loops
+    cs1_scope: true
+  - id: statements.for_in
+    title: "`for-in` loop"
+    reference: Statements › For
+    group: Definite loops
+    cs1_scope: true
+    note: Same spec section as C-style `for`; tracked separately because it is the idiomatic Dart form.
+  - id: statements.while
+    title: "`while`"
+    reference: Statements › While
+    group: Indefinite loops
+    cs1_scope: true
+  - id: statements.do
+    title: "`do-while`"
+    reference: Statements › Do
+    group: Indefinite loops
+    cs1_scope: true
+  - id: statements.return
+    title: "`return`"
+    reference: Statements › Return
+    group: Functions
+    cs1_scope: true
+  - id: statements.break
+    title: "`break`"
+    reference: Statements › Break
+    group: Indefinite loops
+    cs1_scope: true
+  - id: statements.continue
+    title: "`continue`"
+    reference: Statements › Continue
+    group: Definite loops
+    cs1_scope: true
+  - id: statements.print
+    title: "`print` as the observable output channel"
+    reference: Libraries and Scripts › Scripts
+    group: Fundamentals
+    cs1_scope: true
+    note: Not a spec construct (it is `dart:core`), listed so every tracing item has an output anchor.
+
+  # -------------------------------------------------- Gaps: null safety
+  - id: types.nullable
+    title: Nullable types (`int?`) and sound null safety
+    reference: accepted/2.12/nnbd/feature-specification.md
+    group: Null safety
+    cs1_scope: false
+  - id: expressions.if_null
+    title: If-null (`??`, `??=`)
+    reference: Expressions › If-null Expressions
+    group: Null safety
+    cs1_scope: false
+  - id: expressions.null_aware_access
+    title: Null-aware access (`?.`, `?[]`, `...?`)
+    reference: Expressions › Property Extraction
+    group: Null safety
+    cs1_scope: false
+  - id: expressions.null_check
+    title: Null check (`x!`)
+    reference: Expressions › Postfix Expressions
+    group: Null safety
+    cs1_scope: false
+  - id: variables.late
+    title: "`late` variables and definite assignment"
+    reference: accepted/2.12/nnbd/feature-specification.md
+    group: Null safety
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: types & generics
+  - id: types.static
+    title: Static types, type annotations and inference
+    reference: Types › Static Types
+    group: Types & generics
+    cs1_scope: false
+    note: Pseudocode is untyped; every Dart item silently depends on inference.
+  - id: generics
+    title: Generics and parameterized types (`List<int>`)
+    reference: Generics
+    group: Types & generics
+    cs1_scope: false
+  - id: expressions.type_test
+    title: Type test (`is`, `is!`)
+    reference: Expressions › Type Test
+    group: Types & generics
+    cs1_scope: false
+  - id: expressions.type_cast
+    title: Type cast (`as`)
+    reference: Expressions › Type Cast
+    group: Types & generics
+    cs1_scope: false
+  - id: types.dynamic
+    title: "`dynamic` and `Object`"
+    reference: Types › Type dynamic
+    group: Types & generics
+    cs1_scope: false
+  - id: types.aliases
+    title: Type aliases (`typedef`)
+    reference: Types › Type Aliases
+    group: Types & generics
+    cs1_scope: false
+  - id: types.function_types
+    title: Function types
+    reference: Types › Function Types
+    group: Types & generics
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: collections
+  - id: expressions.sets
+    title: Set literals
+    reference: Expressions › Collection Literals › Sets
+    group: Collections
+    cs1_scope: false
+  - id: expressions.maps
+    title: Map literals
+    reference: Expressions › Collection Literals › Maps
+    group: Collections
+    cs1_scope: false
+  - id: expressions.collection_elements
+    title: Spread, `if` and `for` collection elements
+    reference: Expressions › Collection Literals
+    group: Collections
+    cs1_scope: false
+  - id: expressions.null_aware_elements
+    title: Null-aware collection elements (`?x`)
+    reference: accepted/3.8/null-aware-elements/feature-specification.md
+    group: Collections
+    cs1_scope: false
+  - id: collections.list_growth
+    title: Growable lists (`add`, `remove`, `length` changes)
+    reference: Expressions › Collection Literals › Lists
+    group: Collections
+    cs1_scope: false
+    note: "`dart:core` behaviour, not spec text; listed because pseudocode arrays are fixed-size."
+  - id: collections.iterable_methods
+    title: Iterable methods (`map`, `where`, `fold`, `forEach`)
+    reference: Expressions › Method Invocation
+    group: Collections
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: functions beyond CS1
+  - id: functions.optional_formals
+    title: Optional positional and named parameters, defaults, `required`
+    reference: Functions › Formal Parameters › Optional Formals
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: functions.named_arguments_anywhere
+    title: Named arguments anywhere
+    reference: accepted/2.17/named-arguments-anywhere/feature-specification.md
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: expressions.function_expressions
+    title: Function expressions (closures, `=>`)
+    reference: Expressions › Function Expressions
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: expressions.closurization
+    title: Tear-offs
+    reference: Expressions › Function Closurization
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: statements.local_function
+    title: Local function declarations
+    reference: Statements › Local Function Declaration
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: expressions.generic_function_instantiation
+    title: Generic functions and instantiation
+    reference: Expressions › Generic Function Instantiation
+    group: Functions beyond CS1
+    cs1_scope: false
+  - id: functions.private_named_parameters
+    title: Private named parameters
+    reference: accepted/3.12/private-named-parameters/feature-specification.md
+    group: Functions beyond CS1
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: classes beyond CS1
+  - id: classes.superclasses
+    title: Inheritance (`extends`, `super`, overriding)
+    reference: Classes › Superclasses
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: interfaces
+    title: Interfaces and `implements`
+    reference: Interfaces
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.abstract_members
+    title: Abstract classes and members
+    reference: Classes › Abstract Instance Members
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.getters_setters
+    title: Getters and setters
+    reference: Classes › Getters
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.static_members
+    title: Static members
+    reference: Classes › Static Methods
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.operators
+    title: Operator overloading and `==`/`hashCode`
+    reference: Classes › Instance Methods
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: expressions.constants
+    title: "`const` and constant constructors"
+    reference: Expressions › Constants
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: mixins
+    title: Mixins
+    reference: Mixins
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: enums
+    title: Enums and enhanced enums
+    reference: Enums
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: extensions
+    title: Extension methods
+    reference: Extensions
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: extension_types
+    title: Extension types
+    reference: accepted/3.3/extension-types/feature-specification.md
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: class_modifiers
+    title: Class modifiers (`sealed`, `final`, `base`, `interface`)
+    reference: accepted/3.0/class-modifiers/feature-specification.md
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.primary_constructors
+    title: Primary constructors
+    reference: accepted/3.13/primary-constructors/feature-specification.md
+    group: Classes beyond CS1
+    cs1_scope: false
+  - id: classes.super_parameters
+    title: Super parameters (`super.x`)
+    reference: accepted/2.17/super-parameters/feature-specification.md
+    group: Classes beyond CS1
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: control flow beyond CS1
+  - id: statements.switch
+    title: "`switch` statement"
+    reference: Statements › Switch
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: patterns
+    title: Patterns, `switch` expressions, `if-case`, destructuring
+    reference: accepted/3.0/patterns/feature-specification.md
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: records
+    title: Records
+    reference: accepted/3.0/records/feature-specification.md
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: expressions.conditional
+    title: "Conditional expression (`c ? a : b`)"
+    reference: Expressions › Conditional
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: statements.labels
+    title: Labels (labelled `break`/`continue`)
+    reference: Statements › Labels
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: statements.assert
+    title: "`assert`"
+    reference: Statements › Assert
+    group: Control flow beyond CS1
+    cs1_scope: false
+  - id: exceptions
+    title: Exceptions (`throw`, `try`/`catch`/`finally`, `rethrow`)
+    reference: Statements › Try
+    group: Control flow beyond CS1
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: async
+  - id: expressions.await
+    title: "`async` / `await` and `Future`"
+    reference: Expressions › Await Expressions
+    group: Asynchrony
+    cs1_scope: false
+  - id: types.future_or
+    title: "`FutureOr`"
+    reference: Types › Type FutureOr
+    group: Asynchrony
+    cs1_scope: false
+  - id: statements.yield
+    title: Generators (`sync*`, `async*`, `yield`)
+    reference: Statements › Yield
+    group: Asynchrony
+    cs1_scope: false
+  - id: expressions.isolates
+    title: Isolates
+    reference: Expressions › Spawning an Isolate
+    group: Asynchrony
+    cs1_scope: false
+
+  # -------------------------------------------------- Gaps: libraries & lexical
+  - id: libraries.imports
+    title: Imports, `show`/`hide`, prefixes
+    reference: Libraries and Scripts › Imports
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: libraries.privacy
+    title: Library privacy (`_name`)
+    reference: Libraries and Scripts
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: libraries.parts
+    title: Parts and exports
+    reference: Libraries and Scripts › Parts
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: lexical.digit_separators
+    title: Digit separators (`1_000_000`)
+    reference: accepted/3.6/digit-separators/feature-specification.md
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: lexical.wildcards
+    title: Wildcard variables (`_`)
+    reference: accepted/3.7/wildcard-variables/feature-specification.md
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: lexical.dot_shorthands
+    title: Dot shorthands (`.red`)
+    reference: accepted/3.10/dot-shorthands/feature-specification.md
+    group: Libraries & lexical
+    cs1_scope: false
+  - id: metadata
+    title: Metadata annotations (`@override`)
+    reference: Metadata
+    group: Libraries & lexical
+    cs1_scope: false

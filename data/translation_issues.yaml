@@ -1,0 +1,121 @@
+# Concepts / phrasings in FCS1-style pseudocode that do not map cleanly onto
+# Dart. Rendered into coverage.md by tool/report.dart. `concepts` lists the
+# FCS1 concept ids affected; `decision` records how this inventory handles it.
+issues:
+  - id: integer_division
+    title: Integer division and numeric types
+    concepts: [fundamentals]
+    problem: >-
+      Pseudocode has one "number". Dart has `int` and `double`; `7 / 2` is
+      `3.5` (a `double`), `7 ~/ 2` is `3`, and `7 / 7` prints `1.0`, not `1`.
+      A tracing item written for "integer division" in Java/Python semantics
+      has three possible keys in Dart.
+    decision: >-
+      Items use `~/` explicitly when integer division is intended and include a
+      `1.0`-style distractor when `/` appears, so the `double` result is the
+      thing being tested rather than an accident.
+
+  - id: array_vs_list
+    title: Fixed-size arrays vs growable `List`
+    concepts: [arrays]
+    problem: >-
+      FCS1 arrays have a fixed length set at creation and are indexed from 0.
+      Dart's `List<T>` is growable (`add`, `removeLast`), generic, and has no
+      separate array literal; `List.filled(n, 0)` is the closest analogue and
+      is unidiomatic in beginner code. Out-of-range access throws `RangeError`
+      instead of being undefined or returning a default.
+    decision: >-
+      Items use list literals (`[2, 4, 6]`) and never resize inside a loop;
+      `length` is treated as fixed within an item. Growth is listed as a gap.
+
+  - id: pass_by_sharing
+    title: Pass-by-reference questions
+    concepts: [function_params, arrays, oop]
+    problem: >-
+      Classic FCS1 parameter items ask whether reassigning a parameter changes
+      the caller's variable. Dart is pass-by-sharing for every type: reassigning
+      the parameter never affects the caller, but mutating a `List` or object
+      *through* the parameter does. There is no way to express "pass by
+      reference" for an `int` at all, so one pseudocode item becomes two Dart
+      items (reassign vs mutate).
+    decision: >-
+      Split into separate items; the pair is tagged `expressions.object_identity`.
+
+  - id: string_output
+    title: Output formatting
+    concepts: [fundamentals, loops_definite, recursion]
+    problem: >-
+      Pseudocode "print x, y" with implicit spacing has no single Dart form.
+      `print` always appends a newline, so items that print inside a loop
+      produce multi-line output, while a pseudocode author may have assumed a
+      single line.
+    decision: >-
+      Expected outputs are multi-line strings joined with `\n`; items that need
+      one line build it with interpolation and `trim()`.
+
+  - id: boolean_strictness
+    title: Truthiness
+    concepts: [logical_operators, selection, loops_indefinite]
+    problem: >-
+      Dart conditions must be `bool`; `if (count)` or `while (n)` is a compile
+      error, not a truthiness test. Items that probe "is a non-zero number
+      true?" are unaskable.
+    decision: >-
+      Dropped. A compile-error distractor can be used in completion items to
+      probe the misconception instead.
+
+  - id: typed_declarations
+    title: Untyped pseudocode vs static typing
+    concepts: [fundamentals, function_params, function_return]
+    problem: >-
+      Every Dart item silently requires reading `var`, `int`, `String`,
+      `void`, `List<int>` and type inference. A function "that returns
+      nothing" is `void` and using its call as a value is a compile error
+      (`use_of_void_result`), which changes a tracing question into a
+      compile-time question.
+    decision: >-
+      Items use `var` for locals and explicit types on parameters and return
+      types; the `void`-as-value case is a compile-error distractor.
+
+  - id: string_concat_vs_interpolation
+    title: String building
+    concepts: [fundamentals, loops_definite]
+    problem: >-
+      Pseudocode concatenates numbers to strings freely. In Dart `'a' + 1` is a
+      compile error; `'$a$b'` or `'a' + 1.toString()` is required.
+    decision: >-
+      Items use interpolation only. Concatenation of two strings with `+` is
+      allowed where it reads naturally.
+
+  - id: for_in_vs_index
+    title: Iteration style
+    concepts: [loops_definite, arrays]
+    problem: >-
+      FCS1 definite loops are index-based. Idiomatic Dart iterates with
+      `for (var x in list)`, which has no index. Both styles are needed: the
+      index form for the FCS1 concept, the `for-in` form for the language.
+    decision: >-
+      Both appear; `for-in` is tagged `statements.for_in`.
+
+  - id: no_main_in_pseudocode
+    title: Program structure
+    concepts: [fundamentals, function_params, oop]
+    problem: >-
+      Pseudocode snippets have no entry point. Every Dart item needs
+      `void main() { ... }`, and top-level functions/classes sit outside it,
+      so even the simplest item shows two nesting levels.
+    decision: >-
+      Accepted; `main` is treated as boilerplate and `statements.print` is the
+      coverage anchor.
+
+  - id: oop_basics_scope
+    title: Object-oriented basics without inheritance
+    concepts: [oop]
+    problem: >-
+      FCS1 "OOP basics" is class/instance/field/method only. Dart beginners
+      immediately meet constructors with `this.x`, named constructors,
+      getters, and `toString`. Printing an object without `toString` yields
+      `Instance of 'Point'`, which is a plausible but unteachable output.
+    decision: >-
+      Items print fields, never objects. Initializing formals (`this.x`) are
+      used because they are the only idiomatic constructor form.

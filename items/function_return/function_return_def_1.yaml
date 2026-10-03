@@ -1,0 +1,20 @@
+id: function_return_def_1
+concept: function_return
+type: definitional
+prompt: |
+  Inside a function, what happens when a `return 7;` statement runs?
+options:
+  - id: a
+    text: The number 7 is printed, and the function keeps running to its last line.
+    rationale: Confuses `return` with `print`; returning produces no output by itself.
+  - id: b
+    text: The function stops immediately, and the call expression that invoked it takes the value 7.
+    rationale: "`return` ends the function at once and hands its value back to wherever the call was written."
+  - id: c
+    text: The value 7 is remembered, but the function finishes its remaining statements before giving it back.
+    rationale: Assumes `return` only marks the result; in fact no statement after an executed `return` runs.
+  - id: d
+    text: Nothing, unless `return 7;` is the last line of the function.
+    rationale: Assumes `return` is just an end-of-function marker; it works, and exits, from anywhere, including inside loops.
+answer: b
+spec_areas: [statements.return, expressions.function_invocation, functions.declarations]

@@ -1,0 +1,191 @@
+# Proposed prerequisite graph (knowledge-space style). A node is "unlocked"
+# when all of its `prerequisites` are demonstrated. Nodes are finer than the ten
+# FCS1 concepts because the concepts themselves are not atomic (e.g. "arrays"
+# needs indexing before iteration, and iteration needs loops).
+#
+# `concept` links a node back to data/concepts.yaml; nodes without a concept
+# are scaffolding FCS1 does not probe directly. Edges are proposals, not
+# measured data: see dag.md for the open questions.
+nodes:
+  - id: values_and_types
+    title: Values and literal types
+    concept: fundamentals
+    prerequisites: []
+    rationale: >-
+      `3`, `3.5`, `'hi'`, `true` are different kinds of values. Everything else
+      manipulates values, so this is the root.
+
+  - id: arithmetic_expressions
+    title: Arithmetic expressions and precedence
+    concept: fundamentals
+    prerequisites: [values_and_types]
+    rationale: >-
+      `+ - * / ~/ %` and precedence. Needs the int/double distinction to make
+      sense of `7 / 2` vs `7 ~/ 2`.
+
+  - id: variables_assignment
+    title: Variables and assignment
+    concept: fundamentals
+    prerequisites: [values_and_types]
+    rationale: >-
+      A name holds a value; `=` replaces it. Must precede any expression that
+      reads a variable.
+
+  - id: output_and_strings
+    title: "`print` and string interpolation"
+    concept: fundamentals
+    prerequisites: [variables_assignment]
+    rationale: >-
+      Every tracing item is observed through `print`; interpolation `'$x'` is
+      the Dart-specific syntax a student must read fluently before tracing.
+
+  - id: sequencing
+    title: Sequencing and state over time
+    concept: fundamentals
+    prerequisites: [variables_assignment, arithmetic_expressions]
+    rationale: >-
+      Statements run top to bottom and a variable's value is whatever the most
+      recent assignment left (the `a = b; b = a;` non-swap). This is the core
+      skill behind all tracing.
+
+  - id: boolean_expressions
+    title: Comparisons produce booleans
+    concept: logical_operators
+    prerequisites: [arithmetic_expressions, values_and_types]
+    rationale: >-
+      `x > 3` is a value of type `bool`, not a command. Required before any
+      condition in `if` or a loop.
+
+  - id: logical_operators
+    title: "`&&`, `||`, `!` and short-circuit"
+    concept: logical_operators
+    prerequisites: [boolean_expressions]
+    rationale: >-
+      Combining booleans. Short-circuit evaluation additionally needs
+      sequencing (which operand is evaluated first).
+
+  - id: selection
+    title: "`if` / `else if` / `else` and blocks"
+    concept: selection
+    prerequisites: [boolean_expressions, sequencing]
+    rationale: >-
+      A chain runs one branch; independent `if`s may run several. Compound
+      conditions (`&&`) are a co-requisite via `logical_operators`, not a
+      prerequisite: simple `if (x > 3)` can be taught first.
+
+  - id: definite_loops
+    title: Counted `for` loops and accumulation
+    concept: loops_definite
+    prerequisites: [selection, arithmetic_expressions]
+    rationale: >-
+      Needs a condition (from selection) plus the accumulator pattern
+      (`total += i`). Off-by-one bounds are the main misconception probed.
+
+  - id: indefinite_loops
+    title: "`while` / `do-while` with data-dependent exit"
+    concept: loops_indefinite
+    prerequisites: [selection, sequencing]
+    rationale: >-
+      Repetition guarded by a condition. Does not require `for` first; both loop
+      forms hang off selection. `do-while` adds "body before test".
+
+  - id: nested_loops
+    title: Nested loops
+    concept: loops_definite
+    prerequisites: [definite_loops]
+    rationale: >-
+      Inner loop runs to completion per outer iteration; trip count is a
+      product or triangle number. Consistently harder than single loops.
+
+  - id: lists_indexing
+    title: Lists, zero-based indexing and `length`
+    concept: arrays
+    prerequisites: [variables_assignment, arithmetic_expressions]
+    rationale: >-
+      `a[0]`, `a[a.length - 1]`, `a[i] = v`. Index arithmetic is why
+      arithmetic_expressions is a prerequisite.
+
+  - id: lists_iteration
+    title: Iterating and updating lists in loops
+    concept: arrays
+    prerequisites: [lists_indexing, definite_loops]
+    rationale: >-
+      Combines the index variable of a loop with element access; `for-in` is
+      the Dart shortcut once the indexed form is understood.
+
+  - id: aliasing_references
+    title: Two names, one list
+    concept: arrays
+    prerequisites: [lists_indexing]
+    rationale: >-
+      `var b = a; b[0] = 9;` changes what `a[0]` prints. First encounter with
+      reference semantics; FCS1 probes it under arrays, Dart needs it again for
+      objects and for list parameters.
+
+  - id: function_calls_and_params
+    title: Calling functions; binding arguments to parameters
+    concept: function_params
+    prerequisites: [sequencing, variables_assignment]
+    rationale: >-
+      Arguments bind by position; parameters are fresh variables inside the
+      call. Needs sequencing to follow control into and out of the call.
+
+  - id: scope_and_shadowing
+    title: Scope, shadowing and parameter reassignment
+    concept: function_params
+    prerequisites: [function_calls_and_params, selection]
+    rationale: >-
+      A parameter named like a top-level variable is a different variable;
+      reassigning it does not change the caller. Blocks (from selection) give
+      the first notion of scope.
+
+  - id: return_values
+    title: "`return` and the call expression as a value"
+    concept: function_return
+    prerequisites: [function_calls_and_params, arithmetic_expressions]
+    rationale: >-
+      The call `f(2)` *is* the returned value and can sit inside an expression;
+      `return` exits immediately; `print` is not `return`.
+
+  - id: list_parameters
+    title: Lists passed to functions (pass-by-sharing)
+    concept: function_params
+    prerequisites: [aliasing_references, function_calls_and_params]
+    rationale: >-
+      Mutating a list parameter is visible to the caller, reassigning it is
+      not. Depends on both aliasing and parameter binding being secure.
+
+  - id: recursion
+    title: "Recursion: base case, recursive case, call order"
+    concept: recursion
+    prerequisites: [return_values, scope_and_shadowing]
+    rationale: >-
+      Each call has its own parameter (scope) and hands a value back
+      (return). Printing before vs after the recursive call is the ordering
+      probe. Loops are deliberately *not* a prerequisite.
+
+  - id: classes_and_objects
+    title: Classes, fields, constructors, instances
+    concept: oop
+    prerequisites: [function_calls_and_params, variables_assignment]
+    rationale: >-
+      A constructor call binds arguments to fields; each instance has its own
+      field values. The field / parameter / local discrimination drill lives
+      here.
+
+  - id: methods_and_this
+    title: Methods that read and mutate `this`
+    concept: oop
+    prerequisites: [classes_and_objects, return_values]
+    rationale: >-
+      A method is a function with an implicit receiver; `this.count += 1`
+      changes the object, a local `count` does not.
+
+  - id: object_aliasing
+    title: Two variables, one object
+    concept: oop
+    prerequisites: [classes_and_objects, aliasing_references]
+    rationale: >-
+      Same misconception as list aliasing, now with fields; FCS1 OOP items
+      lean on it. Placed after list aliasing because lists give a smaller
+      mental model.

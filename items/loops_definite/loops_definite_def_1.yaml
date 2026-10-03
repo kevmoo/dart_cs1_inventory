@@ -1,0 +1,21 @@
+id: loops_definite_def_1
+concept: loops_definite
+type: definitional
+prompt: |
+  In the loop header `for (var i = 0; i < 5; i++)`, when is the condition
+  `i < 5` checked?
+options:
+  - id: a
+    text: Once, before the loop starts.
+    rationale: Confuses the condition with the initializer, which runs once.
+  - id: b
+    text: Before every iteration, including the first; the loop stops when it is false.
+    rationale: The condition guards each pass; `i++` runs after the body, then the condition is re-checked.
+  - id: c
+    text: After every iteration, so the body always runs at least once.
+    rationale: Describes `do-while`; a `for` loop with a false condition runs zero times.
+  - id: d
+    text: Only when `i++` changes `i`.
+    rationale: The update and the condition are separate clauses; the condition is evaluated regardless of what the update did.
+answer: b
+spec_areas: [statements.for, expressions.relational, expressions.postfix]

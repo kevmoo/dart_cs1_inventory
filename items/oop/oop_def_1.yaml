@@ -1,0 +1,28 @@
+id: oop_def_1
+concept: oop
+type: definitional
+prompt: |
+  In the class below, what does the constructor `Counter(this.count);` do
+  when `Counter(5)` is evaluated?
+
+  ```dart
+  class Counter {
+    int count;
+    Counter(this.count);
+  }
+  ```
+options:
+  - id: a
+    text: It declares a new local variable named `count` that holds 5 until the constructor finishes.
+    rationale: Confuses the initializing formal `this.count` with an ordinary parameter; `this.` means the value is stored in the object's field.
+  - id: b
+    text: It creates a new `Counter` object and stores 5 in that object's `count` field.
+    rationale: "`this.count` in a parameter list copies the argument straight into the field of the object being built."
+  - id: c
+    text: It calls a method named `count` on the new object, passing 5.
+    rationale: Misreads `this.count` as a method call; `count` is a field and no parentheses follow it.
+  - id: d
+    text: It sets `count` to 5 for every `Counter` object, since all objects share one `count`.
+    rationale: Treats the field as shared class-level state; each object created by the constructor has its own `count`.
+answer: b
+spec_areas: [classes.constructors, classes.instance_variables, expressions.instance_creation, expressions.this]

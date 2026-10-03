@@ -1,0 +1,37 @@
+id: logical_operators_complete_1
+concept: logical_operators
+type: completion
+prompt: |
+  The loop tries each `n` from 0 to 11. Fill in the blank so `count` is the
+  number of values that are between 1 and 10 inclusive, i.e. the program
+  prints `10`.
+code_file: logical_operators_complete_1.dart
+template: |
+  void main() {
+    var count = 0;
+    for (var n = 0; n <= 11; n++) {
+      if (____) {
+        count++;
+      }
+    }
+    print(count);
+  }
+options:
+  - id: a
+    text: "n >= 1 && n <= 10"
+    rationale: Both bounds must hold at once, so `&&` with inclusive comparisons counts exactly 1..10.
+  - id: b
+    text: "n >= 1 || n <= 10"
+    rationale: Uses `||` for the English "between"; every integer satisfies at least one side, so all 12 values are counted.
+  - id: c
+    text: "n > 1 && n < 10"
+    rationale: Strict comparisons exclude the endpoints 1 and 10, counting only 8 values.
+  - id: d
+    text: "1 <= n <= 10"
+    rationale: Mathematical chained comparison; the analyzer rejects it (`equality_cannot_be_equality_operand`, `undefined_operator` for `<=` on `bool`).
+    compile_error: true
+answer: a
+spec_areas: [expressions.logical, expressions.relational, statements.if, statements.for, statements.print]
+dart_notes: >-
+  A loop over 0..11 is used so that each wrong condition yields a distinct
+  count; with a single fixed `n` the options collapse to two outputs.

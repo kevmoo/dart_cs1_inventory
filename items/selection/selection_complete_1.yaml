@@ -1,0 +1,42 @@
+id: selection_complete_1
+concept: selection
+type: completion
+prompt: |
+  For each `n` from 1 to 5 the program should add one letter: `B` when
+  `n` is above 3, otherwise `M` when `n` is above 1, otherwise `S`. Fill in
+  the blank so it prints `SMMBB`.
+code_file: selection_complete_1.dart
+template: |
+  void main() {
+    var line = '';
+    for (var n = 1; n <= 5; n++) {
+      if (n > 3) {
+        line += 'B';
+      } ____ {
+        line += 'M';
+      } else {
+        line += 'S';
+      }
+    }
+    print(line);
+  }
+options:
+  - id: a
+    text: "if (n > 1)"
+    rationale: Makes an independent `if`, so for n = 4 and 5 both `B` and `M` are added; prints `SMMBMBM`.
+  - id: b
+    text: "else if (n > 1)"
+    rationale: Chains the branches so exactly one letter is added per `n`.
+  - id: c
+    text: "else if (n >= 1)"
+    rationale: Chain is right but the bound is inclusive, so n = 1 gets `M` instead of `S`; prints `MMMBB`.
+  - id: d
+    text: "else (n > 1)"
+    rationale: "`else` cannot take a condition; the analyzer reports `expected_token` (Expected to find ';')."
+    compile_error: true
+answer: b
+spec_areas: [statements.if, statements.blocks, expressions.relational, statements.for, statements.print]
+dart_notes: >-
+  A short loop is used so the independent-`if` distractor is observably
+  different from the chain; with a single fixed value the two are
+  indistinguishable for most inputs.

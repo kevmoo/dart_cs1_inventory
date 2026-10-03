@@ -1,0 +1,24 @@
+id: loops_indefinite_trace_3
+concept: loops_indefinite
+type: tracing
+prompt: |
+  What does this program print?
+code_file: loops_indefinite_trace_3.dart
+options:
+  - id: a
+    text: "2 11"
+    rationale: 4 and 7 are added (i becomes 2); the sentinel -1 triggers `break` before `sum` or `i` change again.
+  - id: b
+    text: "3 10"
+    rationale: Believes `break` only takes effect at the end of the current pass, so -1 is added and `i` incremented first.
+  - id: c
+    text: "4 23"
+    rationale: Treats `break` like `continue`, skipping the sentinel and summing the remaining positives 9 and 3.
+  - id: d
+    text: "5 22"
+    rationale: Ignores `break` entirely and sums every element of the list.
+answer: a
+spec_areas: [statements.while, statements.break, statements.if, expressions.index, expressions.relational, expressions.booleans, statements.print]
+dart_notes: >-
+  `while (true)` plus `break` is the Dart spelling of the pseudocode
+  loop-and-a-half; the sentinel is a list element rather than user input.

@@ -1,0 +1,20 @@
+id: recursion_def_1
+concept: recursion
+type: definitional
+prompt: |
+  In a recursive function, what is the job of the *base case*?
+options:
+  - id: a
+    text: It is the first call made from `main`, which starts the recursion.
+    rationale: Confuses the base case with the initial call; the base case is usually reached last, deepest in the chain of calls.
+  - id: b
+    text: It is the branch that returns a result directly, without calling the function again, so the chain of calls can stop.
+    rationale: Without a branch that does not recurse, every call makes another call and the program never finishes.
+  - id: c
+    text: It is the line where the function calls itself with a smaller argument.
+    rationale: Describes the recursive case, not the base case.
+  - id: d
+    text: It is the final answer that `main` prints after all calls return.
+    rationale: The base case's value is only one piece; the other calls combine it with their own arguments on the way back.
+answer: b
+spec_areas: [expressions.function_invocation, statements.return, statements.if]

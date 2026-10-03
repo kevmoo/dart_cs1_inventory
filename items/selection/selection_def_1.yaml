@@ -1,0 +1,22 @@
+id: selection_def_1
+concept: selection
+type: definitional
+prompt: |
+  A program contains the chain
+  `if (x > 10) { A } else if (x > 5) { B } else { C }`
+  where A, B and C are blocks of statements. When `x` is 20, which blocks run?
+options:
+  - id: a
+    text: Only A.
+    rationale: In an `if` / `else if` / `else` chain exactly one branch runs; the first true condition wins and the rest are skipped.
+  - id: b
+    text: A and B, because both conditions are true.
+    rationale: Treats the chain as independent `if` statements; `else if` is only tested when every earlier condition was false.
+  - id: c
+    text: A, B and C, one after another.
+    rationale: Reads the chain as a sequence of statements that all execute; `else` branches are alternatives, not a sequence.
+  - id: d
+    text: Only B, because it is the last condition that is true.
+    rationale: Last-true-wins misconception; the chain stops at the *first* true condition.
+answer: a
+spec_areas: [statements.if, statements.blocks, expressions.relational]

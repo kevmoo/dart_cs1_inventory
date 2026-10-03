@@ -1,0 +1,20 @@
+id: fundamentals_def_1
+concept: fundamentals
+type: definitional
+prompt: |
+  A program contains the statement `x = x + 1;`. What does it do?
+options:
+  - id: a
+    text: It is an error, because no number can equal itself plus one.
+    rationale: Reads `=` as a mathematical equation instead of an assignment that stores a value.
+  - id: b
+    text: It reads the current value of `x`, adds 1, and stores the result back into `x`.
+    rationale: Assignment evaluates the right-hand side first, then overwrites the variable on the left.
+  - id: c
+    text: It links `x` to the formula `x + 1`, so `x` grows by 1 every time it is read.
+    rationale: Spreadsheet-formula misconception; a variable stores one value, not a live expression.
+  - id: d
+    text: It checks whether `x` is equal to `x + 1` and stores `true` or `false`.
+    rationale: Confuses the assignment operator `=` with the equality operator `==`.
+answer: b
+spec_areas: [expressions.assignment, expressions.additive, statements.expression]

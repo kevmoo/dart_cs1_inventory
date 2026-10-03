@@ -1,0 +1,25 @@
+id: loops_definite_trace_3
+concept: loops_definite
+type: tracing
+prompt: |
+  What does this program print?
+code_file: loops_definite_trace_3.dart
+options:
+  - id: a
+    text: "3 2 1"
+    rationale: Misses the final iteration where `n == 0`; `n >= 0` is inclusive.
+  - id: b
+    text: "3 2 1 0"
+    rationale: Starts at 3, prints while `n >= 0`, decrements each time; the trailing space after 0 is trimmed by the `trim()` call.
+  - id: c
+    text: "2 1 0"
+    rationale: Applies `n--` before the first `print`, like a prefix decrement.
+  - id: d
+    text: "3 2 1 0 -1"
+    rationale: Runs one extra iteration; the condition is checked *before* the body, so -1 is never printed.
+answer: b
+spec_areas: [statements.for, expressions.relational, expressions.postfix, expressions.strings, statements.print]
+dart_notes: >-
+  Builds a string with `+=` and `trim()` rather than printing per iteration,
+  so the expected output is a single line and the item still reads as one
+  program.

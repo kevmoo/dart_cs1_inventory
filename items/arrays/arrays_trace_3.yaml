@@ -1,0 +1,33 @@
+id: arrays_trace_3
+concept: arrays
+type: tracing
+prompt: |
+  What does this program print?
+code_file: arrays_trace_3.dart
+options:
+  - id: a
+    text: |-
+      [9, 2, 5]
+      [9, 2, 5]
+    rationale: "`b = a` makes both names refer to the same list, so every element update is visible through either name."
+  - id: b
+    text: |-
+      [1, 2, 5]
+      [9, 2, 3]
+    rationale: Believes `b = a` copies the list, so each name has its own independent elements.
+  - id: c
+    text: |-
+      [1, 2, 5]
+      [9, 2, 5]
+    rationale: Imagines a one-way link where changes through `a` reach `b` but changes through `b` do not reach `a`.
+  - id: d
+    text: |-
+      [9, 2, 5]
+      [9, 2, 3]
+    rationale: Imagines a one-way link the other way, where `b` can change `a` but later changes through `a` do not reach `b`.
+answer: a
+spec_areas: [expressions.lists, expressions.index, expressions.object_identity, expressions.assignment, statements.print]
+dart_notes: >-
+  Pseudocode arrays are often value types (assignment copies); Dart lists are
+  objects passed by sharing, so `var b = a;` creates an alias, not a copy.
+  Use `[...a]` or `a.toList()` for an actual copy.

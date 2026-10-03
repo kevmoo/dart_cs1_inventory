@@ -1,0 +1,21 @@
+id: loops_indefinite_def_1
+concept: loops_indefinite
+type: definitional
+prompt: |
+  How does a `do { ... } while (condition);` loop differ from a
+  `while (condition) { ... }` loop?
+options:
+  - id: a
+    text: There is no difference; both check the condition before every pass through the body.
+    rationale: Ignores that `do-while` checks its condition *after* the body, so the first pass is unconditional.
+  - id: b
+    text: The body of a `do-while` always runs at least once, because the condition is checked after the body.
+    rationale: Post-checking the condition is exactly what makes `do-while` run its body before the first test.
+  - id: c
+    text: A `do-while` runs the body one extra time after the condition becomes false.
+    rationale: Once the condition is found false the loop stops immediately; there is no extra pass.
+  - id: d
+    text: A `do-while` cannot run forever, because the condition is re-checked after each pass.
+    rationale: Both loop kinds run forever if the body never makes the condition false; where the check happens does not prevent that.
+answer: b
+spec_areas: [statements.do, statements.while, expressions.booleans]

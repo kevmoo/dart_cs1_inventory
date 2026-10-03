@@ -1,0 +1,21 @@
+id: selection_trace_1
+concept: selection
+type: tracing
+prompt: |
+  What does this program print?
+code_file: selection_trace_1.dart
+options:
+  - id: a
+    text: "B\npass\nok"
+    rationale: The chain prints only `B` (first true branch); the two independent `if` statements are each tested and both are true.
+  - id: b
+    text: "B\nC\npass\nok"
+    rationale: Treats the `else if` chain like independent `if`s, so `C` also prints; after `B` runs the rest of the chain is skipped.
+  - id: c
+    text: "B\npass"
+    rationale: Treats the two separate `if` statements as if they were a chain, stopping after `pass`; independent `if`s are all tested.
+  - id: d
+    text: "C\npass\nok"
+    rationale: Last-true-wins misconception in the chain; the first true condition (`score >= 80`) is the one that runs.
+answer: a
+spec_areas: [statements.if, expressions.relational, statements.print]

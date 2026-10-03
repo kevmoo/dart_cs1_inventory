@@ -1,0 +1,26 @@
+id: logical_operators_trace_2
+concept: logical_operators
+type: tracing
+prompt: |
+  What does this program print?
+code_file: logical_operators_trace_2.dart
+options:
+  - id: a
+    text: "no data\ndone"
+    rationale: "`count != 0` is false, so `&&` short-circuits and never evaluates the division; the `else` branch runs, then `done`."
+  - id: b
+    text: The program crashes with a division-by-zero error.
+    rationale: Assumes both operands of `&&` are always evaluated; Dart skips the right operand when the left is already false.
+  - id: c
+    text: "big average\ndone"
+    rationale: Misreads `!=` as `==` (so `count != 0` looks true) and assumes the division then succeeds with a large result.
+  - id: d
+    text: "done"
+    rationale: Believes a false condition skips the whole `if`/`else` statement; a false condition is exactly when the `else` branch runs.
+answer: a
+spec_areas: [expressions.logical, expressions.equality, expressions.relational, expressions.multiplicative, statements.if, statements.print]
+dart_notes: >-
+  The guard-then-divide pattern is the usual way to make short-circuit
+  evaluation observable without functions. `~/` by zero throws
+  `IntegerDivisionByZeroException`; `/` by zero would silently give
+  `Infinity`, which is why `~/` is used here.

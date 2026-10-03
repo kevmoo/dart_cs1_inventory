@@ -1,0 +1,25 @@
+id: fundamentals_trace_1
+concept: fundamentals
+type: tracing
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_1.dart
+options:
+  - id: a
+    text: "3.5\n3\n1"
+    rationale: In Dart `/` always produces a double (3.5), `~/` truncates to an integer (3), and `%` is the integer remainder (1).
+  - id: b
+    text: "3\n3\n1"
+    rationale: Assumes `/` on two integers performs integer division, as in C or Java; Dart's `/` returns 3.5.
+  - id: c
+    text: "3.5\n4\n1"
+    rationale: Believes `~/` rounds to the nearest whole number; it truncates toward zero, so 3.5 becomes 3.
+  - id: d
+    text: "3.5\n3\n0.5"
+    rationale: Treats `%` as "the fractional part left over"; it is the integer remainder of the division, 7 - 2 * 3 = 1.
+answer: a
+spec_areas: [expressions.multiplicative, expressions.numbers, statements.local_variable, statements.print]
+dart_notes: >-
+  Pseudocode and many languages make `7 / 2` an integer division; Dart's `/`
+  always yields a `double`, and truncating division is the separate operator
+  `~/`. This is the single most common arithmetic surprise when porting.

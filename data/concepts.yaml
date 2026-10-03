@@ -1,0 +1,120 @@
+# The ten FCS1 concepts (Tew & Guzdial, SIGCSE 2011; replicated as SCS1 by
+# Parker, Guzdial & Engleman, ICER 2016). Ordering matches the FCS1 list.
+#
+# `drills` flags concepts where drill-style practice (instant token labelling,
+# special-character typing, trace tables) is likely to pay off, per the
+# teaching plan in the task brief.
+concepts:
+  - id: fundamentals
+    title: Fundamentals
+    fcs1_name: Fundamentals
+    description: >-
+      Variables, assignment, arithmetic expressions, and the distinction
+      between a variable's name and its current value. In Dart this also means
+      `var`/`final`, `int` vs `double`, and `print` with string interpolation.
+    drills:
+      - "Token discrimination: label each identifier as variable / literal / function / keyword."
+      - "Special characters: `=`, `;`, `()`, `{}`, `'` and `$` for interpolation."
+      - "Assignment-order drills: `a = b;` then `b = a;` is not a swap."
+
+  - id: logical_operators
+    title: Logical operators
+    fcs1_name: Logical Operators
+    description: >-
+      Boolean values and `&&`, `||`, `!`, comparison operators, operator
+      precedence, and short-circuit evaluation.
+    drills:
+      - "Truth-table flash drills for `&&`, `||`, `!` including De Morgan pairs."
+      - "Special characters: `&&`, `||`, `!=`, `==`, `<=`, `>=` (no spaces inside a token)."
+
+  - id: selection
+    title: Selection
+    fcs1_name: Selection
+    description: >-
+      `if` / `else if` / `else` chains, nesting, and the difference between a
+      chain (one branch runs) and independent `if`s (several may run). Dart adds
+      `switch` statements/expressions, covered as a gap.
+    drills:
+      - "Trace-table drill: given inputs, mark which branch runs."
+      - "Special characters: `{}` block braces and the missing-`else` bug."
+
+  - id: loops_definite
+    title: Definite loops
+    fcs1_name: Definite Loops
+    description: >-
+      Counted `for` loops: initializer, condition, update, off-by-one bounds,
+      accumulation, and nested loops. Dart's `for-in` over a `List` is the
+      idiomatic sibling.
+    drills:
+      - "Trace-table drill: columns for `i`, the condition, and each accumulator."
+      - "Bounds flash cards: `< n` vs `<= n`, starting at 0 vs 1."
+      - "Special characters: `for (;;)` with two semicolons, `++`, `+=`."
+
+  - id: loops_indefinite
+    title: Indefinite loops
+    fcs1_name: Indefinite Loops
+    description: >-
+      `while` / `do-while` loops whose trip count depends on data; sentinel
+      values, loop-and-a-half with `break`, and recognising infinite loops.
+    drills:
+      - "Trace-table drill until the condition flips; mark the exit iteration."
+      - "`while` vs `do-while` first-iteration flash drill."
+
+  - id: arrays
+    title: Arrays
+    fcs1_name: Arrays
+    description: >-
+      Indexed sequences: zero-based indexing, `length`, iteration, element
+      update, and aliasing (two names for one list). Dart has no fixed-size
+      array type; `List<T>` is the carrier, which changes several pseudocode
+      semantics (growable, reference-typed, generic).
+    drills:
+      - "Index flash drill: `a[0]`, `a[a.length - 1]`, `a[a.length]` (error)."
+      - "Special characters: `[]` vs `()` vs `{}`."
+      - "Token discrimination: list variable vs element vs index variable."
+
+  - id: function_params
+    title: Function parameters
+    fcs1_name: Function Parameters
+    description: >-
+      Declaring and calling functions with positional parameters: binding
+      actuals to formals, parameter scope and shadowing, and that reassigning a
+      parameter does not change the caller's variable (object references still
+      allow mutation of a shared `List`).
+    drills:
+      - "Token discrimination: parameter vs local variable vs argument expression at the call site."
+      - "Call-site binding drill: draw arrows from arguments to parameters."
+
+  - id: function_return
+    title: Function return values
+    fcs1_name: Function Return Values
+    description: >-
+      `return` exits the function immediately with a value; the call expression
+      *is* that value; a function that only prints returns `null`/`void`;
+      return inside a loop; composing calls.
+    drills:
+      - "`print` vs `return` discrimination drill (does the caller get a value?)."
+      - "Expression-substitution drill: replace each call with its value."
+
+  - id: recursion
+    title: Recursion
+    fcs1_name: Recursion
+    description: >-
+      A function calling itself: base case, recursive case, order of side
+      effects before vs after the recursive call, and tracing the call stack
+      for small inputs.
+    drills:
+      - "Call-stack drill: write each frame's arguments and return value for n = 3."
+      - "Base-case spotting flash drill: which argument stops the recursion?"
+
+  - id: oop
+    title: Object-oriented basics
+    fcs1_name: Object-Oriented Basics
+    description: >-
+      Classes as blueprints, objects as instances, fields vs locals, methods
+      that read/mutate `this`, constructors, and that two variables can refer
+      to the same object. Inheritance is *not* in FCS1 scope.
+    drills:
+      - "Token discrimination: field vs parameter vs local vs method (the core drill from the brief)."
+      - "Special characters: `.` member access, `this.`, named constructor `Foo.bar()`."
+      - "Aliasing drill: after `b = a;`, which prints change?"

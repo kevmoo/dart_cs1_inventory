@@ -1,0 +1,35 @@
+id: loops_indefinite_complete_1
+concept: loops_indefinite
+type: completion
+prompt: |
+  Fill in the blank so the program prints `1 2 4 8 16`.
+code_file: loops_indefinite_complete_1.dart
+template: |
+  void main() {
+    var n = 1;
+    var line = '';
+    while (n < 20) {
+      line += '$n ';
+      ____;
+    }
+    print(line.trim());
+  }
+options:
+  - id: a
+    text: "n++"
+    rationale: Counts up by one, printing every integer from 1 to 19.
+  - id: b
+    text: "n = n * 2"
+    rationale: Doubling 1 gives 1, 2, 4, 8, 16; the next value 32 fails `n < 20` and the loop stops.
+  - id: c
+    text: "n = n + 2"
+    rationale: Confuses "double" with "add 2", printing the odd numbers 1 to 19.
+  - id: d
+    text: "n = n * 2 + 1"
+    rationale: Doubles but also adds one each pass, printing 1 3 7 15.
+answer: b
+spec_areas: [statements.while, expressions.assignment, expressions.multiplicative, expressions.additive, expressions.postfix, expressions.relational, statements.print]
+dart_notes: >-
+  `n *= 2` and `n = n + n` were rejected as distractors because they behave
+  exactly like the key; `n * 2;` (forgetting the assignment) is the most common
+  real mistake but produces an infinite loop, which cannot be exercised by a test.

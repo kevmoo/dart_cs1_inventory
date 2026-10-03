@@ -1,0 +1,25 @@
+id: arrays_trace_2
+concept: arrays
+type: tracing
+prompt: |
+  What does this program print?
+code_file: arrays_trace_2.dart
+options:
+  - id: a
+    text: "[6, 2, 8]"
+    rationale: Each pass reads `a[i]`, doubles it, and stores it back into the same slot.
+  - id: b
+    text: "[3, 1, 4]"
+    rationale: Believes assigning to `a[i]` produces a new value without changing the list itself.
+  - id: c
+    text: "[6, 2, 4]"
+    rationale: Treats `i < a.length` as excluding the last element (off-by-one), so index 2 is never updated.
+  - id: d
+    text: "[0, 2, 4]"
+    rationale: Confuses the index with the element, computing `i * 2` instead of `a[i] * 2`.
+answer: a
+spec_areas: [expressions.lists, expressions.index, expressions.property_extraction, statements.for, expressions.assignment, expressions.multiplicative, statements.print]
+dart_notes: >-
+  `print(a)` on a `List` shows `[6, 2, 8]` with brackets and commas, unlike
+  pseudocode which usually prints elements one at a time. The list is a
+  growable `List<int>`, but updating `a[i]` never changes its length.

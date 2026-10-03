@@ -1,0 +1,21 @@
+id: loops_definite_trace_2
+concept: loops_definite
+type: tracing
+prompt: |
+  What does this program print?
+code_file: loops_definite_trace_2.dart
+options:
+  - id: a
+    text: "6"
+    rationale: 1 + 2 + 3 = 6; the inner loop runs `row` times for row = 1, 2, 3.
+  - id: b
+    text: "9"
+    rationale: Assumes the inner loop always runs 3 times (3 * 3) instead of `row` times.
+  - id: c
+    text: "3"
+    rationale: Reads the inner loop as running once in total.
+  - id: d
+    text: "0"
+    rationale: Believes postfix `count++` "returns the old value" and therefore never changes `count`; it does increment the variable.
+answer: a
+spec_areas: [statements.for, expressions.assignment, expressions.relational, expressions.postfix, statements.print]
