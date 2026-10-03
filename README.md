@@ -44,6 +44,7 @@ checklist.
 | `data/spec_areas.yaml`         | Dart spec areas (stable section titles / feature-spec paths), CS1-scope flag, gap grouping.                                     |
 | `data/translation_issues.yaml` | Pseudocode → Dart hazards and the decision taken for each.                                                                      |
 | `data/dag.yaml`                | Prerequisite graph nodes and edges with rationale.                                                                              |
+| `data/misconceptions.yaml`     | Catalog of named wrong models; every distractor cites one, so a wrong answer is evidence for a specific misconception.          |
 | `tool/report.dart`             | Generates `coverage.md` and `dag.md` deterministically.                                                                         |
 | `tool/balance_keys.dart`       | Rebalances answer-key positions across YAML, Dart and tests (seeded).                                                           |
 | `test/compile_error_test.dart` | Substitutes every `compile_error` option into its template and asserts `dart analyze` reports the named diagnostic.             |

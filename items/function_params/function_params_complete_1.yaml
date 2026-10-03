@@ -23,17 +23,20 @@ options:
   - id: a
     text: "between(high, low)"
     rationale: Passes the arguments in the order `main` declared them; `low` becomes 4 and `high` 2, so the loop never runs and an empty line prints.
+    misconception: param.bind_by_declaration_order
   - id: b
     text: "between(low: low, high: high)"
     rationale: Uses named arguments for positional parameters; the analyzer reports `undefined_named_parameter`.
     compile_error: true
     diagnostic: undefined_named_parameter
+    misconception: param.named_for_positional
   - id: c
     text: "between(low, high)"
     rationale: Arguments bind by position, so `low` must come first regardless of where `main` declared it.
   - id: d
     text: "between(low, high + 1)"
     rationale: Assumes `i <= high` stops before `high` (as `<` would) and compensates by adding 1; prints `2 3 4 5`.
+    misconception: bounds.off_by_one
 answer: c
 spec_areas: [expressions.function_invocation, functions.required_formals, statements.for, statements.print]
 dart_notes: >-

@@ -13,11 +13,14 @@ options:
   - id: b
     text: A and B, because both conditions are true.
     rationale: Treats the chain as independent `if` statements; `else if` is only tested when every earlier condition was false.
+    misconception: if.chain_as_independent
   - id: c
     text: A, B and C, one after another.
     rationale: Reads the chain as a sequence of statements that all execute; `else` branches are alternatives, not a sequence.
+    misconception: if.all_branches_run
   - id: d
     text: Only B, because it is the last condition that is true.
     rationale: Last-true-wins misconception; the chain stops at the *first* true condition.
+    misconception: if.last_true_wins
 answer: a
 spec_areas: [statements.if, statements.blocks, expressions.relational]

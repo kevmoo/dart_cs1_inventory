@@ -9,12 +9,15 @@ options:
   - id: a
     text: There is no difference; both check the condition before every pass through the body.
     rationale: Ignores that `do-while` checks its condition *after* the body, so the first pass is unconditional.
+    misconception: loop.test_before_body
   - id: b
     text: A `do-while` cannot run forever, because the condition is re-checked after each pass.
     rationale: Both loop kinds run forever if the body never makes the condition false; where the check happens does not prevent that.
+    misconception: loop.test_placement_prevents_infinite
   - id: c
     text: A `do-while` runs the body one extra time after the condition becomes false.
     rationale: Once the condition is found false the loop stops immediately; there is no extra pass.
+    misconception: loop.extra_pass_after_false
   - id: d
     text: The body of a `do-while` always runs at least once, because the condition is checked after the body.
     rationale: Post-checking the condition is exactly what makes `do-while` run its body before the first test.

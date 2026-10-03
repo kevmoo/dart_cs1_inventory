@@ -9,15 +9,18 @@ options:
   - id: a
     text: "6"
     rationale: Takes only the last element, assuming `sum` is overwritten rather than accumulated.
+    misconception: loop.accumulator_overwritten
   - id: b
     text: "3"
     rationale: Counts elements instead of summing their values (confuses index with element).
+    misconception: list.index_vs_element
   - id: c
     text: "12"
     rationale: 2 + 4 + 6 = 12; `for-in` visits every element of the list in order.
   - id: d
     text: "0 2 4 6"
     rationale: Expects the loop body to print; only the final `print(sum)` produces output.
+    misconception: output.phantom_print
 answer: c
 spec_areas: [statements.for_in, expressions.lists, expressions.assignment, expressions.additive, statements.print]
 dart_notes: >-

@@ -9,14 +9,17 @@ options:
   - id: a
     text: Once, before the loop starts.
     rationale: Confuses the condition with the initializer, which runs once.
+    misconception: loop.init_runs_each_pass
   - id: b
     text: Before every iteration, including the first; the loop stops when it is false.
     rationale: The condition guards each pass; `i++` runs after the body, then the condition is re-checked.
   - id: c
     text: After every iteration, so the body always runs at least once.
     rationale: Describes `do-while`; a `for` loop with a false condition runs zero times.
+    misconception: loop.body_before_test
   - id: d
     text: Only when `i++` changes `i`.
     rationale: The update and the condition are separate clauses; the condition is evaluated regardless of what the update did.
+    misconception: loop.update_decides_exit
 answer: b
 spec_areas: [statements.for, expressions.relational, expressions.postfix]

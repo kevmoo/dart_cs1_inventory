@@ -9,12 +9,15 @@ options:
   - id: a
     text: "3 2 1"
     rationale: Misses the final iteration where `n == 0`; `n >= 0` is inclusive.
+    misconception: bounds.off_by_one
   - id: b
     text: "3 2 1 0 -1"
     rationale: Runs one extra iteration; the condition is checked *before* the body, so -1 is never printed.
+    misconception: loop.body_before_test
   - id: c
     text: "2 1 0"
     rationale: Applies `n--` before the first `print`, like a prefix decrement.
+    misconception: postfix.prefix_timing
   - id: d
     text: "3 2 1 0"
     rationale: Starts at 3, prints while `n >= 0`, decrements each time; the trailing space after 0 is trimmed by the `trim()` call.

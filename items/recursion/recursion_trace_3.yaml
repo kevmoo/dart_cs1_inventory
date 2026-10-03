@@ -9,12 +9,15 @@ options:
   - id: a
     text: "0"
     rationale: Takes the base case's `return 0` as the final result instead of the value the outer calls add to it.
+    misconception: recursion.base_value_is_result
   - id: b
     text: "15"
     rationale: Ignores the starting index and sums every element (4 + 5 + 6).
+    misconception: trace.ignores_initial_value
   - id: c
     text: "5"
     rationale: Stops one element early, treating `i == items.length` as if it were reached at the last index.
+    misconception: bounds.off_by_one
   - id: d
     text: "11"
     rationale: Starting at index 1 adds `items[1]` and `items[2]` (5 + 6) and stops when `i` reaches the length.

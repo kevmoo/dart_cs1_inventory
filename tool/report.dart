@@ -154,6 +154,30 @@ special-character typing, trace tables), from `data/concepts.yaml`.
     }
   }
 
+  final itemsByMisconception = <String, Set<String>>{};
+  for (final item in inv.items) {
+    for (final o in item.distractors) {
+      itemsByMisconception.putIfAbsent(o.misconception!, () => {}).add(item.id);
+    }
+  }
+  b.writeln('''
+
+## Misconceptions probed
+
+Every distractor names an id from `data/misconceptions.yaml`; a wrong answer
+is evidence for that wrong model. Ids probed by a single item are weak
+evidence on their own.
+
+| Misconception | Items |
+| --- | --- |''');
+  for (final m in inv.misconceptions) {
+    final items = itemsByMisconception[m.id] ?? const <String>{};
+    b.writeln(
+      '| `${m.id}` — ${_md(m.title)} | '
+      '${items.map((i) => '`$i`').join(', ')} |',
+    );
+  }
+
   b.writeln('''
 
 ## Appendix: item → spec area mapping

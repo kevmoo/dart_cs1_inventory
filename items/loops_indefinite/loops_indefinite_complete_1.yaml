@@ -22,12 +22,15 @@ options:
   - id: b
     text: "n++"
     rationale: Counts up by one, printing every integer from 1 to 19.
+    misconception: trace.wrong_operation
   - id: c
     text: "n = n + 2"
     rationale: Confuses "double" with "add 2", printing the odd numbers 1 to 19.
+    misconception: trace.wrong_operation
   - id: d
     text: "n = n * 2 + 1"
     rationale: Doubles but also adds one each pass, printing 1 3 7 15.
+    misconception: trace.wrong_operation
 answer: a
 spec_areas: [statements.while, expressions.assignment, expressions.multiplicative, expressions.additive, expressions.postfix, expressions.relational, statements.print]
 dart_notes: >-

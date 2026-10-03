@@ -15,17 +15,20 @@ options:
   - id: a
     text: "x * 3;"
     rationale: Evaluates 15 but never stores it; without `=` the variable keeps 5, so the program prints `5`.
+    misconception: assign.expression_without_store
   - id: b
     text: "x = x * 3;"
     rationale: Computes 5 * 3 and stores 15 back into `x`.
   - id: c
     text: "x += 15;"
     rationale: Confuses `+=` with `=`; `x += 15` adds 15 to the existing 5, printing `20`.
+    misconception: assign.compound_vs_plain
   - id: d
     text: "var x = 15;"
     rationale: Tries to change a value by declaring the variable again; the analyzer rejects it with `duplicate_definition` (The name 'x' is already defined).
     compile_error: true
     diagnostic: duplicate_definition
+    misconception: assign.redeclare
 answer: b
 spec_areas: [expressions.assignment, expressions.multiplicative, statements.local_variable, statements.expression, statements.print]
 dart_notes: >-

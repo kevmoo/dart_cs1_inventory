@@ -9,12 +9,15 @@ options:
   - id: a
     text: "3 100\n3"
     rationale: Treats the parameter `size` as the top-level variable itself, so binding 3 to it would overwrite the 100 that `main` prints afterwards.
+    misconception: scope.param_is_global
   - id: b
     text: "100 3\n100"
     rationale: Binds arguments to parameters by matching names instead of by position.
+    misconception: param.bind_by_name
   - id: c
     text: "100 100\n100"
     rationale: Reads the top-level `size` inside `show`, not noticing that the parameter `size` shadows it.
+    misconception: scope.shadow_ignored
   - id: d
     text: "3 100\n100"
     rationale: Arguments bind by position (`size` gets 3, `count` gets 100); inside `show` the parameter `size` shadows the top-level one, which is unchanged.

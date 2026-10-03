@@ -18,12 +18,15 @@ options:
     rationale: Prints the answer instead of returning it, so `square(3)` has no value to store; the analyzer reports `use_of_void_result`.
     compile_error: true
     diagnostic: use_of_void_result
+    misconception: output.print_as_computation
   - id: b
     text: "int square(int n) { n * n; return n; }"
     rationale: Computes `n * n` but never stores or returns it; `return n` gives back the unchanged 3.
+    misconception: assign.expression_without_store
   - id: c
     text: "int square(int n) { print(n * n); return n; }"
     rationale: Believes printing is what sends the answer back; it prints `9` inside the function but returns 3, so the output is `9` then `3`.
+    misconception: output.print_as_computation
   - id: d
     text: "int square(int n) { return n * n; }"
     rationale: Returns the computed value, which the call expression then hands to `result`.

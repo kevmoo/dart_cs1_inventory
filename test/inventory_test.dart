@@ -11,6 +11,25 @@ void main() {
   final inv = Inventory.load();
   final conceptIds = {for (final c in inv.concepts) c.id};
   final areaIds = {for (final a in inv.specAreas) a.id};
+  final misconceptionIds = {for (final m in inv.misconceptions) m.id};
+
+  test('misconception catalog: unique `family.name` ids, none unused', () {
+    expect(misconceptionIds, hasLength(inv.misconceptions.length));
+    for (final m in inv.misconceptions) {
+      expect(m.id, matches(RegExp(r'^[a-z_]+\.[a-z_]+$')), reason: m.id);
+      expect(m.title.trim(), isNotEmpty, reason: m.id);
+      expect(m.description.trim(), isNotEmpty, reason: m.id);
+    }
+    final used = {
+      for (final i in inv.items)
+        for (final o in i.distractors) ?o.misconception,
+    };
+    expect(
+      misconceptionIds.difference(used),
+      isEmpty,
+      reason: 'catalog entries no distractor uses',
+    );
+  });
 
   test('ten FCS1 concepts, in FCS1 order', () {
     expect(inv.concepts.map((c) => c.id), [
@@ -88,6 +107,21 @@ void main() {
         expect(texts, hasLength(4), reason: 'duplicate option text');
         for (final o in item.options) {
           expect(o.rationale.trim(), isNotEmpty, reason: 'option ${o.id}');
+          if (o.id == item.answer) {
+            expect(
+              o.misconception,
+              isNull,
+              reason: 'key ${o.id} must not name a misconception',
+            );
+          } else {
+            expect(
+              misconceptionIds,
+              contains(o.misconception),
+              reason:
+                  'distractor ${o.id}: unknown or missing misconception '
+                  '${o.misconception}',
+            );
+          }
         }
         expect(item.specAreas, isNotEmpty);
         expect(

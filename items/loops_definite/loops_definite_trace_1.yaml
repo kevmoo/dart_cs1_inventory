@@ -9,14 +9,17 @@ options:
   - id: a
     text: "10"
     rationale: Sums `i` instead of `i * i`.
+    misconception: trace.wrong_operation
   - id: b
     text: "30"
     rationale: 1 + 4 + 9 + 16 = 30; the loop runs for i = 1, 2, 3, 4.
   - id: c
     text: "55"
     rationale: Treats `i <= 4` as `i <= 5` (off-by-one on an inclusive bound).
+    misconception: bounds.off_by_one
   - id: d
     text: "14"
     rationale: Starts at i = 0 and stops before 4 (0 + 1 + 4 + 9); misreads both bounds.
+    misconception: bounds.off_by_one
 answer: b
 spec_areas: [statements.for, expressions.assignment, expressions.multiplicative, expressions.relational, statements.print]

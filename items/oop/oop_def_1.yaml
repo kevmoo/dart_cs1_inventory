@@ -19,11 +19,14 @@ options:
   - id: b
     text: It declares a new local variable named `count` that holds 5 until the constructor finishes.
     rationale: Confuses the initializing formal `this.count` with an ordinary parameter; `this.` means the value is stored in the object's field.
+    misconception: oop.this_formal_is_param
   - id: c
     text: It calls a method named `count` on the new object, passing 5.
     rationale: Misreads `this.count` as a method call; `count` is a field and no parentheses follow it.
+    misconception: oop.field_as_method
   - id: d
     text: It sets `count` to 5 for every `Counter` object, since all objects share one `count`.
     rationale: Treats the field as shared class-level state; each object created by the constructor has its own `count`.
+    misconception: oop.field_shared
 answer: a
 spec_areas: [classes.constructors, classes.instance_variables, expressions.instance_creation, expressions.this]

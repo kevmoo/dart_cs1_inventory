@@ -24,14 +24,17 @@ options:
   - id: b
     text: "n >= 1 || n <= 10"
     rationale: Uses `||` for the English "between"; every integer satisfies at least one side, so all 12 values are counted.
+    misconception: bool.or_for_between
   - id: c
     text: "n > 1 && n < 10"
     rationale: Strict comparisons exclude the endpoints 1 and 10, counting only 8 values.
+    misconception: compare.strict_vs_inclusive
   - id: d
     text: "1 <= n <= 10"
     rationale: Mathematical chained comparison; the analyzer rejects it (`equality_cannot_be_equality_operand`, `undefined_operator` for `<=` on `bool`).
     compile_error: true
     diagnostic: undefined_operator
+    misconception: bool.chained_comparison
 answer: a
 spec_areas: [expressions.logical, expressions.relational, statements.if, statements.for, statements.print]
 dart_notes: >-
