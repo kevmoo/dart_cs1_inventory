@@ -50,6 +50,17 @@ void main() {
     expect(areaIds, hasLength(inv.specAreas.length));
   });
 
+  test('translation issues reference known concepts', () {
+    final issueIds = {for (final t in inv.translationIssues) t.id};
+    expect(issueIds, hasLength(inv.translationIssues.length));
+    for (final t in inv.translationIssues) {
+      expect(t.concepts, isNotEmpty, reason: t.id);
+      for (final c in t.concepts) {
+        expect(conceptIds, contains(c), reason: '${t.id} -> $c');
+      }
+    }
+  });
+
   test('item ids are unique and match file names', () {
     final ids = <String>{};
     for (final item in inv.items) {
