@@ -51,10 +51,44 @@ checklist.
 | `coverage.md`                  | Generated: item matrix, spec areas exercised, gap list, translation issues, drill candidates.                                   |
 | `dag.md`                       | Generated: Mermaid graph, levels, node table, open questions.                                                                   |
 
+## Using the tutor
+
+`bin/tutor.dart` serves items one at a time and tracks mastery over the
+prerequisite DAG. It is built to be driven by a coding agent (JSON in, JSON out)
+but also runs at a terminal.
+
+```sh
+dart pub global activate --source git https://github.com/kevmoo/dart_cs1_inventory
+tutor next                       # the next item to present; never includes the key
+tutor check <item-id> <a|b|c|d>  # logs the answer, then reveals key + rationales
+tutor status                     # mastery per node, misconception counts
+tutor interactive                # no agent: answer at the terminal
+```
+
+Inside a checkout, `dart run dart_cs1_inventory:tutor …` works from any
+directory. The tool locates its own `items/` and `data/`; the current working
+directory never matters.
+
+Rules the CLI enforces so an agent cannot leak or drift:
+
+- `next` is deterministic: lowest unlocked, unmastered node in prerequisite
+  order; least-settled item on it.
+- `check` is the only path to the key and rationales, and it writes the answer
+  to the log _before_ revealing anything. The first answer is the one that
+  counts.
+- Mastery of a node needs distinct correct items (up to three, including at
+  least one tracing and one completion item where the node has them) and no
+  wrong answer among the most recent three. Definitional items never count.
+
+Answer logs live under the platform state directory
+(`~/.local/state/dart_cs1_inventory/<student>/log.jsonl` on Linux, via
+`package:cli_util`), overridable with `--state-dir` or `$DART_CS1_STATE`.
+`tutor status` prints the resolved path.
+
 ## Commands
 
 ```sh
-dart test                          # item tests + invariants
+dart test                          # item tests + invariants + tutor engine
 dart run tool/report.dart          # regenerate coverage.md and dag.md
 dart run tool/report.dart --check  # fail if the generated files are stale
 dart run tool/balance_keys.dart    # spread answer keys across a/b/c/d
