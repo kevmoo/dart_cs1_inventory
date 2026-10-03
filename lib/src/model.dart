@@ -239,6 +239,6 @@ List<T> _loadList<T>(String path, String key, T Function(YamlMap) parse) {
 
 List<String> _strings(Object? value) => switch (value) {
   null => const [],
-  YamlList list => [for (final e in list) e as String],
+  final YamlList list => [for (final e in list) e as String],
   _ => throw ArgumentError.value(value, 'value', 'expected a list of strings'),
 };
