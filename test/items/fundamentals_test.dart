@@ -4,6 +4,8 @@ import '../../items/fundamentals/fundamentals_complete_1.dart' as c1;
 import '../../items/fundamentals/fundamentals_complete_2.dart' as c2;
 import '../../items/fundamentals/fundamentals_complete_3.dart' as c3;
 import '../../items/fundamentals/fundamentals_trace_1.dart' as t1;
+import '../../items/fundamentals/fundamentals_trace_10.dart' as t10;
+import '../../items/fundamentals/fundamentals_trace_11.dart' as t11;
 import '../../items/fundamentals/fundamentals_trace_2.dart' as t2;
 import '../../items/fundamentals/fundamentals_trace_3.dart' as t3;
 import '../../items/fundamentals/fundamentals_trace_4.dart' as t4;
@@ -28,12 +30,12 @@ void main() {
   });
 
   group('fundamentals_trace_4', () {
-    test('key: 34 / 7 / 7.0', () => expectOutput(t4.main, '34\n7\n7.0'));
+    test('key: 10 / 5 / 5', () => expectOutput(t4.main, '10\n5\n5'));
   });
 
   group('fundamentals_trace_5', () {
-    test('key: true / 1.0 / 6.0', () {
-      expectOutput(t5.main, 'true\n1.0\n6.0');
+    test('key: score / 7 / score: 7', () {
+      expectOutput(t5.main, 'score\n7\nscore: 7');
     });
   });
 
@@ -57,6 +59,14 @@ void main() {
     test('key: 2 2 1 / 2 1 1', () {
       expectOutput(t9.main, '2 2 1\n2 1 1');
     });
+  });
+
+  group('fundamentals_trace_10', () {
+    test('key: 34 / 7 / 33', () => expectOutput(t10.main, '34\n7\n33'));
+  });
+
+  group('fundamentals_trace_11', () {
+    test('key: 2.5 / 2 / 3.5', () => expectOutput(t11.main, '2.5\n2\n3.5'));
   });
 
   group('fundamentals_complete_1', () {

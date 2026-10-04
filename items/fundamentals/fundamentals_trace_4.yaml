@@ -1,31 +1,29 @@
 id: fundamentals_trace_4
 concept: fundamentals
 type: tracing
-dag_node: values_and_types
+dag_node: variables_assignment
 prompt: |
   What does this program print?
 code_file: fundamentals_trace_4.dart
 options:
   - id: a
-    text: "7\n7\n7.0"
-    rationale: Treats the quoted digits `'3'` and `'4'` as numbers; `left` and `right` hold strings, and `+` on strings joins them into `34`.
-    misconception: types.quoted_digits_are_numbers
+    text: "10\n10\n5"
+    rationale: Ignores `points = bonus`, treating the initial value of `points` as permanent.
+    misconception: assign.first_value_permanent
   - id: b
-    text: "34\n7\n7.0"
-    rationale: "`+` joins two strings into `34`, adds two ints to `7`, and adding a double to an int gives the double `7.0`."
+    text: "10\n5\n5"
+    rationale: "`points` starts at 10; `points = bonus` copies `5` into `points`, while `bonus` stays `5`."
   - id: c
-    text: "34\n7\n7"
-    rationale: Believes adding a double to an int gives an int when the result is whole; `3.0 + 4` is the double `7.0`, which the Dart VM prints with its `.0`.
-    misconception: types.mixed_arith_yields_int
+    text: "10\n5\n10"
+    rationale: Believes `points = bonus` swaps the two variables; it only overwrites `points` with a copy of `bonus`.
+    misconception: assign.swap
   - id: d
-    text: "'34'\n7\n7.0"
-    rationale: Believes `print` shows the quotes around a string; quotes only mark where the string starts and ends in the code.
-    misconception: output.quotes_printed
+    text: "10\n10\n10"
+    rationale: Reads `points = bonus` right to left as "`bonus` gets `points`"; the value on the right is copied into the variable on the left.
+    misconception: assign.right_to_left
 answer: b
-spec_areas: [expressions.strings, expressions.numbers, expressions.additive, statements.local_variable, statements.print]
+spec_areas: [statements.local_variable, expressions.assignment, statements.expression, statements.print]
 dart_notes: >-
-  Dart has no implicit string-to-number conversion, and `+` on a `String`
-  is concatenation; mixing `int` and `double` in arithmetic yields `double`.
-  The command-line VM prints a whole-valued double as `7.0`; on the web
-  (DartPad, dart2js) the same value prints as `7`, so check this item in
-  the VM.
+  Each `print` shows the variable's value at that point in the program;
+  `points = bonus` copies the current value of `bonus` into `points` without
+  changing `bonus`.

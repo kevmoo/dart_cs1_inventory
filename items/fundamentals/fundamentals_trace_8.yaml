@@ -1,7 +1,7 @@
 id: fundamentals_trace_8
 concept: fundamentals
 type: tracing
-dag_node: sequencing
+dag_node: variables_assignment
 prompt: |
   What does this program print?
 code_file: fundamentals_trace_8.dart

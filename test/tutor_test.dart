@@ -1,6 +1,7 @@
 // Unit tests for the tutoring engine against the real inventory and a
 // temporary state directory. No agent, no stdin.
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dart_cs1_inventory/dart_cs1_inventory.dart';
@@ -31,6 +32,15 @@ void main() {
       }
       expect(t.order.first.prerequisites, isEmpty);
       expect(t.order.map((n) => n.id), containsAll(inv.dag.map((n) => n.id)));
+      expect(t.order.take(7).map((n) => n.id), [
+        'variables_assignment',
+        'output_and_strings',
+        'sequencing',
+        'boolean_expressions',
+        'logical_operators',
+        'selection',
+        'arithmetic_expressions',
+      ]);
     });
   });
 
@@ -104,6 +114,7 @@ void main() {
       final log = [for (final i in tracing) right(t0_, i.id)];
       final t = Tutor(inv, log);
       expect(t.statusOf(node).state, isNot(NodeState.mastered));
+      expect(t.statusOf(node).correct, lessThan(t.statusOf(node).required));
     });
 
     test('a wrong answer inside the recent window blocks mastery', () {
@@ -120,6 +131,31 @@ void main() {
       expect(t.statusOf(node).correct, 2);
     });
 
+    test('immediate warm retry after a miss does not credit until another item '
+        'intervenes', () {
+      final t0_ = Tutor(inv, const []);
+      final log = [
+        right(t0_, tracing[0].id),
+        right(t0_, tracing[1].id),
+        wrong(t0_, completion.id),
+        right(t0_, completion.id),
+        right(t0_, completion.id),
+      ];
+      var t = Tutor(inv, log);
+      expect(t.isCredited(completion.id, hasAlternatives: true), isFalse);
+      expect(t.statusOf(node).correct, 2);
+      expect(t.statusOf(node).state, NodeState.available);
+
+      // Intervening attempt on another item, then cold correct on completion.
+      log
+        ..add(right(t0_, tracing[0].id))
+        ..add(right(t0_, completion.id));
+      t = Tutor(inv, log);
+      expect(t.isCredited(completion.id, hasAlternatives: true), isTrue);
+      expect(t.statusOf(node).correct, 3);
+      expect(t.statusOf(node).state, NodeState.mastered);
+    });
+
     test('definitional items are not evidence', () {
       final def = inv.items.firstWhere((i) => i.type == ItemType.definitional);
       final t0_ = Tutor(inv, const []);
@@ -130,10 +166,12 @@ void main() {
   });
 
   group('next', () {
-    test('is deterministic and starts on an available node', () {
+    test('is deterministic and starts with a tracing item on root node', () {
       final t = Tutor(inv, const []);
       final a = t.next()!;
       expect(Tutor(inv, const []).next()!.id, a.id);
+      expect(a.dagNode, 'variables_assignment');
+      expect(a.type, ItemType.tracing);
       final node = inv.dag.firstWhere((n) => n.id == a.dagNode);
       expect(t.statusOf(node).state, NodeState.available);
     });
@@ -148,18 +186,36 @@ void main() {
         t = Tutor(inv, log);
         final after = t.next();
         if (after == null) break;
-        final siblings = t.itemsOn(item.dagNode).length;
+        final siblings = t.evidenceOn(item.dagNode).length;
         if (siblings > 1 && after.dagNode == item.dagNode) {
           expect(after.id, isNot(item.id), reason: 'round $i');
         }
       }
     });
 
+    test(
+      'never repeats a just-missed item even when all siblings are credited',
+      () {
+        final t0_ = Tutor(inv, const []);
+        final first = t0_.next()!;
+        final siblings = t0_.evidenceOn(first.dagNode).toList();
+        expect(siblings.length, greaterThan(1));
+        final log = [
+          for (final s in siblings.skip(1)) right(t0_, s.id),
+          wrong(t0_, first.id),
+        ];
+        final t = Tutor(inv, log);
+        final nextItem = t.next()!;
+        expect(nextItem.dagNode, first.dagNode);
+        expect(nextItem.id, isNot(first.id));
+      },
+    );
+
     test('prefers unattempted items, then latest-wrong, then fewest tries', () {
       var t = Tutor(inv, const []);
       final first = t.next()!;
       final node = first.dagNode;
-      final onNode = t.itemsOn(node).toList();
+      final onNode = t.evidenceOn(node).toList();
       if (onNode.length < 2) return; // nothing to discriminate
       t = Tutor(inv, [right(t, first.id)]);
       final second = t.next()!;
@@ -168,25 +224,33 @@ void main() {
       expect(t.latest(second.id), isNull);
     });
 
-    test('returns null once every node is mastered', () {
-      var t = Tutor(inv, const []);
-      final log = <Attempt>[];
-      // Answer everything correctly until next() runs dry; bounded.
-      for (var i = 0; i < 500; i++) {
-        final item = t.next();
-        if (item == null) break;
-        log.add(right(t, item.id));
-        t = Tutor(inv, log);
-      }
-      expect(t.next(), isNull);
-      for (final n in t.order) {
-        expect(
-          t.statusOf(n).state,
-          anyOf(NodeState.mastered, NodeState.noItems),
-          reason: n.id,
-        );
-      }
-    });
+    test(
+      'returns null once every node is mastered in exact required steps',
+      () {
+        var t = Tutor(inv, const []);
+        final log = <Attempt>[];
+        final expectedSteps = t.order
+            .map((n) => t.statusOf(n).required)
+            .fold<int>(0, (a, b) => a + b);
+        // Answer everything correctly until next() runs dry; bounded.
+        for (var i = 0; i < 500; i++) {
+          final item = t.next();
+          if (item == null) break;
+          expect(item.type, isNot(ItemType.definitional));
+          log.add(right(t, item.id));
+          t = Tutor(inv, log);
+        }
+        expect(t.next(), isNull);
+        expect(log, hasLength(expectedSteps));
+        for (final n in t.order) {
+          expect(
+            t.statusOf(n).state,
+            anyOf(NodeState.mastered, NodeState.noItems),
+            reason: n.id,
+          );
+        }
+      },
+    );
   });
 
   group('check', () {
@@ -200,6 +264,28 @@ void main() {
       final k = t.check(item.id, item.answer, at: t0);
       expect(k.correct, isTrue);
       expect(k.attempt.misconception, isNull);
+    });
+
+    test('consecutiveMissesOn counts trailing misses and resets on hit', () {
+      final t0_ = Tutor(inv, const []);
+      final items = inv.items
+          .where((i) => i.type == ItemType.tracing)
+          .take(2)
+          .toList();
+      final a = items[0].id;
+      final b = items[1].id;
+      expect(t0_.consecutiveMissesOn(a), 0);
+      final t1 = Tutor(inv, [wrong(t0_, a)]);
+      expect(t1.consecutiveMissesOn(a), 1);
+      final t2 = Tutor(inv, [wrong(t0_, a), right(t0_, b), wrong(t0_, a)]);
+      expect(t2.consecutiveMissesOn(a), 2);
+      final t3 = Tutor(inv, [
+        wrong(t0_, a),
+        right(t0_, b),
+        wrong(t0_, a),
+        right(t0_, a),
+      ]);
+      expect(t3.consecutiveMissesOn(a), 0);
     });
 
     test('rejects unknown item and option', () {
@@ -223,7 +309,7 @@ void main() {
     });
   });
 
-  group('StudentLog', () {
+  group('StudentLog and CLI check', () {
     late Directory tmp;
     setUp(() => tmp = Directory.systemTemp.createTempSync('cs1_'));
     tearDown(() => tmp.deleteSync(recursive: true));
@@ -242,6 +328,56 @@ void main() {
       expect(back.first.toJson(), a.toJson());
       expect(back.last.correct, isTrue);
     });
+
+    test(
+      'CLI check withholds key on 1st miss and reveals on 2nd miss or --reveal',
+      () {
+        final item = inv.items.firstWhere((i) => i.type == ItemType.tracing);
+        final wrongOpt = item.distractors.first.id;
+
+        Map<String, Object?> runCheck(List<String> extra) {
+          final res = Process.runSync(Platform.executable, [
+            'bin/tutor.dart',
+            '--state-dir=${tmp.path}',
+            'check',
+            ...extra,
+            item.id,
+            wrongOpt,
+          ], workingDirectory: inv.root);
+          expect(res.exitCode, 0, reason: '${res.stderr}');
+          return jsonDecode(res.stdout as String) as Map<String, Object?>;
+        }
+
+        final miss1 = runCheck(const []);
+        expect(miss1['correct'], isFalse);
+        expect(miss1['consecutive_misses'], 1);
+        expect(miss1.containsKey('answer'), isFalse);
+        expect(miss1.containsKey('key'), isFalse);
+
+        final miss2 = runCheck(const []);
+        expect(miss2['correct'], isFalse);
+        expect(miss2['consecutive_misses'], 2);
+        expect(miss2['answer'], item.answer);
+        expect(miss2['key'], isNotNull);
+
+        // Fresh student with --reveal on 1st miss.
+        final revealed = Process.runSync(Platform.executable, [
+          'bin/tutor.dart',
+          '--state-dir=${tmp.path}',
+          '--student=other',
+          'check',
+          '--reveal',
+          item.id,
+          wrongOpt,
+        ], workingDirectory: inv.root);
+        expect(revealed.exitCode, 0, reason: '${revealed.stderr}');
+        final revJson =
+            jsonDecode(revealed.stdout as String) as Map<String, Object?>;
+        expect(revJson['consecutive_misses'], 1);
+        expect(revJson['answer'], item.answer);
+        expect(revJson['key'], isNotNull);
+      },
+    );
   });
 
   group('locations', () {
