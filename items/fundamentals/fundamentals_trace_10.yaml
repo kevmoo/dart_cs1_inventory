@@ -1,0 +1,28 @@
+id: fundamentals_trace_10
+concept: fundamentals
+type: tracing
+dag_node: values_and_types
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_10.dart
+options:
+  - id: a
+    text: "7\n7\n6"
+    rationale: Treats the string `'3'` and `'4'` as numbers and adds them; `a` holds a `String`, and `+` on strings joins them end to end.
+    misconception: types.quoted_digits_are_numbers
+  - id: b
+    text: "34\n34\n33"
+    rationale: Treats `b + 4` as joining digits into text; `b` and `4` are ints, so `+` adds them to `7`.
+    misconception: output.interpolation_concatenates
+  - id: c
+    text: "a4\n7\naa"
+    rationale: Treats the unquoted variable name `a` as the literal letter `'a'` instead of reading the string `'3'` stored in `a`.
+    misconception: output.bare_name_interpolates
+  - id: d
+    text: "34\n7\n33"
+    rationale: "`+` on strings joins `'3'` and `'4'` into `34` and `'3' + '3'` into `33`, while `+` on ints adds `3 + 4` to `7`."
+answer: d
+spec_areas: [expressions.strings, expressions.numbers, expressions.additive, statements.local_variable, statements.print]
+dart_notes: >-
+  Dart has no implicit string-to-number conversion; `+` concatenates when
+  called on `String` and adds when called on `int` or `double`.

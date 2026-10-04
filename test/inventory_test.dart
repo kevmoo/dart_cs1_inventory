@@ -96,6 +96,51 @@ void main() {
     }
   });
 
+  test(
+    'items are ordered by concept, tracing -> completion -> def, numeric',
+    () {
+      const typeRank = {
+        ItemType.tracing: 0,
+        ItemType.completion: 1,
+        ItemType.definitional: 2,
+      };
+      int suffix(String id) =>
+          int.parse(RegExp(r'_(\d+)$').firstMatch(id)!.group(1)!);
+      for (var i = 1; i < inv.items.length; i++) {
+        final prev = inv.items[i - 1];
+        final curr = inv.items[i];
+        if (prev.concept != curr.concept) continue;
+        final byType = typeRank[prev.type]!.compareTo(typeRank[curr.type]!);
+        expect(
+          byType,
+          lessThanOrEqualTo(0),
+          reason: '${prev.id} should not precede ${curr.id}',
+        );
+        if (byType == 0) {
+          expect(
+            suffix(prev.id),
+            lessThan(suffix(curr.id)),
+            reason: '${prev.id} vs ${curr.id}',
+          );
+        }
+      }
+    },
+  );
+
+  test('tracing keys never rely on whole-valued .0 double output', () {
+    final wholeDoubleLine = RegExp(r'^-?\d+\.0$', multiLine: true);
+    for (final item in inv.items) {
+      if (item.type != ItemType.tracing) continue;
+      expect(
+        wholeDoubleLine.hasMatch(item.key.text),
+        isFalse,
+        reason:
+            '${item.id} key prints a whole-valued double (.0), which differs '
+            'between Dart VM and DartPad/web',
+      );
+    }
+  });
+
   test('every (concept, type) cell has at least one item', () {
     final missing = <String>[];
     for (final c in inv.concepts) {

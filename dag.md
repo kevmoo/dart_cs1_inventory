@@ -13,14 +13,14 @@ end.
 
 ```mermaid
 flowchart TD
-  values_and_types["Values and literal types"]
-  arithmetic_expressions["Arithmetic expressions and precedence"]
   variables_assignment["Variables and assignment"]
   output_and_strings["print and string interpolation"]
   sequencing["Sequencing and state over time"]
   boolean_expressions["Comparisons produce booleans"]
   logical_operators["&&, ||, ! and short-circuit"]
   selection["if / else if / else and blocks"]
+  arithmetic_expressions["Arithmetic expressions and precedence"]
+  values_and_types["Strings vs. numbers, and int vs. double"]
   definite_loops["Counted for loops and accumulation"]
   indefinite_loops["while / do-while with data-dependent exit"]
   nested_loops["Nested loops"]
@@ -35,17 +35,16 @@ flowchart TD
   classes_and_objects["Classes, fields, constructors, instances"]
   methods_and_this["Methods that read and mutate this"]
   object_aliasing["Two variables, one object"]
-  values_and_types --> arithmetic_expressions
-  values_and_types --> variables_assignment
   variables_assignment --> output_and_strings
   variables_assignment --> sequencing
-  arithmetic_expressions --> sequencing
-  arithmetic_expressions --> boolean_expressions
-  values_and_types --> boolean_expressions
+  output_and_strings --> sequencing
   variables_assignment --> boolean_expressions
   boolean_expressions --> logical_operators
   boolean_expressions --> selection
   sequencing --> selection
+  variables_assignment --> arithmetic_expressions
+  output_and_strings --> values_and_types
+  arithmetic_expressions --> values_and_types
   selection --> definite_loops
   arithmetic_expressions --> definite_loops
   selection --> indefinite_loops
@@ -76,10 +75,10 @@ flowchart TD
 
 ## Levels (longest prerequisite chain)
 
-- **Level 0**: `values_and_types`
-- **Level 1**: `arithmetic_expressions`, `variables_assignment`
-- **Level 2**: `output_and_strings`, `sequencing`, `boolean_expressions`, `lists_indexing`
-- **Level 3**: `logical_operators`, `selection`, `aliasing_references`, `function_calls_and_params`
+- **Level 0**: `variables_assignment`
+- **Level 1**: `output_and_strings`, `boolean_expressions`, `arithmetic_expressions`
+- **Level 2**: `sequencing`, `logical_operators`, `values_and_types`, `lists_indexing`
+- **Level 3**: `selection`, `aliasing_references`, `function_calls_and_params`
 - **Level 4**: `definite_loops`, `indefinite_loops`, `scope_and_shadowing`, `return_values`, `list_parameters`, `classes_and_objects`
 - **Level 5**: `nested_loops`, `lists_iteration`, `recursion`, `methods_and_this`, `object_aliasing`
 
@@ -87,14 +86,14 @@ flowchart TD
 
 | Node | FCS1 concept | Prerequisites | Items | Rationale |
 | --- | --- | --- | ---: | --- |
-| `values_and_types` — Values and literal types | `fundamentals` | — | 2 | `3`, `3.5`, `'hi'`, `true` are different kinds of values. Everything else manipulates values, so this is the root. |
-| `arithmetic_expressions` — Arithmetic expressions and precedence | `fundamentals` | `values_and_types` | 3 | `+ - * / ~/ %` and precedence. Needs the int/double distinction to make sense of `7 / 2` vs `7 ~/ 2`. |
-| `variables_assignment` — Variables and assignment | `fundamentals` | `values_and_types` | 2 | A name holds a value; `=` replaces it. Must precede any expression that reads a variable. |
-| `output_and_strings` — `print` and string interpolation | `fundamentals` | `variables_assignment` | 2 | Every tracing item is observed through `print`; interpolation `'$x'` is the Dart-specific syntax a student must read fluently before tracing. |
-| `sequencing` — Sequencing and state over time | `fundamentals` | `variables_assignment`, `arithmetic_expressions` | 4 | Statements run top to bottom and a variable's value is whatever the most recent assignment left (the `a = b; b = a;` non-swap). This is the core skill behind all tracing. |
-| `boolean_expressions` — Comparisons produce booleans | `logical_operators` | `arithmetic_expressions`, `values_and_types`, `variables_assignment` | 3 | `x > 3` is a value of type `bool`, not a command. Required before any condition in `if` or a loop. |
+| `variables_assignment` — Variables and assignment | `fundamentals` | — | 4 | A name holds a value; `=` replaces it. Reading a variable and following `=` is the starting point for every tracing item. |
+| `output_and_strings` — `print` and string interpolation | `fundamentals` | `variables_assignment` | 3 | Every tracing item is observed through `print`; interpolation `'$x'` is the Dart-specific syntax a student must read fluently before tracing. |
+| `sequencing` — Sequencing and state over time | `fundamentals` | `variables_assignment`, `output_and_strings` | 3 | Statements run top to bottom and a variable's value is whatever the most recent assignment left (the `a = b; b = a;` non-swap). This is the core skill behind all tracing. |
+| `boolean_expressions` — Comparisons produce booleans | `logical_operators` | `variables_assignment` | 3 | `x > 3` is a value of type `bool`, not a command. Required before any condition in `if` or a loop. |
 | `logical_operators` — `&&`, `\|\|`, `!` and short-circuit | `logical_operators` | `boolean_expressions` | 3 | Combining booleans. Short-circuit evaluation additionally needs sequencing (which operand is evaluated first). |
 | `selection` — `if` / `else if` / `else` and blocks | `selection` | `boolean_expressions`, `sequencing` | 5 | A chain runs one branch; independent `if`s may run several. Compound conditions (`&&`) are a co-requisite via `logical_operators`, not a prerequisite: simple `if (x > 3)` can be taught first. |
+| `arithmetic_expressions` — Arithmetic expressions and precedence | `fundamentals` | `variables_assignment` | 3 | `+ - * / ~/ %` and precedence. Placed after `selection` so `~/` and `%` are introduced right before loops and list indexing rather than blocking early variable and `if`/`else` items. |
+| `values_and_types` — Strings vs. numbers, and `int` vs. `double` | `fundamentals` | `output_and_strings`, `arithmetic_expressions` | 2 | `'3' + '4'` vs. `3 + 4`, and non-whole division `5 / 2` (`2.5`) vs. truncating `5 ~/ 2` (`2`). Kept off the early trunk so type conversion details do not gate core control flow. |
 | `definite_loops` — Counted `for` loops and accumulation | `loops_definite` | `selection`, `arithmetic_expressions` | 6 | Needs a condition (from selection) plus the accumulator pattern (`total += i`). Off-by-one bounds are the main misconception probed. |
 | `indefinite_loops` — `while` / `do-while` with data-dependent exit | `loops_indefinite` | `selection`, `sequencing` | 5 | Repetition guarded by a condition. Does not require `for` first; both loop forms hang off selection. `do-while` adds "body before test". |
 | `nested_loops` — Nested loops | `loops_definite` | `definite_loops` | 3 | Inner loop runs to completion per outer iteration; trip count is a product or triangle number. Consistently harder than single loops. |

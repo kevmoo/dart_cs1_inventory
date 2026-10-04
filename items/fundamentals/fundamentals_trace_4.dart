@@ -1,7 +1,8 @@
 void main() {
-  var left = '3';
-  var right = '4';
-  print(left + right);
-  print(3 + 4);
-  print(3.0 + 4);
+  var points = 10;
+  var bonus = 5;
+  print(points);
+  points = bonus;
+  print(points);
+  print(bonus);
 }

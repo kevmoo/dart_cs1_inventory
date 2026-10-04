@@ -7,29 +7,13 @@
 # are scaffolding FCS1 does not probe directly. Edges are proposals, not
 # measured data: see dag.md for the open questions.
 nodes:
-  - id: values_and_types
-    title: Values and literal types
-    concept: fundamentals
-    prerequisites: []
-    rationale: >-
-      `3`, `3.5`, `'hi'`, `true` are different kinds of values. Everything else
-      manipulates values, so this is the root.
-
-  - id: arithmetic_expressions
-    title: Arithmetic expressions and precedence
-    concept: fundamentals
-    prerequisites: [values_and_types]
-    rationale: >-
-      `+ - * / ~/ %` and precedence. Needs the int/double distinction to make
-      sense of `7 / 2` vs `7 ~/ 2`.
-
   - id: variables_assignment
     title: Variables and assignment
     concept: fundamentals
-    prerequisites: [values_and_types]
+    prerequisites: []
     rationale: >-
-      A name holds a value; `=` replaces it. Must precede any expression that
-      reads a variable.
+      A name holds a value; `=` replaces it. Reading a variable and following
+      `=` is the starting point for every tracing item.
 
   - id: output_and_strings
     title: "`print` and string interpolation"
@@ -42,7 +26,7 @@ nodes:
   - id: sequencing
     title: Sequencing and state over time
     concept: fundamentals
-    prerequisites: [variables_assignment, arithmetic_expressions]
+    prerequisites: [variables_assignment, output_and_strings]
     rationale: >-
       Statements run top to bottom and a variable's value is whatever the most
       recent assignment left (the `a = b; b = a;` non-swap). This is the core
@@ -51,7 +35,7 @@ nodes:
   - id: boolean_expressions
     title: Comparisons produce booleans
     concept: logical_operators
-    prerequisites: [arithmetic_expressions, values_and_types, variables_assignment]
+    prerequisites: [variables_assignment]
     rationale: >-
       `x > 3` is a value of type `bool`, not a command. Required before any
       condition in `if` or a loop.
@@ -72,6 +56,24 @@ nodes:
       A chain runs one branch; independent `if`s may run several. Compound
       conditions (`&&`) are a co-requisite via `logical_operators`, not a
       prerequisite: simple `if (x > 3)` can be taught first.
+
+  - id: arithmetic_expressions
+    title: Arithmetic expressions and precedence
+    concept: fundamentals
+    prerequisites: [variables_assignment]
+    rationale: >-
+      `+ - * / ~/ %` and precedence. Placed after `selection` so `~/` and `%`
+      are introduced right before loops and list indexing rather than blocking
+      early variable and `if`/`else` items.
+
+  - id: values_and_types
+    title: Strings vs. numbers, and `int` vs. `double`
+    concept: fundamentals
+    prerequisites: [output_and_strings, arithmetic_expressions]
+    rationale: >-
+      `'3' + '4'` vs. `3 + 4`, and non-whole division `5 / 2` (`2.5`) vs.
+      truncating `5 ~/ 2` (`2`). Kept off the early trunk so type conversion
+      details do not gate core control flow.
 
   - id: definite_loops
     title: Counted `for` loops and accumulation

@@ -1,0 +1,28 @@
+id: fundamentals_trace_11
+concept: fundamentals
+type: tracing
+dag_node: values_and_types
+prompt: |
+  What does this program print?
+code_file: fundamentals_trace_11.dart
+options:
+  - id: a
+    text: "2\n2\n3"
+    rationale: Assumes `/` on two ints drops the `.5` like integer division in C or Java; in Dart `/` always produces a `double` (`2.5`).
+    misconception: arith.int_division_slash
+  - id: b
+    text: "2.5\n3\n3.5"
+    rationale: Believes `~/` rounds `2.5` up to `3`; `~/` truncates toward zero, giving `2`.
+    misconception: arith.truncdiv_rounds
+  - id: c
+    text: "2.5\n2\n3"
+    rationale: Believes adding the int `1` to `2.5` drops the `.5` and produces an int; mixing `double` and `int` in `+` produces the `double` `3.5`.
+    misconception: types.mixed_arith_yields_int
+  - id: d
+    text: "2.5\n2\n3.5"
+    rationale: "`5 / 2` is the `double` `2.5`, `5 ~/ 2` truncates to the `int` `2`, and adding `1` to `2.5` produces `3.5`."
+answer: d
+spec_areas: [expressions.numbers, expressions.multiplicative, expressions.additive, statements.local_variable, statements.print]
+dart_notes: >-
+  Uses non-whole division (`5 / 2` -> `2.5`) so the printed output is
+  identical on the Dart VM and on the web (DartPad / dart2js).

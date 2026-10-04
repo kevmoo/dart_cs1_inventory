@@ -193,18 +193,17 @@ final class const Inventory({
         decision: m['decision'] as String,
       ),
     );
-    final itemFiles =
-        Directory(p.join(root, 'items'))
-            .listSync(recursive: true)
-            .whereType<File>()
-            .where(
-              (f) =>
-                  f.path.endsWith('.yaml') &&
-                  p.basename(f.path) != 'analysis_options.yaml',
-            )
-            .toList()
-          ..sort((a, b) => a.path.compareTo(b.path));
-    final items = [for (final f in itemFiles) _loadItem(f, root)];
+    final itemFiles = Directory(p.join(root, 'items'))
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where(
+          (f) =>
+              f.path.endsWith('.yaml') &&
+              p.basename(f.path) != 'analysis_options.yaml',
+        )
+        .toList();
+    final items = [for (final f in itemFiles) _loadItem(f, root)]
+      ..sort(_compareItems);
     return Inventory(
       root: root,
       concepts: concepts,
@@ -267,3 +266,22 @@ List<String> _strings(Object? value) => switch (value) {
   final YamlList list => [for (final e in list) e as String],
   _ => throw ArgumentError.value(value, 'value', 'expected a list of strings'),
 };
+
+int _typeOrder(ItemType type) => switch (type) {
+  ItemType.tracing => 0,
+  ItemType.completion => 1,
+  ItemType.definitional => 2,
+};
+
+final _trailingNumber = RegExp(r'_(\d+)$');
+
+int _compareItems(Item a, Item b) {
+  final byConcept = a.concept.compareTo(b.concept);
+  if (byConcept != 0) return byConcept;
+  final byType = _typeOrder(a.type).compareTo(_typeOrder(b.type));
+  if (byType != 0) return byType;
+  final na = int.tryParse(_trailingNumber.firstMatch(a.id)?.group(1) ?? '');
+  final nb = int.tryParse(_trailingNumber.firstMatch(b.id)?.group(1) ?? '');
+  if (na != null && nb != null && na != nb) return na.compareTo(nb);
+  return a.id.compareTo(b.id);
+}

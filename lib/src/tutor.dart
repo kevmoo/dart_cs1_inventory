@@ -111,9 +111,6 @@ final class Tutor {
   /// Distinct evidence items required per node (fewer if the node has fewer).
   static const requiredPerNode = 3;
 
-  /// How many of the most recent answers on a node must all be correct.
-  static const recentWindow = 3;
-
   late final Map<String, Item> _items = {
     for (final i in inventory.items) i.id: i,
   };
@@ -148,6 +145,31 @@ final class Tutor {
     return last;
   }
 
+  /// Whether [itemId]'s latest sitting is a cold correct answer: the latest
+  /// attempt on [itemId] is correct and, when [hasAlternatives] is `true`, no
+  /// wrong attempt on [itemId] occurred since the last attempt on another item.
+  bool isCredited(String itemId, {required bool hasAlternatives}) {
+    final idx = attempts.lastIndexWhere((a) => a.item == itemId);
+    if (idx < 0 || !attempts[idx].correct) return false;
+    if (!hasAlternatives) return true;
+    for (var i = idx - 1; i >= 0 && attempts[i].item == itemId; i--) {
+      if (!attempts[i].correct) return false;
+    }
+    return true;
+  }
+
+  /// Trailing wrong answers to [itemId] since the last correct answer to it.
+  int consecutiveMissesOn(String itemId) {
+    var misses = 0;
+    for (var i = attempts.length - 1; i >= 0; i--) {
+      final a = attempts[i];
+      if (a.item != itemId) continue;
+      if (a.correct) break;
+      misses++;
+    }
+    return misses;
+  }
+
   NodeStatus statusOf(DagNode node) {
     final evidence = evidenceOn(node.id).toList();
     if (evidence.isEmpty) {
@@ -159,18 +181,23 @@ final class Tutor {
         required: 0,
       );
     }
+    final hasAlt = evidence.length > 1;
     final ids = {for (final i in evidence) i.id};
     final onNode = attempts.where((a) => ids.contains(a.item)).toList();
-    final correct = evidence.where((i) => latest(i.id)?.correct ?? false);
+    final credited = evidence
+        .where((i) => isCredited(i.id, hasAlternatives: hasAlt))
+        .toList();
     final required = math.min(requiredPerNode, evidence.length);
     bool hasType(ItemType t) => evidence.any((i) => i.type == t);
-    bool correctType(ItemType t) => correct.any((i) => i.type == t);
-    final recent = onNode.skip(math.max(0, onNode.length - recentWindow));
-    final mastered =
-        correct.length >= required &&
-        (!hasType(ItemType.tracing) || correctType(ItemType.tracing)) &&
-        (!hasType(ItemType.completion) || correctType(ItemType.completion)) &&
-        recent.every((a) => a.correct);
+    bool creditedType(ItemType t) => credited.any((i) => i.type == t);
+    final missingType =
+        (hasType(ItemType.tracing) && !creditedType(ItemType.tracing)) ||
+        (hasType(ItemType.completion) && !creditedType(ItemType.completion));
+    final lastWrong = onNode.isNotEmpty && !onNode.last.correct;
+    final correct = missingType || lastWrong
+        ? math.min(credited.length, required - 1)
+        : math.min(credited.length, required);
+    final mastered = correct >= required;
     final state = mastered
         ? NodeState.mastered
         : unlocked(node)
@@ -180,7 +207,7 @@ final class Tutor {
       node: node,
       state: state,
       attempts: onNode.length,
-      correct: correct.length,
+      correct: correct,
       required: required,
     );
   }
@@ -195,30 +222,60 @@ final class Tutor {
   /// The next item to present, or `null` when every node is mastered.
   ///
   /// Walks nodes in prerequisite order and picks, on the first unlocked and
-  /// unmastered node, the item that is least settled: never attempted first,
-  /// then latest-wrong, then fewest attempts, then `dag.yaml`/file order. The
-  /// item answered most recently is avoided when there is an alternative.
+  /// unmastered node, an evidence item that avoids repeating the most recent
+  /// attempt when alternatives exist, prefers unattempted items over
+  /// uncredited retries over already-credited items, and ensures a completion
+  /// item is served once tracing evidence is satisfied.
   Item? next() {
     final lastAnswered = attempts.isEmpty ? null : attempts.last.item;
     for (final node in order) {
-      if (statusOf(node).state != NodeState.available) continue;
-      final candidates = itemsOn(node.id).toList();
+      final status = statusOf(node);
+      if (status.state != NodeState.available) continue;
+      final candidates = evidenceOn(node.id).toList();
       if (candidates.isEmpty) continue;
-      int rank(Item i) {
-        final last = latest(i.id);
-        final settled = last == null
-            ? 0
-            : last.correct
-            ? 2
-            : 1;
-        final avoid = candidates.length > 1 && i.id == lastAnswered ? 1 : 0;
-        return settled * 10000 + avoid * 1000 + attemptsOn(i.id).length;
-      }
-
-      candidates.sort((a, b) => rank(a).compareTo(rank(b)));
-      return candidates.first;
+      final ranked = _rankCandidates(
+        candidates,
+        required: status.required,
+        lastAnswered: lastAnswered,
+      );
+      return ranked.first;
     }
     return null;
+  }
+
+  List<Item> _rankCandidates(
+    List<Item> candidates, {
+    required int required,
+    required String? lastAnswered,
+  }) {
+    final hasAlt = candidates.length > 1;
+    final credited = {
+      for (final c in candidates)
+        if (isCredited(c.id, hasAlternatives: hasAlt)) c.id,
+    };
+    final needsCompletion =
+        candidates.any((c) => c.type == ItemType.completion) &&
+        !candidates.any(
+          (c) => c.type == ItemType.completion && credited.contains(c.id),
+        ) &&
+        credited.length >= required - 1;
+    int rank(Item i) {
+      final avoid = hasAlt && i.id == lastAnswered ? 1 : 0;
+      final settled = credited.contains(i.id)
+          ? 2
+          : latest(i.id) == null
+          ? 0
+          : 1;
+      final deferType = needsCompletion && i.type != ItemType.completion
+          ? 1
+          : 0;
+      return avoid * 100000 +
+          settled * 10000 +
+          deferType * 1000 +
+          attemptsOn(i.id).length;
+    }
+
+    return [...candidates]..sort((a, b) => rank(a).compareTo(rank(b)));
   }
 
   /// Grades [optionId] for [itemId] and builds the [Attempt] to log. Does not

@@ -60,7 +60,7 @@ but also runs at a terminal.
 ```sh
 dart pub global activate --source git https://github.com/kevmoo/dart_cs1_inventory
 tutor next                       # the next item to present; never includes the key
-tutor check <item-id> <a|b|c|d>  # logs the answer, then reveals key + rationales
+tutor check <item-id> <a|b|c|d>  # logs the answer, then reveals rationale (and key on hit, 2nd+ miss, or --reveal)
 tutor status                     # mastery per node, misconception counts
 tutor interactive                # no agent: answer at the terminal
 ```
@@ -72,13 +72,19 @@ directory never matters.
 Rules the CLI enforces so an agent cannot leak or drift:
 
 - `next` is deterministic: lowest unlocked, unmastered node in prerequisite
-  order; least-settled item on it.
-- `check` is the only path to the key and rationales, and it writes the answer
-  to the log _before_ revealing anything. The first answer is the one that
-  counts.
-- Mastery of a node needs distinct correct items (up to three, including at
-  least one tracing and one completion item where the node has them) and no
-  wrong answer among the most recent three. Definitional items never count.
+  order; serves `tracing` before `completion` in numeric item order, avoids
+  repeating the item just answered when alternatives exist, and ensures a
+  `completion` item is served once tracing evidence is satisfied.
+- `check` writes the answer to the log _before_ revealing anything. On a first
+  consecutive miss on an item, `check` returns only the chosen distractor's
+  rationale and misconception (`consecutive_misses: 1`), withholding `answer`
+  and `key` so the agent can coach the student to re-trace without giving away
+  the letter; `answer` and `key` are revealed on a correct answer, a 2nd+
+  consecutive miss, or `--reveal`.
+- Mastery of a node requires distinct cold-credited evidence items (up to three,
+  including at least one `tracing` and one `completion` item where the node has
+  them); an immediate back-to-back retry after a miss does not credit the item
+  until another item has intervened. Definitional items never count.
 
 Answer logs live under the platform state directory
 (`~/.local/state/dart_cs1_inventory/<student>/log.jsonl` on Linux, via

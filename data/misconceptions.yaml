@@ -13,14 +13,10 @@ misconceptions:
     title: Quoted digits are numbers
     description: Believes `'3' + '4'` adds, treating a string of digits as an int.
   - id: types.mixed_arith_yields_int
-    title: Mixed int/double arithmetic gives an int
+    title: Mixed int/double arithmetic drops the fraction
     description: >-
-      Believes arithmetic that mixes `int` and `double` (or `/` on ints)
-      produces an `int` whenever the result is a whole number; it is always
-      a `double`.
-  - id: types.int_double_unequal
-    title: "`7 == 7.0` is false"
-    description: Assumes an int and a double are never equal because they are different types.
+      Believes arithmetic that mixes `int` and `double` (such as `2.5 + 1`)
+      truncates to an `int`; any arithmetic with a `double` produces a `double`.
   - id: types.string_plus_number
     title: "`'text' + number` concatenates"
     description: Believes `+` glues a number onto a string, as in Java or JavaScript.

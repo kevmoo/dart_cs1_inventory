@@ -1,5 +1,6 @@
 void main() {
-  print(7 == 7.0);
-  print(1 / 1);
-  print(2 * 3.0);
+  var score = 7;
+  print('score');
+  print(score);
+  print('score: $score');
 }

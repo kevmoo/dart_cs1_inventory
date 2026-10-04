@@ -88,8 +88,14 @@ final class _Session {
     ],
   };
 
-  Map<String, Object?> reveal(CheckResult r, Tutor after) {
+  Map<String, Object?> reveal(
+    CheckResult r,
+    Tutor after, {
+    bool forceReveal = false,
+  }) {
     final m = r.chosen.misconception;
+    final misses = after.consecutiveMissesOn(r.item.id);
+    final showKey = r.correct || forceReveal || misses >= 2;
     final node = after.statusOf(
       inventory.dag.firstWhere((n) => n.id == r.item.dagNode),
     );
@@ -97,7 +103,8 @@ final class _Session {
       'item': r.item.id,
       'option': r.chosen.id,
       'correct': r.correct,
-      'answer': r.item.answer,
+      if (!r.correct) 'consecutive_misses': misses,
+      if (showKey) 'answer': r.item.answer,
       'chosen': {
         'text': r.chosen.text,
         'rationale': r.chosen.rationale.trim(),
@@ -109,10 +116,11 @@ final class _Session {
                 .title,
           },
       },
-      'key': {
-        'text': r.item.key.text,
-        'rationale': r.item.key.rationale.trim(),
-      },
+      if (showKey)
+        'key': {
+          'text': r.item.key.text,
+          'rationale': r.item.key.rationale.trim(),
+        },
       if (r.item.dartNotes case final notes?) 'dart_notes': notes.trim(),
       'node': {
         'id': node.node.id,
@@ -187,12 +195,20 @@ final class _NextCommand extends _SessionCommand {
 }
 
 final class _CheckCommand extends _SessionCommand {
+  _CheckCommand() {
+    argParser.addFlag(
+      'reveal',
+      help: 'Reveal the answer key and key rationale even on a first miss.',
+    );
+  }
+
   @override
   String get name => 'check';
   @override
   String get description =>
       'Grade an answer: `check <item-id> <a|b|c|d>`. Logs first, then '
-      'reveals the key and rationales.';
+      'reveals the chosen rationale (and the key on hit, 2nd+ miss, or '
+      '--reveal).';
   @override
   String get invocation => 'tutor check <item-id> <option>';
 
@@ -208,7 +224,8 @@ final class _CheckCommand extends _SessionCommand {
     }
     final result = before.check(rest[0], option);
     s.log.append(result.attempt);
-    _emit(s.reveal(result, s.tutor()));
+    final forceReveal = argResults!['reveal'] as bool;
+    _emit(s.reveal(result, s.tutor(), forceReveal: forceReveal));
   }
 }
 
@@ -260,10 +277,11 @@ final class _InteractiveCommand extends _SessionCommand {
       }
       final result = s.tutor().check(item.id, answer);
       s.log.append(result.attempt);
+      final after = s.tutor();
       stdout
         ..writeln(result.correct ? '✅ Correct.' : '❌ Not quite.')
         ..writeln(result.chosen.rationale.trim());
-      if (!result.correct) {
+      if (!result.correct && after.consecutiveMissesOn(item.id) >= 2) {
         stdout.writeln('Key: ${item.answer}) ${item.key.rationale.trim()}');
       }
     }

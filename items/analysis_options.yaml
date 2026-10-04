@@ -19,3 +19,5 @@ linter:
     cascade_invocations: false
     use_string_buffers: false
     prefer_expression_function_bodies: false
+    prefer_interpolation_to_compose_strings: false
+    prefer_adjacent_string_concatenation: false
